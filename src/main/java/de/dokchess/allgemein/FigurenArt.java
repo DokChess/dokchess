@@ -19,21 +19,30 @@
 
 package de.dokchess.allgemein;
 
+/**
+ * Figurenarten als Aufzaehlung.
+ *
+ * @author StefanZ
+ */
 public enum FigurenArt {
 
     KOENIG('K'), DAME('Q'), TURM('R'), LAEUFER('B'), SPRINGER('N'), BAUER('P');
+
+    private char buchstabe;
 
     private FigurenArt(char buchstabe) {
         this.buchstabe = buchstabe;
     }
 
-    private char buchstabe;
-
-    public char getBuchstabe() {
-        return buchstabe;
-    }
-
-    public static FigurenArt ausBuchstabe(char c) {
+    /**
+     * Liegert die passende Figurenart zu einem Buchstaben, wie er in englischen
+     * Schachnotationen Verwendung findet, zurueck. Kann klein oder gross sein.
+     *
+     * @param c Buchstabe, z.B. 'q' fuer Queen (Dame).
+     * @return die Figurenart.
+     * @throws java.lang.IllegalArgumentException kein zulässiger Buchstabe.
+     */
+    public static FigurenArt ausBuchstabe(final char c) throws IllegalArgumentException {
         switch (c) {
             case 'k':
             case 'K':
@@ -54,7 +63,17 @@ public enum FigurenArt {
             case 'P':
                 return BAUER;
             default:
-                return null;
+                throw new IllegalArgumentException("keine zulaessige Figurenart");
         }
+    }
+
+    /**
+     * Liefert den Buchstaben der Figurenart, wie er in englischen Notationen
+     * Verwendung findet, zurueck. Zum Beispiel Q fuer Queen (Dame).
+     *
+     * @return Buchstabe zur Figurenart
+     */
+    public char getBuchstabe() {
+        return buchstabe;
     }
 }
