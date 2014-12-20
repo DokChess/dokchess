@@ -21,9 +21,23 @@ package de.dokchess.xboard;
 
 import de.dokchess.allgemein.*;
 
+/**
+ * Wandelt Zug-Objekte in das Format von XBoard um, und umgekehrt.
+ *
+ * @author StefanZ
+ */
 public class ZugParser {
 
-    public Zug vonXboard(String eingabe, Stellung stellung) {
+    /**
+     * Wandelt einen als Zeichenkette eingegebenen Zug in ein Zug-Objekt um.
+     * Die Methode reichert das Zugobjekt mit einigen Informationen an (zum Beispiel, ob eine
+     * Figur geschlagen wird), dazu wird die aktuelle Stellung benotigt.
+     *
+     * @param eingabe  eingelesener Zug
+     * @param stellung Stellung, fuer Kontext-Informationen
+     * @return Zug-Objekt, oder null, falls kein gueltiger Zug.
+     */
+    public Zug vonXboard(final String eingabe, final Stellung stellung) {
 
         Zug zug = null;
 
@@ -51,9 +65,15 @@ public class ZugParser {
         return zug;
     }
 
-    public String nachXboard(Zug zug) {
+    /**
+     * Wandelt ein Zug-Objekt in das Format fuer das XBoard-Protokoll zurueck.
+     *
+     * @param zug der umzuwandelnde Zug.
+     * @return die entsprechende Zeichenkette.
+     */
+    public String nachXboard(final Zug zug) {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("move ");
 
         sb.append(zug.getVon());
