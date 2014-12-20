@@ -39,6 +39,10 @@ public class StellungTest {
             WEISS);
     private static final Figur WEISSE_DAME = new Figur(DAME,
             WEISS);
+    private static final Figur WEISSER_KOENIG = new Figur(KOENIG,
+            WEISS);
+    private static final Figur WEISSER_TURM = new Figur(TURM,
+            WEISS);
 
     @Test
     public void bauerEinsVor() {
@@ -91,7 +95,7 @@ public class StellungTest {
     public void kurzeRochadeWeiss() {
         Stellung stellung = new Stellung("rnbqkbnr/ppp3pp/3ppp2/8/8/4PN2/PPPPBPPP/RNBQK2R w KQkq - 0 1");
 
-        Zug zug = new Zug(new Figur(KOENIG, WEISS), E1, G1);
+        Zug zug = new Zug(WEISSER_KOENIG, E1, G1);
         Assert.assertTrue(zug.istRochadeKurz());
 
         Stellung neueStellung = stellung.fuehreZugAus(zug);
@@ -100,8 +104,8 @@ public class StellungTest {
         Assert.assertNull(neueStellung.getFigur(E1));
         Assert.assertNull(neueStellung.getFigur(H1));
 
-        Assert.assertEquals(new Figur(KOENIG, WEISS), neueStellung.getFigur(G1));
-        Assert.assertEquals(new Figur(TURM, WEISS), neueStellung.getFigur(F1));
+        Assert.assertEquals(WEISSER_KOENIG, neueStellung.getFigur(G1));
+        Assert.assertEquals(WEISSER_TURM, neueStellung.getFigur(F1));
 
         Set<RochadeRecht> rochadeRechte = neueStellung.getRochadeRechte();
         Assert.assertTrue(rochadeRechte.contains(RochadeRecht.SCHWARZ_LANG));
@@ -109,6 +113,36 @@ public class StellungTest {
         Assert.assertFalse(rochadeRechte.contains(RochadeRecht.WEISS_LANG));
         Assert.assertFalse(rochadeRechte.contains(RochadeRecht.WEISS_KURZ));
     }
+
+    /**
+     * Weiss bewegt einen Turm oder den Koenig. Rochaderechte anpassen.
+     */
+    @Test
+    public void rochadeRechteAnpassenWeiss() {
+        Stellung stellung = new Stellung("4k3/8/1Q6/8/8/8/8/R3K2R w KQ - 0 1");
+
+        // Turm wird bewegt. Auf der anderen Seite ist dann rochade noch erlaubt
+        Zug z1 = new Zug(WEISSER_TURM, A1, B1);
+        Stellung neueStellung1 = stellung.fuehreZugAus(z1);
+        Set<RochadeRecht> rochadeRechte1 = neueStellung1.getRochadeRechte();
+        Assert.assertFalse(rochadeRechte1.contains(RochadeRecht.WEISS_LANG));
+        Assert.assertTrue(rochadeRechte1.contains(RochadeRecht.WEISS_KURZ));
+
+        // Gleicher Test, andere Seite
+        Zug z2 = new Zug(WEISSER_TURM, H1, G1);
+        Stellung neueStellung2 = stellung.fuehreZugAus(z2);
+        Set<RochadeRecht> rochadeRechte2 = neueStellung2.getRochadeRechte();
+        Assert.assertTrue(rochadeRechte2.contains(RochadeRecht.WEISS_LANG));
+        Assert.assertFalse(rochadeRechte2.contains(RochadeRecht.WEISS_KURZ));
+
+        // Koenig wird bewegt. Keine Rochade fuer weiss merh moeglich.
+        Zug z3 = new Zug(WEISSER_KOENIG, E1, E2);
+        Stellung neueStellung3 = stellung.fuehreZugAus(z3);
+        Set<RochadeRecht> rochadeRechte3 = neueStellung3.getRochadeRechte();
+        Assert.assertFalse(rochadeRechte3.contains(RochadeRecht.WEISS_LANG));
+        Assert.assertFalse(rochadeRechte3.contains(RochadeRecht.WEISS_KURZ));
+    }
+
 
     @Test
     public void sucheFelderMitWeissenFiguren() {
