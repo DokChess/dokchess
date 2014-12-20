@@ -47,15 +47,15 @@ public final class Feld {
      */
     public Feld(String name) {
 
-        char linie = name.charAt(0); // a - h
-        char reihe = name.charAt(1); // 1 - 8
+        char nameLinie = name.charAt(0); // a - h
+        char nameReihe = name.charAt(1); // 1 - 8
 
-        if (Character.isUpperCase(linie)) {
-            linie = Character.toLowerCase(linie);
+        if (Character.isUpperCase(nameLinie)) {
+            nameLinie = Character.toLowerCase(nameLinie);
         }
 
-        this.reihe = (7 - (reihe - '1'));
-        this.linie = linie - 'a';
+        this.reihe = (7 - (nameReihe - '1'));
+        this.linie = nameLinie - 'a';
     }
 
     /**
