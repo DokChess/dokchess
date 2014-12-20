@@ -20,29 +20,34 @@ package de.dokchess.allgemein;
 
 /**
  * Farben der Spieler als Aufzaehlung.
- * 
+ *
  * @author StefanZ
  */
 public enum Farbe {
 
-	/** Spielerfarbe schwarz */
-	SCHWARZ,
+    /**
+     * Spielerfarbe schwarz.
+     */
+    SCHWARZ,
 
-	/** Spielerfarbe weiss */
-	WEISS;
+    /**
+     * Spielerfarbe weiss.
+     */
+    WEISS;
 
-	/**
-	 * Liefert zu einer Farbe die andere Farbe.
-	 * 
-	 * @return die andere Farbe.
-	 */
-	public Farbe andereFarbe() {
-		switch (this) {
-		case WEISS:
-			return SCHWARZ;
-		case SCHWARZ:
-			return WEISS;
-		}
-		return null;
-	}
+    /**
+     * Liefert zu einer Farbe die andere Farbe.
+     *
+     * @return die andere Farbe.
+     */
+    public Farbe andereFarbe() {
+        switch (this) {
+            case WEISS:
+                return SCHWARZ;
+            case SCHWARZ:
+                return WEISS;
+            default:
+                return null;
+        }
+    }
 }
