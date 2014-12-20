@@ -201,7 +201,7 @@ public final class Stellung {
      * @param rr konkrete Rochade, zum Beispiel WEISS_LANG
      * @return true, fals grundsaetzlich noch erlaubt
      */
-    public boolean rochadeErlaubt(RochadeRecht rr) {
+    public boolean rochadeErlaubt(final RochadeRecht rr) {
         return rochadeRechte.contains(rr);
     }
 
