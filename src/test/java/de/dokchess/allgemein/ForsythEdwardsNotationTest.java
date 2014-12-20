@@ -22,51 +22,53 @@ package de.dokchess.allgemein;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static de.dokchess.allgemein.Farbe.SCHWARZ;
+import static de.dokchess.allgemein.Farbe.WEISS;
 import static de.dokchess.allgemein.Felder.*;
-
-import static de.dokchess.allgemein.FigurenArt.*;
+import static de.dokchess.allgemein.FigurenArt.BAUER;
+import static de.dokchess.allgemein.FigurenArt.DAME;
 
 public class ForsythEdwardsNotationTest {
 
-	/**
-	 * Umwandlung der Anfangsstellung in eine FEN-Zeichenkette
-	 */
-	@Test
-	public void anfangsstellungToString() {
+    /**
+     * Umwandlung der Anfangsstellung in eine FEN-Zeichenkette
+     */
+    @Test
+    public void anfangsstellungToString() {
 
-		Stellung s = new Stellung();
+        Stellung s = new Stellung();
 
-		String fen = ForsythEdwardsNotation.toString(s);
-		Assert.assertEquals(
-				"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", fen);
-	}
-	
-	/**
-	 * Stellung mit en passant in Zeichenkette.
-	 */
-	@Test
-	public void enPassantToString() {
-		
-		Stellung s = new Stellung();
-		Zug z = new Zug(new Figur(FigurenArt.BAUER, Farbe.WEISS), E2, E4);
-		s = s.fuehreZugAus(z);
-		
-		String fen = ForsythEdwardsNotation.toString(s);		
-		Assert.assertEquals("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1", fen);
-	}
-	
-	/**
-	 * Umwandlung einer FEN-Zeichenkette in ein Stellungsobjekt 
-	 */
-	@Test
-	public void schaefermattFenInStellung() {
+        String fen = ForsythEdwardsNotation.toString(s);
+        Assert.assertEquals(
+                "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", fen);
+    }
 
-		Stellung pos = new Stellung();
-		String fen = "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 1";
-		ForsythEdwardsNotation.fromString(pos, fen);
-		
-		Assert.assertEquals(Farbe.WEISS, pos.getAmZug());
-		Assert.assertEquals(new Figur(FigurenArt.DAME, Farbe.WEISS), pos.getFigur(H5));
-		Assert.assertEquals(new Figur(FigurenArt.BAUER, Farbe.SCHWARZ), pos.getFigur(E5));
-	}
+    /**
+     * Stellung mit en passant in Zeichenkette.
+     */
+    @Test
+    public void enPassantToString() {
+
+        Stellung s = new Stellung();
+        Zug z = new Zug(new Figur(BAUER, Farbe.WEISS), E2, E4);
+        s = s.fuehreZugAus(z);
+
+        String fen = ForsythEdwardsNotation.toString(s);
+        Assert.assertEquals("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1", fen);
+    }
+
+    /**
+     * Umwandlung einer FEN-Zeichenkette in ein Stellungsobjekt
+     */
+    @Test
+    public void schaefermattFenInStellung() {
+
+        Stellung pos = new Stellung();
+        String fen = "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 1";
+        ForsythEdwardsNotation.fromString(pos, fen);
+
+        Assert.assertEquals(Farbe.WEISS, pos.getAmZug());
+        Assert.assertEquals(new Figur(DAME, WEISS), pos.getFigur(H5));
+        Assert.assertEquals(new Figur(BAUER, SCHWARZ), pos.getFigur(E5));
+    }
 }
