@@ -34,6 +34,9 @@ import static de.dokchess.allgemein.RochadeRecht.*;
  */
 public final class Stellung {
 
+    private static final int ANZAHL_REIHEN = 8;
+    private static final int ANZAHL_LINIEN = 8;
+
     private Farbe amZug;
 
     private Figur[][] brett;
@@ -55,8 +58,8 @@ public final class Stellung {
      *
      * @param fen
      */
-    public Stellung(String fen) {
-        this.brett = new Figur[8][8];
+    public Stellung(final String fen) {
+        this.brett = new Figur[ANZAHL_REIHEN][ANZAHL_LINIEN];
         ForsythEdwardsNotation.fromString(this, fen);
     }
 
@@ -64,7 +67,7 @@ public final class Stellung {
         this.amZug = s.amZug;
         this.rochadeRechte = s.rochadeRechte;
         this.enPassantFeld = s.enPassantFeld;
-        this.brett = new Figur[8][];
+        this.brett = new Figur[ANZAHL_REIHEN][];
         System.arraycopy(s.brett, 0, this.brett, 0, 8);
     }
 
@@ -124,8 +127,8 @@ public final class Stellung {
     }
 
     public Feld findeFeldMitKoenig(Farbe farbe) {
-        for (int reihe = 0; reihe < 8; ++reihe) {
-            for (int linie = 0; linie < 8; ++linie) {
+        for (int reihe = 0; reihe < ANZAHL_REIHEN; ++reihe) {
+            for (int linie = 0; linie < ANZAHL_LINIEN; ++linie) {
                 Figur aktFigur = getFigur(reihe, linie);
                 if (aktFigur != null && aktFigur.getArt() == FigurenArt.KOENIG
                         && aktFigur.getFarbe() == farbe) {
@@ -139,8 +142,8 @@ public final class Stellung {
     public Set<Feld> felderMitFarbe(Farbe farbe) {
         HashSet<Feld> felder = new HashSet<Feld>();
 
-        for (int reihe = 0; reihe < 8; ++reihe) {
-            for (int linie = 0; linie < 8; ++linie) {
+        for (int reihe = 0; reihe < ANZAHL_REIHEN; ++reihe) {
+            for (int linie = 0; linie < ANZAHL_LINIEN; ++linie) {
                 Figur aktFigur = getFigur(reihe, linie);
                 if (aktFigur != null && aktFigur.getFarbe() == farbe) {
                     felder.add(new Feld(reihe, linie));
@@ -266,13 +269,13 @@ public final class Stellung {
         int reihe1 = zug.getVon().getReihe();
         int reihe2 = zug.getNach().getReihe();
 
-        neueStellung.brett[reihe1] = new Figur[8];
+        neueStellung.brett[reihe1] = new Figur[ANZAHL_LINIEN];
         System.arraycopy(quelle.brett[reihe1], 0, neueStellung.brett[reihe1],
-                0, 8);
+                0, ANZAHL_LINIEN);
         if (reihe2 != reihe1) {
-            neueStellung.brett[reihe2] = new Figur[8];
+            neueStellung.brett[reihe2] = new Figur[ANZAHL_LINIEN];
             System.arraycopy(quelle.brett[reihe2], 0,
-                    neueStellung.brett[reihe2], 0, 8);
+                    neueStellung.brett[reihe2], 0, ANZAHL_LINIEN);
         }
 
         return neueStellung;
