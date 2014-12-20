@@ -26,7 +26,10 @@ package de.dokchess.allgemein;
  */
 public final class Feld {
 
+    /** Linie (Spalte) des Feldes, Werte 0-7, 0 ist die a-Linie */
     private final int linie;
+
+    /** Reihe  des Feldes, Werte 0-7, 0 ist Reihe 8 */
     private final int reihe;
 
     /**
@@ -35,7 +38,7 @@ public final class Feld {
      * @param reihe Reihe des Feldes, 0-7
      * @param linie Linie des Feldes, 0-7, 0 ist a
      */
-    public Feld(int reihe, int linie) {
+    public Feld(final int reihe, final int linie) {
         this.reihe = reihe;
         this.linie = linie;
     }
@@ -45,10 +48,13 @@ public final class Feld {
      *
      * @param name Name des Feldes, z.B. "e4"
      */
-    public Feld(String name) {
+    public Feld(final String name) {
 
-        char nameLinie = name.charAt(0); // a - h
-        char nameReihe = name.charAt(1); // 1 - 8
+        // a - h
+        char nameLinie = name.charAt(0);
+
+        // 1 - 8
+        char nameReihe = name.charAt(1);
 
         if (Character.isUpperCase(nameLinie)) {
             nameLinie = Character.toLowerCase(nameLinie);
