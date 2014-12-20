@@ -19,7 +19,6 @@
 
 package de.dokchess.allgemein;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -29,8 +28,8 @@ import static de.dokchess.allgemein.Farbe.SCHWARZ;
 import static de.dokchess.allgemein.Farbe.WEISS;
 import static de.dokchess.allgemein.Felder.*;
 import static de.dokchess.allgemein.FigurenArt.*;
-import static de.dokchess.allgemein.FigurenArt.DAME;
-import static de.dokchess.allgemein.FigurenArt.KOENIG;
+import static de.dokchess.allgemein.RochadeRecht.*;
+import static org.junit.Assert.*;
 
 
 public class StellungTest {
@@ -52,11 +51,11 @@ public class StellungTest {
 
         Stellung neueStellung = stellung.fuehreZugAus(zug);
 
-        Assert.assertNull(neueStellung.getFigur(E2));
-        Assert.assertNull(neueStellung.getEnPassantFeld());
-        Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(E3));
+        assertNull(neueStellung.getFigur(E2));
+        assertNull(neueStellung.getEnPassantFeld());
+        assertEquals(WEISSER_BAUER, neueStellung.getFigur(E3));
 
-        Assert.assertEquals(SCHWARZ, neueStellung.getAmZug());
+        assertEquals(SCHWARZ, neueStellung.getAmZug());
     }
 
     @Test
@@ -67,11 +66,11 @@ public class StellungTest {
 
         Stellung neueStellung = stellung.fuehreZugAus(zug);
 
-        Assert.assertNull(neueStellung.getFigur(E2));
-        Assert.assertEquals(E3, neueStellung.getEnPassantFeld());
-        Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(E4));
+        assertNull(neueStellung.getFigur(E2));
+        assertEquals(E3, neueStellung.getEnPassantFeld());
+        assertEquals(WEISSER_BAUER, neueStellung.getFigur(E4));
 
-        Assert.assertEquals(SCHWARZ, neueStellung.getAmZug());
+        assertEquals(SCHWARZ, neueStellung.getAmZug());
     }
 
     /**
@@ -84,8 +83,8 @@ public class StellungTest {
         Zug zug = new Zug(WEISSER_BAUER, B7, B8, FigurenArt.DAME);
         Stellung neueStellung = stellung.fuehreZugAus(zug);
 
-        Assert.assertNull(neueStellung.getFigur(B7));
-        Assert.assertEquals(WEISSE_DAME, neueStellung.getFigur(B8));
+        assertNull(neueStellung.getFigur(B7));
+        assertEquals(WEISSE_DAME, neueStellung.getFigur(B8));
     }
 
     /**
@@ -96,22 +95,21 @@ public class StellungTest {
         Stellung stellung = new Stellung("rnbqkbnr/ppp3pp/3ppp2/8/8/4PN2/PPPPBPPP/RNBQK2R w KQkq - 0 1");
 
         Zug zug = new Zug(WEISSER_KOENIG, E1, G1);
-        Assert.assertTrue(zug.istRochadeKurz());
+        assertTrue(zug.istRochadeKurz());
 
         Stellung neueStellung = stellung.fuehreZugAus(zug);
 
         // Koenig und Turm haben sich bewegt
-        Assert.assertNull(neueStellung.getFigur(E1));
-        Assert.assertNull(neueStellung.getFigur(H1));
+        assertNull(neueStellung.getFigur(E1));
+        assertNull(neueStellung.getFigur(H1));
 
-        Assert.assertEquals(WEISSER_KOENIG, neueStellung.getFigur(G1));
-        Assert.assertEquals(WEISSER_TURM, neueStellung.getFigur(F1));
+        assertEquals(WEISSER_KOENIG, neueStellung.getFigur(G1));
+        assertEquals(WEISSER_TURM, neueStellung.getFigur(F1));
 
-        Set<RochadeRecht> rochadeRechte = neueStellung.getRochadeRechte();
-        Assert.assertTrue(rochadeRechte.contains(RochadeRecht.SCHWARZ_LANG));
-        Assert.assertTrue(rochadeRechte.contains(RochadeRecht.SCHWARZ_KURZ));
-        Assert.assertFalse(rochadeRechte.contains(RochadeRecht.WEISS_LANG));
-        Assert.assertFalse(rochadeRechte.contains(RochadeRecht.WEISS_KURZ));
+        assertTrue(neueStellung.rochadeErlaubt((SCHWARZ_LANG)));
+        assertTrue(neueStellung.rochadeErlaubt((SCHWARZ_KURZ)));
+        assertFalse(neueStellung.rochadeErlaubt((WEISS_LANG)));
+        assertFalse(neueStellung.rochadeErlaubt((WEISS_KURZ)));
     }
 
     /**
@@ -124,23 +122,20 @@ public class StellungTest {
         // Turm wird bewegt. Auf der anderen Seite ist dann rochade noch erlaubt
         Zug z1 = new Zug(WEISSER_TURM, A1, B1);
         Stellung neueStellung1 = stellung.fuehreZugAus(z1);
-        Set<RochadeRecht> rochadeRechte1 = neueStellung1.getRochadeRechte();
-        Assert.assertFalse(rochadeRechte1.contains(RochadeRecht.WEISS_LANG));
-        Assert.assertTrue(rochadeRechte1.contains(RochadeRecht.WEISS_KURZ));
+        assertFalse(neueStellung1.rochadeErlaubt(WEISS_LANG));
+        assertTrue(neueStellung1.rochadeErlaubt(WEISS_KURZ));
 
         // Gleicher Test, andere Seite
         Zug z2 = new Zug(WEISSER_TURM, H1, G1);
         Stellung neueStellung2 = stellung.fuehreZugAus(z2);
-        Set<RochadeRecht> rochadeRechte2 = neueStellung2.getRochadeRechte();
-        Assert.assertTrue(rochadeRechte2.contains(RochadeRecht.WEISS_LANG));
-        Assert.assertFalse(rochadeRechte2.contains(RochadeRecht.WEISS_KURZ));
+        assertTrue(neueStellung2.rochadeErlaubt(WEISS_LANG));
+        assertFalse(neueStellung2.rochadeErlaubt(WEISS_KURZ));
 
         // Koenig wird bewegt. Keine Rochade fuer weiss merh moeglich.
         Zug z3 = new Zug(WEISSER_KOENIG, E1, E2);
         Stellung neueStellung3 = stellung.fuehreZugAus(z3);
-        Set<RochadeRecht> rochadeRechte3 = neueStellung3.getRochadeRechte();
-        Assert.assertFalse(rochadeRechte3.contains(RochadeRecht.WEISS_LANG));
-        Assert.assertFalse(rochadeRechte3.contains(RochadeRecht.WEISS_KURZ));
+        assertFalse(neueStellung3.rochadeErlaubt(WEISS_LANG));
+        assertFalse(neueStellung3.rochadeErlaubt(WEISS_KURZ));
     }
 
 
@@ -149,8 +144,8 @@ public class StellungTest {
         Stellung stellung = new Stellung();
 
         Set<Feld> felder = stellung.felderMitFarbe(WEISS);
-        Assert.assertEquals(16, felder.size());
-        Assert.assertTrue("Weisse Figur a1", felder.contains(A1));
+        assertEquals(16, felder.size());
+        assertTrue("Weisse Figur a1", felder.contains(A1));
     }
 
     @Test
@@ -158,8 +153,8 @@ public class StellungTest {
         Stellung stellung = new Stellung();
 
         List<Feld> felder = stellung.findeFelderMit(WEISSER_BAUER);
-        Assert.assertEquals(8, felder.size());
-        Assert.assertTrue("Weisser Bauer e2", felder.contains(E2));
+        assertEquals(8, felder.size());
+        assertTrue("Weisser Bauer e2", felder.contains(E2));
     }
 
     @Test
@@ -167,9 +162,9 @@ public class StellungTest {
         Stellung stellung = new Stellung();
 
         Feld feldSchwarz = stellung.findeFeldMitKoenig(SCHWARZ);
-        Assert.assertEquals(E8, feldSchwarz);
+        assertEquals(E8, feldSchwarz);
 
         Feld feldWeiss = stellung.findeFeldMitKoenig(WEISS);
-        Assert.assertEquals(E1, feldWeiss);
+        assertEquals(E1, feldWeiss);
     }
 }
