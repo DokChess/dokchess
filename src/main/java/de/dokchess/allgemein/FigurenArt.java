@@ -40,9 +40,9 @@ public enum FigurenArt {
      *
      * @param c Buchstabe, z.B. 'q' fuer Queen (Dame).
      * @return die Figurenart.
-     * @throws java.lang.IllegalArgumentException kein zulässiger Buchstabe.
+     * @throws java.lang.IllegalArgumentException kein zulaessiger Buchstabe.
      */
-    public static FigurenArt ausBuchstabe(final char c) throws IllegalArgumentException {
+    public static FigurenArt ausBuchstabe(final char c) {
         switch (c) {
             case 'k':
             case 'K':
