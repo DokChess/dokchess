@@ -25,15 +25,19 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Set;
 
+import static de.dokchess.allgemein.Farbe.SCHWARZ;
+import static de.dokchess.allgemein.Farbe.WEISS;
 import static de.dokchess.allgemein.Felder.*;
+import static de.dokchess.allgemein.FigurenArt.BAUER;
+import static de.dokchess.allgemein.FigurenArt.DAME;
 
 
 public class StellungTest {
 
-    private static final Figur WEISSER_BAUER = new Figur(FigurenArt.BAUER,
-            Farbe.WEISS);
-    private static final Figur WEISSE_DAME = new Figur(FigurenArt.DAME,
-            Farbe.WEISS);
+    private static final Figur WEISSER_BAUER = new Figur(BAUER,
+            WEISS);
+    private static final Figur WEISSE_DAME = new Figur(DAME,
+            WEISS);
 
     @Test
     public void bauerEinsVor() {
@@ -47,7 +51,7 @@ public class StellungTest {
         Assert.assertNull(neueStellung.getEnPassantFeld());
         Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(e3));
 
-        Assert.assertEquals(Farbe.SCHWARZ, neueStellung.getAmZug());
+        Assert.assertEquals(SCHWARZ, neueStellung.getAmZug());
     }
 
     @Test
@@ -62,7 +66,7 @@ public class StellungTest {
         Assert.assertEquals(e3, neueStellung.getEnPassantFeld());
         Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(e4));
 
-        Assert.assertEquals(Farbe.SCHWARZ, neueStellung.getAmZug());
+        Assert.assertEquals(SCHWARZ, neueStellung.getAmZug());
     }
 
     /**
@@ -83,7 +87,7 @@ public class StellungTest {
     public void sucheFelderMitWeissenFiguren() {
         Stellung stellung = new Stellung();
 
-        Set<Feld> felder = stellung.felderMitFarbe(Farbe.WEISS);
+        Set<Feld> felder = stellung.felderMitFarbe(WEISS);
         Assert.assertEquals(16, felder.size());
         Assert.assertTrue("Weisse Figur a1", felder.contains(Felder.a1));
     }
@@ -101,10 +105,10 @@ public class StellungTest {
     public void sucheFelderMitKoenig() {
         Stellung stellung = new Stellung();
 
-        Feld feldSchwarz = stellung.findeFeldMitKoenig(Farbe.SCHWARZ);
+        Feld feldSchwarz = stellung.findeFeldMitKoenig(SCHWARZ);
         Assert.assertEquals(Felder.e8, feldSchwarz);
 
-        Feld feldWeiss= stellung.findeFeldMitKoenig(Farbe.WEISS);
+        Feld feldWeiss = stellung.findeFeldMitKoenig(WEISS);
         Assert.assertEquals(Felder.e1, feldWeiss);
     }
 }
