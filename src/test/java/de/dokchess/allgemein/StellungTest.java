@@ -28,8 +28,9 @@ import java.util.Set;
 import static de.dokchess.allgemein.Farbe.SCHWARZ;
 import static de.dokchess.allgemein.Farbe.WEISS;
 import static de.dokchess.allgemein.Felder.*;
-import static de.dokchess.allgemein.FigurenArt.BAUER;
+import static de.dokchess.allgemein.FigurenArt.*;
 import static de.dokchess.allgemein.FigurenArt.DAME;
+import static de.dokchess.allgemein.FigurenArt.KOENIG;
 
 
 public class StellungTest {
@@ -81,6 +82,32 @@ public class StellungTest {
 
         Assert.assertNull(neueStellung.getFigur(B7));
         Assert.assertEquals(WEISSE_DAME, neueStellung.getFigur(B8));
+    }
+
+    /**
+     * Weiss macht eine kurze Rochade.
+     */
+    @Test
+    public void kurzeRochadeWeiss() {
+        Stellung stellung = new Stellung("rnbqkbnr/ppp3pp/3ppp2/8/8/4PN2/PPPPBPPP/RNBQK2R w KQkq - 0 1");
+
+        Zug zug = new Zug(new Figur(KOENIG, WEISS), E1, G1);
+        Assert.assertTrue(zug.istRochadeKurz());
+
+        Stellung neueStellung = stellung.fuehreZugAus(zug);
+
+        // Koenig und Turm haben sich bewegt
+        Assert.assertNull(neueStellung.getFigur(E1));
+        Assert.assertNull(neueStellung.getFigur(H1));
+
+        Assert.assertEquals(new Figur(KOENIG, WEISS), neueStellung.getFigur(G1));
+        Assert.assertEquals(new Figur(TURM, WEISS), neueStellung.getFigur(F1));
+
+        Set<RochadeRecht> rochadeRechte = neueStellung.getRochadeRechte();
+        Assert.assertTrue(rochadeRechte.contains(RochadeRecht.SCHWARZ_LANG));
+        Assert.assertTrue(rochadeRechte.contains(RochadeRecht.SCHWARZ_KURZ));
+        Assert.assertFalse(rochadeRechte.contains(RochadeRecht.WEISS_LANG));
+        Assert.assertFalse(rochadeRechte.contains(RochadeRecht.WEISS_KURZ));
     }
 
     @Test
