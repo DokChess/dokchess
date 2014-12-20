@@ -22,6 +22,8 @@ package de.dokchess.allgemein;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 import static de.dokchess.allgemein.Felder.*;
 
 
@@ -59,5 +61,14 @@ public class StellungTest {
         Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(e4));
 
         Assert.assertEquals(Farbe.SCHWARZ, neueStellung.getAmZug());
+    }
+
+    @Test
+    public void sucheFelderMitWeissenBauern() {
+        Stellung stellung = new Stellung();
+
+        List<Feld> felder = stellung.findeFelderMit(WEISSER_BAUER);
+        Assert.assertEquals(8, felder.size());
+        Assert.assertTrue("Weisser Bauer e2", felder.contains(Felder.e2));
     }
 }
