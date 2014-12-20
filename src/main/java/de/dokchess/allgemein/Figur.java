@@ -26,19 +26,25 @@ package de.dokchess.allgemein;
  */
 public final class Figur {
 
+    /**
+     * Farbe der Figut, etwa WEISS
+     */
     private final Farbe farbe;
 
+    /**
+     * Art der Figur, etwa BAUER
+     */
     private final FigurenArt art;
 
     /**
      * Erzeugt eine unveraenderliche Figur.
      *
-     * @param art   Art der Figur, etwa BAUER
-     * @param farbe Farbe der Figut, etwa WEISS
+     * @param a Art der Figur, etwa BAUER
+     * @param f Farbe der Figut, etwa WEISS
      */
-    public Figur(FigurenArt art, Farbe farbe) {
-        this.art = art;
-        this.farbe = farbe;
+    public Figur(final FigurenArt a, final Farbe f) {
+        this.art = a;
+        this.farbe = f;
     }
 
     /**
@@ -88,13 +94,33 @@ public final class Figur {
         return sb.toString();
     }
 
+    /**
+     * Testet ob die Figur von der gewuenschten Art ist.
+     *
+     * @param a die zu testenden Figurenart.
+     * @return true, falls dem so ist
+     */
+    public boolean ist(final FigurenArt a) {
+        return this.art == a;
+    }
+
+    /**
+     * Testet ob die Figur von der gewuenschten Farbe ist.
+     *
+     * @param f die zu testenden Farbe.
+     * @return true, falls dem so ist
+     */
+    public boolean ist(final Farbe f) {
+        return this.farbe == f;
+    }
+
     @Override
     public int hashCode() {
         return (farbe.ordinal() * 10) + art.ordinal();
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
