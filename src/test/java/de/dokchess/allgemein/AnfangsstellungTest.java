@@ -19,8 +19,7 @@
 
 package de.dokchess.allgemein;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 public class AnfangsstellungTest {
@@ -30,5 +29,4 @@ public class AnfangsstellungTest {
 		Stellung stellung = new Stellung();
 		Assert.assertEquals(Farbe.WEISS, stellung.getAmZug());
 	}
-
 }
