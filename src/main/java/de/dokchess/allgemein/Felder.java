@@ -26,7 +26,7 @@ package de.dokchess.allgemein;
  *
  * @author StefanZ
  */
-public class Felder {
+public final class Felder {
 
     private Felder() {
     }
