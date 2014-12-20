@@ -131,33 +131,41 @@ public final class Zug {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Zug other = (Zug) obj;
         if (figur == null) {
             if (other.figur != null)
                 return false;
-        } else if (!figur.equals(other.figur))
+        } else if (!figur.equals(other.figur)) {
             return false;
+        }
         if (nach == null) {
             if (other.nach != null)
                 return false;
         } else if (!nach.equals(other.nach))
             return false;
-        if (neueFigurenart != other.neueFigurenart)
+        if (neueFigurenart != other.neueFigurenart) {
             return false;
-        if (schlagen != other.schlagen)
+        }
+        if (schlagen != other.schlagen) {
             return false;
+        }
         if (von == null) {
-            if (other.von != null)
+            if (other.von != null) {
                 return false;
-        } else if (!von.equals(other.von))
+            }
+        } else if (!von.equals(other.von)) {
             return false;
+        }
         return true;
     }
 
