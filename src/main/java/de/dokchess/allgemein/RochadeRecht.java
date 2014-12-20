@@ -19,29 +19,29 @@
 package de.dokchess.allgemein;
 
 public enum RochadeRecht {
-	WEISS_KURZ('K'), WEISS_LANG('Q'), SCHWARZ_KURZ('k'), SCHWARZ_LANG('q');
+    WEISS_KURZ('K'), WEISS_LANG('Q'), SCHWARZ_KURZ('k'), SCHWARZ_LANG('q');
 
-	private char buchstabe;
+    private char buchstabe;
 
-	private RochadeRecht(char buchstabe) {
-		this.buchstabe = buchstabe;
-	}
+    private RochadeRecht(char buchstabe) {
+        this.buchstabe = buchstabe;
+    }
 
-	public char alsBuchstabe() {
-		return this.buchstabe;
-	}
+    public char alsBuchstabe() {
+        return this.buchstabe;
+    }
 
-	public static RochadeRecht ausBuchstabe(char c) {
-		switch (c) {
-		case 'K':
-			return WEISS_KURZ;
-		case 'Q':
-			return WEISS_LANG;
-		case 'k':
-			return SCHWARZ_KURZ;
-		case 'q':
-			return SCHWARZ_LANG;
-		}
-		return null;
-	}
+    public static RochadeRecht ausBuchstabe(char c) {
+        switch (c) {
+            case 'K':
+                return WEISS_KURZ;
+            case 'Q':
+                return WEISS_LANG;
+            case 'k':
+                return SCHWARZ_KURZ;
+            case 'q':
+                return SCHWARZ_LANG;
+        }
+        return null;
+    }
 }

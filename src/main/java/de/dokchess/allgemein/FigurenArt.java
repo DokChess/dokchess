@@ -21,40 +21,40 @@ package de.dokchess.allgemein;
 
 public enum FigurenArt {
 
-	KOENIG('K'), DAME('Q'), TURM('R'), LAEUFER('B'), SPRINGER('N'), BAUER('P');
+    KOENIG('K'), DAME('Q'), TURM('R'), LAEUFER('B'), SPRINGER('N'), BAUER('P');
 
-	private FigurenArt(char buchstabe) {
-		this.buchstabe = buchstabe;
-	}
+    private FigurenArt(char buchstabe) {
+        this.buchstabe = buchstabe;
+    }
 
-	private char buchstabe;
+    private char buchstabe;
 
-	public char getBuchstabe() {
-		return buchstabe;
-	}
+    public char getBuchstabe() {
+        return buchstabe;
+    }
 
-	public static FigurenArt ausBuchstabe(char c) {
-		switch (c) {
-		case 'k':
-		case 'K':
-			return KOENIG;
-		case 'q':
-		case 'Q':
-			return DAME;
-		case 'r':
-		case 'R':
-			return TURM;
-		case 'b':
-		case 'B':
-			return LAEUFER;
-		case 'n':
-		case 'N':
-			return SPRINGER;
-		case 'p':
-		case 'P':
-			return BAUER;
-		default:
-			return null;
-		}
-	}
+    public static FigurenArt ausBuchstabe(char c) {
+        switch (c) {
+            case 'k':
+            case 'K':
+                return KOENIG;
+            case 'q':
+            case 'Q':
+                return DAME;
+            case 'r':
+            case 'R':
+                return TURM;
+            case 'b':
+            case 'B':
+                return LAEUFER;
+            case 'n':
+            case 'N':
+                return SPRINGER;
+            case 'p':
+            case 'P':
+                return BAUER;
+            default:
+                return null;
+        }
+    }
 }
