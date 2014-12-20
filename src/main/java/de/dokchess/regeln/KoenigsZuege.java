@@ -18,48 +18,48 @@
  */
 package de.dokchess.regeln;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import de.dokchess.allgemein.Feld;
 import de.dokchess.allgemein.Figur;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 
-public class KoenigsZuege extends Gangart {
+import java.util.ArrayList;
+import java.util.List;
 
-	public void fuegeZugkandidatenHinzu(Feld von, Stellung stellung, List<Zug> liste) {
+class KoenigsZuege extends Gangart {
 
-		Figur eigenerKoenig = stellung.getFigur(von);
+    public void fuegeZugkandidatenHinzu(Feld von, Stellung stellung, List<Zug> liste) {
 
-		List<Feld> erreichbareFelder = ermittleErreichbareFelder(stellung, von);
-		for (Feld nach : erreichbareFelder) {
-			if (stellung.getFigur(nach) == null) {
-				Zug m = new Zug(eigenerKoenig, von, nach);
-				liste.add(m);
-			} else {
-				Zug m = new Zug(eigenerKoenig, von, nach,
-						true);
-				liste.add(m);
-			}
-		}
-	}
+        Figur eigenerKoenig = stellung.getFigur(von);
 
-	protected List<Feld> ermittleErreichbareFelder(Stellung stellung,
-			Feld startfeld) {
+        List<Feld> erreichbareFelder = ermittleErreichbareFelder(stellung, von);
+        for (Feld nach : erreichbareFelder) {
+            if (stellung.getFigur(nach) == null) {
+                Zug m = new Zug(eigenerKoenig, von, nach);
+                liste.add(m);
+            } else {
+                Zug m = new Zug(eigenerKoenig, von, nach,
+                        true);
+                liste.add(m);
+            }
+        }
+    }
 
-		List<Feld> felder = new ArrayList<Feld>();
+    protected List<Feld> ermittleErreichbareFelder(Stellung stellung,
+                                                   Feld startfeld) {
 
-		fuegeFeldHinzuFallsErreichbar(stellung, startfeld, 0, 1, felder);
-		fuegeFeldHinzuFallsErreichbar(stellung, startfeld, 0, -1, felder);
-		fuegeFeldHinzuFallsErreichbar(stellung, startfeld, 1, 0, felder);
-		fuegeFeldHinzuFallsErreichbar(stellung, startfeld, -1, 0, felder);
-		fuegeFeldHinzuFallsErreichbar(stellung, startfeld, 1, 1, felder);
-		fuegeFeldHinzuFallsErreichbar(stellung, startfeld, -1, -1, felder);
-		fuegeFeldHinzuFallsErreichbar(stellung, startfeld, 1, -1, felder);
-		fuegeFeldHinzuFallsErreichbar(stellung, startfeld, -1, 1, felder);
+        List<Feld> felder = new ArrayList<Feld>();
 
-		return felder;
-	}
+        fuegeFeldHinzuFallsErreichbar(stellung, startfeld, 0, 1, felder);
+        fuegeFeldHinzuFallsErreichbar(stellung, startfeld, 0, -1, felder);
+        fuegeFeldHinzuFallsErreichbar(stellung, startfeld, 1, 0, felder);
+        fuegeFeldHinzuFallsErreichbar(stellung, startfeld, -1, 0, felder);
+        fuegeFeldHinzuFallsErreichbar(stellung, startfeld, 1, 1, felder);
+        fuegeFeldHinzuFallsErreichbar(stellung, startfeld, -1, -1, felder);
+        fuegeFeldHinzuFallsErreichbar(stellung, startfeld, 1, -1, felder);
+        fuegeFeldHinzuFallsErreichbar(stellung, startfeld, -1, 1, felder);
+
+        return felder;
+    }
 
 }

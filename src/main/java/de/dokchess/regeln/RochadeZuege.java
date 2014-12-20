@@ -27,7 +27,7 @@ import static de.dokchess.allgemein.Farbe.WEISS;
 import static de.dokchess.allgemein.Felder.*;
 import static de.dokchess.allgemein.FigurenArt.KOENIG;
 
-public class RochadeZuege extends Gangart {
+class RochadeZuege extends Gangart {
 
     private static final Figur WEISSER_KOENIG = new Figur(KOENIG, WEISS);
     private static final Figur SCHWARZER_KOENIG = new Figur(KOENIG, SCHWARZ);
