@@ -29,9 +29,9 @@ import java.util.EnumSet;
  *
  * @author StefanZ
  */
-class ForsythEdwardsNotation {
+final class ForsythEdwardsNotation {
 
-    private Felder() {
+    private ForsythEdwardsNotation() {
     }
 
     public static void fromString(Stellung pos, String fen) {
