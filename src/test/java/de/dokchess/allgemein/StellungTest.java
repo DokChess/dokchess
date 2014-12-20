@@ -32,7 +32,8 @@ public class StellungTest {
 
     private static final Figur WEISSER_BAUER = new Figur(FigurenArt.BAUER,
             Farbe.WEISS);
-
+    private static final Figur WEISSE_DAME = new Figur(FigurenArt.DAME,
+            Farbe.WEISS);
 
     @Test
     public void bauerEinsVor() {
@@ -64,6 +65,19 @@ public class StellungTest {
         Assert.assertEquals(Farbe.SCHWARZ, neueStellung.getAmZug());
     }
 
+    /**
+     * Umwandlung eines weissen Bauern in eine Dame
+     */
+    @Test
+    public void bauerUmwandlungInDame() {
+        Stellung stellung = new Stellung("4k3/1P6/4K3/8/8/8/8/8 w - - 0 1");
+
+        Zug zug = new Zug(WEISSER_BAUER, b7, b8, FigurenArt.DAME);
+        Stellung neueStellung = stellung.fuehreZugAus(zug);
+
+        Assert.assertNull(neueStellung.getFigur(b7));
+        Assert.assertEquals(WEISSE_DAME, neueStellung.getFigur(b8));
+    }
 
     @Test
     public void sucheFelderMitWeissenFiguren() {
