@@ -19,46 +19,45 @@
 
 package de.dokchess.allgemein;
 
-import static de.dokchess.allgemein.Felder.e2;
-import static de.dokchess.allgemein.Felder.e3;
-import static de.dokchess.allgemein.Felder.e4;
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
+
+import static de.dokchess.allgemein.Felder.*;
+
 
 public class StellungTest {
 
-	private static final Figur WEISSER_BAUER = new Figur(FigurenArt.BAUER,
-			Farbe.WEISS);
+    private static final Figur WEISSER_BAUER = new Figur(FigurenArt.BAUER,
+            Farbe.WEISS);
 
 
-	@Test
-	public void bauerEinsVor() {
-		Stellung stellung = new Stellung();
-		
-		Zug zug = new Zug(WEISSER_BAUER, e2, e3);
-		
-		Stellung neueStellung = stellung.fuehreZugAus(zug);
-		
-		Assert.assertNull(neueStellung.getFigur(e2));
-		Assert.assertNull(neueStellung.getEnPassantFeld());
-		Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(e3));
-		
-		Assert.assertEquals(Farbe.SCHWARZ, neueStellung.getAmZug());	
-	}
-	
-	@Test
-	public void bauerZweiVor() {
-		Stellung stellung = new Stellung();
-		
-		Zug zug = new Zug(WEISSER_BAUER, e2, e4);
-		
-		Stellung neueStellung = stellung.fuehreZugAus(zug);
-		
-		Assert.assertNull(neueStellung.getFigur(e2));
-		Assert.assertEquals(e3, neueStellung.getEnPassantFeld());
-		Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(e4));
-		
-		Assert.assertEquals(Farbe.SCHWARZ, neueStellung.getAmZug());
-	}
+    @Test
+    public void bauerEinsVor() {
+        Stellung stellung = new Stellung();
+
+        Zug zug = new Zug(WEISSER_BAUER, e2, e3);
+
+        Stellung neueStellung = stellung.fuehreZugAus(zug);
+
+        Assert.assertNull(neueStellung.getFigur(e2));
+        Assert.assertNull(neueStellung.getEnPassantFeld());
+        Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(e3));
+
+        Assert.assertEquals(Farbe.SCHWARZ, neueStellung.getAmZug());
+    }
+
+    @Test
+    public void bauerZweiVor() {
+        Stellung stellung = new Stellung();
+
+        Zug zug = new Zug(WEISSER_BAUER, e2, e4);
+
+        Stellung neueStellung = stellung.fuehreZugAus(zug);
+
+        Assert.assertNull(neueStellung.getFigur(e2));
+        Assert.assertEquals(e3, neueStellung.getEnPassantFeld());
+        Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(e4));
+
+        Assert.assertEquals(Farbe.SCHWARZ, neueStellung.getAmZug());
+    }
 }
