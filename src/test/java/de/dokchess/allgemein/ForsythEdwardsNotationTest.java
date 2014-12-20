@@ -20,8 +20,9 @@
 package de.dokchess.allgemein;
 
 import junit.framework.Assert;
-
 import org.junit.Test;
+
+import static de.dokchess.allgemein.FigurenArt.*;
 
 public class ForsythEdwardsNotationTest {
 
