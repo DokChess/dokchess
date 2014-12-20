@@ -30,7 +30,7 @@ import static de.dokchess.allgemein.FigurenArt.*;
 
 class BauernZuege extends Gangart {
 
-    private final static Set<FigurenArt> UMWANDLUNG_OPTIONEN;
+    private static final Set<FigurenArt> UMWANDLUNG_OPTIONEN;
 
     static {
         UMWANDLUNG_OPTIONEN = EnumSet.noneOf(FigurenArt.class);
