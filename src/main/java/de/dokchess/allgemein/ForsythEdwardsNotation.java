@@ -31,10 +31,20 @@ import java.util.EnumSet;
  */
 final class ForsythEdwardsNotation {
 
+    /**
+     * Toolklasse, daher kein oeffentlicher Konstruktor.
+     */
     private ForsythEdwardsNotation() {
     }
 
-    public static void fromString(Stellung pos, String fen) {
+    /**
+     * Baut die ueber die Zeichenkette fen uebergebene Brettstellung im
+     * Stellungsobjekt pos auf.
+     *
+     * @param pos Zielobjekt
+     * @param fen vorgegebene Stellung in FEN-Notation
+     */
+    public static void fromString(final Stellung pos, final String fen) {
 
         String[] gruppen = fen.split(" ");
 
@@ -75,6 +85,8 @@ final class ForsythEdwardsNotation {
             case 'b':
                 pos.setAmZug(Farbe.SCHWARZ);
                 break;
+            default:
+                throw new IllegalArgumentException(side + " keine gueltige Farbe.");
         }
 
         String rochadeRecht = gruppen[2];
@@ -98,7 +110,13 @@ final class ForsythEdwardsNotation {
         }
     }
 
-    public static String toString(Stellung position) {
+    /**
+     * Liefert zur uebergebenen Stellung die FEN-Notation als Zeichenkette zurueck.
+     *
+     * @param position die zu uebersetzende Stellung
+     * @return FEN-Notation der Stellung
+     */
+    public static String toString(final Stellung position) {
 
         StringBuffer sb = new StringBuffer();
 
@@ -134,6 +152,8 @@ final class ForsythEdwardsNotation {
             case SCHWARZ:
                 sb.append('b');
                 break;
+            default:
+                throw new IllegalArgumentException("Ungueltige Farbe");
         }
 
         sb.append(" ");
