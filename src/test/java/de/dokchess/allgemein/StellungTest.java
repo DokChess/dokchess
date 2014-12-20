@@ -23,6 +23,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static de.dokchess.allgemein.Felder.*;
 
@@ -61,6 +62,16 @@ public class StellungTest {
         Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(e4));
 
         Assert.assertEquals(Farbe.SCHWARZ, neueStellung.getAmZug());
+    }
+
+
+    @Test
+    public void sucheFelderMitWeissenFiguren() {
+        Stellung stellung = new Stellung();
+
+        Set<Feld> felder = stellung.felderMitFarbe(Farbe.WEISS);
+        Assert.assertEquals(16, felder.size());
+        Assert.assertTrue("Weisser Figur a1", felder.contains(Felder.a1));
     }
 
     @Test
