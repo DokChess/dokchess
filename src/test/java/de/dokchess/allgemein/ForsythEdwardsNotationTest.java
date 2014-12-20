@@ -22,6 +22,8 @@ package de.dokchess.allgemein;
 import junit.framework.Assert;
 import org.junit.Test;
 
+import static de.dokchess.allgemein.Felder.*;
+
 import static de.dokchess.allgemein.FigurenArt.*;
 
 public class ForsythEdwardsNotationTest {
@@ -46,7 +48,7 @@ public class ForsythEdwardsNotationTest {
 	public void enPassantToString() {
 		
 		Stellung s = new Stellung();
-		Zug z = new Zug(new Figur(FigurenArt.BAUER, Farbe.WEISS), Felder.e2, Felder.e4);
+		Zug z = new Zug(new Figur(FigurenArt.BAUER, Farbe.WEISS), E2, E4);
 		s = s.fuehreZugAus(z);
 		
 		String fen = ForsythEdwardsNotation.toString(s);		
@@ -64,7 +66,7 @@ public class ForsythEdwardsNotationTest {
 		ForsythEdwardsNotation.fromString(pos, fen);
 		
 		Assert.assertEquals(Farbe.WEISS, pos.getAmZug());
-		Assert.assertEquals(new Figur(FigurenArt.DAME, Farbe.WEISS), pos.getFigur(Felder.h5));
-		Assert.assertEquals(new Figur(FigurenArt.BAUER, Farbe.SCHWARZ), pos.getFigur(Felder.e5));
+		Assert.assertEquals(new Figur(FigurenArt.DAME, Farbe.WEISS), pos.getFigur(H5));
+		Assert.assertEquals(new Figur(FigurenArt.BAUER, Farbe.SCHWARZ), pos.getFigur(E5));
 	}
 }

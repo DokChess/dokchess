@@ -43,13 +43,13 @@ public class StellungTest {
     public void bauerEinsVor() {
         Stellung stellung = new Stellung();
 
-        Zug zug = new Zug(WEISSER_BAUER, e2, e3);
+        Zug zug = new Zug(WEISSER_BAUER, E2, E3);
 
         Stellung neueStellung = stellung.fuehreZugAus(zug);
 
-        Assert.assertNull(neueStellung.getFigur(e2));
+        Assert.assertNull(neueStellung.getFigur(E2));
         Assert.assertNull(neueStellung.getEnPassantFeld());
-        Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(e3));
+        Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(E3));
 
         Assert.assertEquals(SCHWARZ, neueStellung.getAmZug());
     }
@@ -58,13 +58,13 @@ public class StellungTest {
     public void bauerZweiVor() {
         Stellung stellung = new Stellung();
 
-        Zug zug = new Zug(WEISSER_BAUER, e2, e4);
+        Zug zug = new Zug(WEISSER_BAUER, E2, E4);
 
         Stellung neueStellung = stellung.fuehreZugAus(zug);
 
-        Assert.assertNull(neueStellung.getFigur(e2));
-        Assert.assertEquals(e3, neueStellung.getEnPassantFeld());
-        Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(e4));
+        Assert.assertNull(neueStellung.getFigur(E2));
+        Assert.assertEquals(E3, neueStellung.getEnPassantFeld());
+        Assert.assertEquals(WEISSER_BAUER, neueStellung.getFigur(E4));
 
         Assert.assertEquals(SCHWARZ, neueStellung.getAmZug());
     }
@@ -76,11 +76,11 @@ public class StellungTest {
     public void bauerUmwandlungInDame() {
         Stellung stellung = new Stellung("4k3/1P6/4K3/8/8/8/8/8 w - - 0 1");
 
-        Zug zug = new Zug(WEISSER_BAUER, b7, b8, FigurenArt.DAME);
+        Zug zug = new Zug(WEISSER_BAUER, B7, B8, FigurenArt.DAME);
         Stellung neueStellung = stellung.fuehreZugAus(zug);
 
-        Assert.assertNull(neueStellung.getFigur(b7));
-        Assert.assertEquals(WEISSE_DAME, neueStellung.getFigur(b8));
+        Assert.assertNull(neueStellung.getFigur(B7));
+        Assert.assertEquals(WEISSE_DAME, neueStellung.getFigur(B8));
     }
 
     @Test
@@ -89,7 +89,7 @@ public class StellungTest {
 
         Set<Feld> felder = stellung.felderMitFarbe(WEISS);
         Assert.assertEquals(16, felder.size());
-        Assert.assertTrue("Weisse Figur a1", felder.contains(Felder.a1));
+        Assert.assertTrue("Weisse Figur a1", felder.contains(A1));
     }
 
     @Test
@@ -98,7 +98,7 @@ public class StellungTest {
 
         List<Feld> felder = stellung.findeFelderMit(WEISSER_BAUER);
         Assert.assertEquals(8, felder.size());
-        Assert.assertTrue("Weisser Bauer e2", felder.contains(Felder.e2));
+        Assert.assertTrue("Weisser Bauer e2", felder.contains(E2));
     }
 
     @Test
@@ -106,9 +106,9 @@ public class StellungTest {
         Stellung stellung = new Stellung();
 
         Feld feldSchwarz = stellung.findeFeldMitKoenig(SCHWARZ);
-        Assert.assertEquals(Felder.e8, feldSchwarz);
+        Assert.assertEquals(E8, feldSchwarz);
 
         Feld feldWeiss = stellung.findeFeldMitKoenig(WEISS);
-        Assert.assertEquals(Felder.e1, feldWeiss);
+        Assert.assertEquals(E1, feldWeiss);
     }
 }

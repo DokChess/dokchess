@@ -193,14 +193,14 @@ public final class Stellung {
             neueStellung.rochadeRechte = EnumSet.copyOf(rochadeRechte);
             switch (getAmZug()) {
                 case WEISS:
-                    neueStellung.setFigur(h1, null);
-                    neueStellung.setFigur(f1, new Figur(FigurenArt.TURM, WEISS));
+                    neueStellung.setFigur(H1, null);
+                    neueStellung.setFigur(F1, new Figur(FigurenArt.TURM, WEISS));
                     neueStellung.rochadeRechte.remove(WEISS_KURZ);
                     neueStellung.rochadeRechte.remove(WEISS_LANG);
                     break;
                 case SCHWARZ:
-                    neueStellung.setFigur(h8, null);
-                    neueStellung.setFigur(f8, new Figur(FigurenArt.TURM, SCHWARZ));
+                    neueStellung.setFigur(H8, null);
+                    neueStellung.setFigur(F8, new Figur(FigurenArt.TURM, SCHWARZ));
                     neueStellung.rochadeRechte.remove(SCHWARZ_KURZ);
                     neueStellung.rochadeRechte.remove(SCHWARZ_LANG);
                     break;
@@ -209,14 +209,14 @@ public final class Stellung {
             neueStellung.rochadeRechte = EnumSet.copyOf(rochadeRechte);
             switch (getAmZug()) {
                 case WEISS:
-                    neueStellung.setFigur(a1, null);
-                    neueStellung.setFigur(d1, new Figur(FigurenArt.TURM, WEISS));
+                    neueStellung.setFigur(A1, null);
+                    neueStellung.setFigur(D1, new Figur(FigurenArt.TURM, WEISS));
                     neueStellung.rochadeRechte.remove(WEISS_KURZ);
                     neueStellung.rochadeRechte.remove(WEISS_LANG);
                     break;
                 case SCHWARZ:
-                    neueStellung.setFigur(a8, null);
-                    neueStellung.setFigur(d8, new Figur(FigurenArt.TURM, SCHWARZ));
+                    neueStellung.setFigur(A8, null);
+                    neueStellung.setFigur(D8, new Figur(FigurenArt.TURM, SCHWARZ));
                     neueStellung.rochadeRechte.remove(SCHWARZ_KURZ);
                     neueStellung.rochadeRechte.remove(SCHWARZ_LANG);
                     break;
@@ -244,16 +244,16 @@ public final class Stellung {
                 neueStellung.rochadeRechte = EnumSet.copyOf(rochadeRechte);
                 switch (amZug) {
                     case WEISS:
-                        if (zug.getVon().equals(a1)) {
+                        if (zug.getVon().equals(A1)) {
                             neueStellung.rochadeRechte.remove(WEISS_LANG);
-                        } else if (zug.getVon().equals(h1)) {
+                        } else if (zug.getVon().equals(H1)) {
                             neueStellung.rochadeRechte.remove(WEISS_KURZ);
                         }
                         break;
                     case SCHWARZ:
-                        if (zug.getVon().equals(a8)) {
+                        if (zug.getVon().equals(A8)) {
                             neueStellung.rochadeRechte.remove(SCHWARZ_LANG);
-                        } else if (zug.getVon().equals(h8)) {
+                        } else if (zug.getVon().equals(H8)) {
                             neueStellung.rochadeRechte.remove(SCHWARZ_KURZ);
                         }
                         break;
