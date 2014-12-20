@@ -68,7 +68,7 @@ public final class Stellung {
         this.rochadeRechte = s.rochadeRechte;
         this.enPassantFeld = s.enPassantFeld;
         this.brett = new Figur[ANZAHL_REIHEN][];
-        System.arraycopy(s.brett, 0, this.brett, 0, 8);
+        System.arraycopy(s.brett, 0, this.brett, 0, ANZAHL_REIHEN);
     }
 
     public Farbe getAmZug() {
