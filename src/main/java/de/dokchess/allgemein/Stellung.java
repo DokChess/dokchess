@@ -195,6 +195,16 @@ public final class Stellung {
         return neueStellung;
     }
 
+    /**
+     * Liefert zurueck, ob die betreffende Rochade noch zulaessig waere.
+     *
+     * @param rr konkrete Rochade, zum Beispiel WEISS_LANG
+     * @return true, fals grundsaetzlich noch erlaubt
+     */
+    public boolean rochadeErlaubt(RochadeRecht rr) {
+        return rochadeRechte.contains(rr);
+    }
+
     private void rochadeDurchfuehrenBehandeln(Zug zug, Stellung neueStellung) {
         if (zug.istRochadeKurz()) {
             neueStellung.rochadeRechte = EnumSet.copyOf(rochadeRechte);
