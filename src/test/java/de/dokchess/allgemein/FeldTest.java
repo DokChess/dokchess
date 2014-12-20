@@ -20,55 +20,70 @@
 package de.dokchess.allgemein;
 
 import junit.framework.Assert;
-
 import org.junit.Test;
 
 public class FeldTest {
 
-	@Test
-	public void konstruktionMitString() {
+    @Test
+    public void konstruktionMitString() {
 
-		Feld a8 = new Feld("a8");
-		Assert.assertEquals(0, a8.getReihe());
-		Assert.assertEquals(0, a8.getLinie());
-		Assert.assertEquals("a8", a8.toString());
+        Feld a8 = new Feld("a8");
+        Assert.assertEquals(0, a8.getReihe());
+        Assert.assertEquals(0, a8.getLinie());
+        Assert.assertEquals("a8", a8.toString());
 
-		Feld h8 = new Feld("h8");
-		Assert.assertEquals(0, h8.getReihe());
-		Assert.assertEquals(7, h8.getLinie());
-		Assert.assertEquals("h8", h8.toString());
+        Feld h8 = new Feld("h8");
+        Assert.assertEquals(0, h8.getReihe());
+        Assert.assertEquals(7, h8.getLinie());
+        Assert.assertEquals("h8", h8.toString());
 
-		Feld a1 = new Feld("a1");
-		Assert.assertEquals(7, a1.getReihe());
-		Assert.assertEquals(0, a1.getLinie());
-		Assert.assertEquals("a1", a1.toString());
+        Feld a1 = new Feld("a1");
+        Assert.assertEquals(7, a1.getReihe());
+        Assert.assertEquals(0, a1.getLinie());
+        Assert.assertEquals("a1", a1.toString());
 
-		Feld h1 = new Feld("h1");
-		Assert.assertEquals(7, h1.getReihe());
-		Assert.assertEquals(7, h1.getLinie());
-		Assert.assertEquals("h1", h1.toString());
-	}
+        Feld h1 = new Feld("h1");
+        Assert.assertEquals(7, h1.getReihe());
+        Assert.assertEquals(7, h1.getLinie());
+        Assert.assertEquals("h1", h1.toString());
+    }
 
-	@Test
-	public void vergleicheMitEquals() {
-		Feld a1 = new Feld("a1");
-		Feld h1 = new Feld("h1");
-		Feld anderesH1 = new Feld("h1");
+    @Test
+    public void konstruktionMitKoordinaten() {
 
-		Assert.assertFalse(a1.equals(h1));
-		Assert.assertFalse(a1.equals(null));
-		Assert.assertFalse(a1.equals("Hallo"));
-		
-		Assert.assertTrue(a1.equals(a1));
-		Assert.assertTrue(h1.equals(anderesH1));
-	}
-	
-	@Test
-	public void hashCodesSindGleich() {
-		Feld h1 = new Feld("h1");
-		Feld anderesH1 = new Feld("h1");
-		Assert.assertTrue(h1.hashCode() == anderesH1.hashCode());
-	}
-	
-	
+        Feld a8 = new Feld(0, 0);
+        Assert.assertEquals("a8", a8.toString());
+
+        Feld h8 = new Feld(0, 7);
+        Assert.assertEquals("h8", h8.toString());
+
+        Feld a1 = new Feld(7, 0);
+        Assert.assertEquals("a1", a1.toString());
+
+        Feld h1 = new Feld(7, 7);
+        Assert.assertEquals("h1", h1.toString());
+    }
+
+    @Test
+    public void vergleicheMitEquals() {
+        Feld a1 = new Feld("a1");
+        Feld h1 = new Feld("h1");
+        Feld anderesH1 = new Feld("h1");
+
+        Assert.assertFalse(a1.equals(h1));
+        Assert.assertFalse(a1.equals(null));
+        Assert.assertFalse(a1.equals("Hallo"));
+
+        Assert.assertTrue(a1.equals(a1));
+        Assert.assertTrue(h1.equals(anderesH1));
+    }
+
+    @Test
+    public void hashCodesSindGleich() {
+        Feld h1 = new Feld("h1");
+        Feld anderesH1 = new Feld("h1");
+        Assert.assertTrue(h1.hashCode() == anderesH1.hashCode());
+    }
+
+
 }
