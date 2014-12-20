@@ -24,6 +24,8 @@ import java.util.*;
 import static de.dokchess.allgemein.Farbe.SCHWARZ;
 import static de.dokchess.allgemein.Farbe.WEISS;
 import static de.dokchess.allgemein.Felder.*;
+import static de.dokchess.allgemein.FigurenArt.KOENIG;
+import static de.dokchess.allgemein.FigurenArt.TURM;
 import static de.dokchess.allgemein.RochadeRecht.*;
 
 /**
@@ -56,7 +58,7 @@ public final class Stellung {
      * Erzeugt die ueber die Forsyth-Edwards-Notation (FEN beschriebene
      * Stellung.
      *
-     * @param fen
+     * @param fen Stellung als zeichenkette in FEN-Notation
      */
     public Stellung(final String fen) {
         this.brett = new Figur[ANZAHL_REIHEN][ANZAHL_LINIEN];
@@ -71,6 +73,11 @@ public final class Stellung {
         System.arraycopy(s.brett, 0, this.brett, 0, ANZAHL_REIHEN);
     }
 
+    /**
+     * Liefert zurueck, wer am Zuge ist.
+     *
+     * @return schwarz oder weiss
+     */
     public Farbe getAmZug() {
         return amZug;
     }
@@ -95,27 +102,27 @@ public final class Stellung {
         brett[feld.getReihe()][feld.getLinie()] = figur;
     }
 
-    void setEnPassantFeld(Feld enPassantFeld) {
-        this.enPassantFeld = enPassantFeld;
-    }
-
     public Feld getEnPassantFeld() {
         return enPassantFeld;
     }
 
-    void setRochadeRechte(Set<RochadeRecht> rochadeRechte) {
-        this.rochadeRechte = rochadeRechte;
+    void setEnPassantFeld(Feld enPassantFeld) {
+        this.enPassantFeld = enPassantFeld;
     }
 
     public Set<RochadeRecht> getRochadeRechte() {
         return rochadeRechte;
     }
 
-    public List<Feld> findeFelderMit(Figur figur) {
+    void setRochadeRechte(Set<RochadeRecht> rochadeRechte) {
+        this.rochadeRechte = rochadeRechte;
+    }
+
+    public List<Feld> findeFelderMit(final Figur figur) {
         List<Feld> felder = new ArrayList<Feld>();
 
-        for (int reihe = 0; reihe < 8; ++reihe) {
-            for (int linie = 0; linie < 8; ++linie) {
+        for (int reihe = 0; reihe < ANZAHL_REIHEN; ++reihe) {
+            for (int linie = 0; linie < ANZAHL_LINIEN; ++linie) {
                 Figur aktFigur = getFigur(reihe, linie);
                 if (aktFigur != null && aktFigur.equals(figur)) {
                     felder.add(new Feld(reihe, linie));
@@ -126,12 +133,12 @@ public final class Stellung {
         return felder;
     }
 
-    public Feld findeFeldMitKoenig(Farbe farbe) {
+    public Feld findeFeldMitKoenig(final Farbe farbe) {
         for (int reihe = 0; reihe < ANZAHL_REIHEN; ++reihe) {
             for (int linie = 0; linie < ANZAHL_LINIEN; ++linie) {
                 Figur aktFigur = getFigur(reihe, linie);
-                if (aktFigur != null && aktFigur.getArt() == FigurenArt.KOENIG
-                        && aktFigur.getFarbe() == farbe) {
+                if (aktFigur != null && aktFigur.ist(KOENIG)
+                        && aktFigur.ist(farbe)) {
                     return new Feld(reihe, linie);
                 }
             }
@@ -139,13 +146,13 @@ public final class Stellung {
         return null;
     }
 
-    public Set<Feld> felderMitFarbe(Farbe farbe) {
+    public Set<Feld> felderMitFarbe(final Farbe farbe) {
         HashSet<Feld> felder = new HashSet<Feld>();
 
         for (int reihe = 0; reihe < ANZAHL_REIHEN; ++reihe) {
             for (int linie = 0; linie < ANZAHL_LINIEN; ++linie) {
                 Figur aktFigur = getFigur(reihe, linie);
-                if (aktFigur != null && aktFigur.getFarbe() == farbe) {
+                if (aktFigur != null && aktFigur.ist(farbe)) {
                     felder.add(new Feld(reihe, linie));
                 }
             }
@@ -170,7 +177,7 @@ public final class Stellung {
 
         // En Passant Feld setzen
         if (zug.istBauernZugZweiVor()) {
-            int delta = zug.getFigur().getFarbe() == Farbe.WEISS ? -1 : +1;
+            int delta = zug.getFigur().ist(WEISS) ? -1 : +1;
             neueStellung.enPassantFeld = new Feld(zug.getVon().getReihe()
                     + delta, zug.getVon().getLinie());
         } else {
@@ -228,7 +235,7 @@ public final class Stellung {
 
         // Ggf. Rochaderechte loeschen
         if (rochadeRechte.size() > 0) {
-            if (zug.getFigur().getArt() == FigurenArt.KOENIG) {
+            if (zug.getFigur().ist(KOENIG)) {
                 neueStellung.rochadeRechte = EnumSet.copyOf(rochadeRechte);
                 switch (amZug) {
                     case WEISS:
@@ -240,7 +247,7 @@ public final class Stellung {
                         neueStellung.rochadeRechte.remove(SCHWARZ_LANG);
                         break;
                 }
-            } else if (zug.getFigur().getArt() == FigurenArt.TURM) {
+            } else if (zug.getFigur().ist(TURM)) {
                 neueStellung.rochadeRechte = EnumSet.copyOf(rochadeRechte);
                 switch (amZug) {
                     case WEISS:
