@@ -31,6 +31,9 @@ import java.util.EnumSet;
  */
 class ForsythEdwardsNotation {
 
+	private Felder() {
+	}
+
 	public static void fromString(Stellung pos, String fen) {
 
 		String[] gruppen = fen.split(" ");
