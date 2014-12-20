@@ -47,7 +47,7 @@ public enum Farbe {
             case SCHWARZ:
                 return WEISS;
             default:
-                return null;
+                throw new IllegalStateException("Ungueltige Farbe");
         }
     }
 }
