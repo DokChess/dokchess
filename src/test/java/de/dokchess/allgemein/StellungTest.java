@@ -71,7 +71,7 @@ public class StellungTest {
 
         Set<Feld> felder = stellung.felderMitFarbe(Farbe.WEISS);
         Assert.assertEquals(16, felder.size());
-        Assert.assertTrue("Weisser Figur a1", felder.contains(Felder.a1));
+        Assert.assertTrue("Weisse Figur a1", felder.contains(Felder.a1));
     }
 
     @Test
@@ -81,5 +81,16 @@ public class StellungTest {
         List<Feld> felder = stellung.findeFelderMit(WEISSER_BAUER);
         Assert.assertEquals(8, felder.size());
         Assert.assertTrue("Weisser Bauer e2", felder.contains(Felder.e2));
+    }
+
+    @Test
+    public void sucheFelderMitKoenig() {
+        Stellung stellung = new Stellung();
+
+        Feld feldSchwarz = stellung.findeFeldMitKoenig(Farbe.SCHWARZ);
+        Assert.assertEquals(Felder.e8, feldSchwarz);
+
+        Feld feldWeiss= stellung.findeFeldMitKoenig(Farbe.WEISS);
+        Assert.assertEquals(Felder.e1, feldWeiss);
     }
 }
