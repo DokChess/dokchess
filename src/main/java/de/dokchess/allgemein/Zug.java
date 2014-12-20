@@ -22,7 +22,8 @@ package de.dokchess.allgemein;
 /**
  * Beschreibt den Zug eines Spielers. Die Klasse ist unver&auml;nderlich
  * (immutable). Neben dem Start- und dem Zielfeld sind verschiedene weitere
- * Informationen enthalten, die in Analysesituationen n&uuml;tzlich sein k&ouml;nnen.
+ * Informationen enthalten, die in Analysesituationen n&uuml;tzlich sein
+ * k&ouml;nnen.
  *
  * @author StefanZ
  */
@@ -172,6 +173,12 @@ public final class Zug {
         return true;
     }
 
+    /**
+     * Liefert eine schoene String-Reprasentation des Zuges zurueck.
+     *
+     * @return Zug als lesbare Zeichenkette
+     */
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         if (this.figur.getArt() != FigurenArt.BAUER) {
