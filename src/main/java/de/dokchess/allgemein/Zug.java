@@ -143,16 +143,19 @@ public final class Zug {
         }
         Zug other = (Zug) obj;
         if (figur == null) {
-            if (other.figur != null)
+            if (other.figur != null) {
                 return false;
+            }
         } else if (!figur.equals(other.figur)) {
             return false;
         }
         if (nach == null) {
-            if (other.nach != null)
+            if (other.nach != null) {
                 return false;
-        } else if (!nach.equals(other.nach))
+            }
+        } else if (!nach.equals(other.nach)) {
             return false;
+        }
         if (neueFigurenart != other.neueFigurenart) {
             return false;
         }
