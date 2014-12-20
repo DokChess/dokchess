@@ -30,7 +30,9 @@ final class Tools {
     private static final Set<FigurenArt> DAME_TURM = EnumSet.of(FigurenArt.DAME,
             FigurenArt.TURM);
 
-    /** Toolklasse, Konstruktor nicht sichtbar. */
+    /**
+     * Toolklasse, Konstruktor nicht sichtbar.
+     */
     private Tools() {
     }
 
@@ -58,8 +60,9 @@ final class Tools {
                 DAME_LAEUFER)
                 || istFeldAngegriffenInRichtung(stellung, feld, farbe, -1, 1,
                 DAME_LAEUFER);
-        if (dameLauferAngriff)
+        if (dameLauferAngriff) {
             return true;
+        }
 
         // Gerade (Dame/Turm)
         boolean dameTurmAngriff = istFeldAngegriffenInRichtung(stellung, feld,
@@ -70,8 +73,9 @@ final class Tools {
                 DAME_TURM)
                 || istFeldAngegriffenInRichtung(stellung, feld, farbe, 0, -1,
                 DAME_TURM);
-        if (dameTurmAngriff)
+        if (dameTurmAngriff) {
             return true;
+        }
 
         // Springer
         boolean springerAngriff = istFeldAngegriffenVonFeld(stellung, feld,
@@ -90,8 +94,9 @@ final class Tools {
                 FigurenArt.SPRINGER)
                 || istFeldAngegriffenVonFeld(stellung, feld, farbe, -2, -1,
                 FigurenArt.SPRINGER);
-        if (springerAngriff)
+        if (springerAngriff) {
             return true;
+        }
 
         // Bauer
         int delta = farbe == Farbe.WEISS ? +1 : -1;
@@ -99,8 +104,9 @@ final class Tools {
                 farbe, 1, delta, FigurenArt.BAUER)
                 || istFeldAngegriffenVonFeld(stellung, feld, farbe, -1, delta,
                 FigurenArt.BAUER);
-        if (bauernAngriff)
+        if (bauernAngriff) {
             return true;
+        }
 
         // Koenig
         boolean koenigsAngriff = istFeldAngegriffenVonFeld(stellung, feld,
@@ -120,14 +126,15 @@ final class Tools {
                 || istFeldAngegriffenVonFeld(stellung, feld, farbe, -1, -1,
                 FigurenArt.KOENIG);
 
-        if (koenigsAngriff)
+        if (koenigsAngriff) {
             return true;
+        }
 
         return false;
     }
 
     private static boolean istFeldAngegriffenInRichtung(Stellung stellung,
-                                                          Feld feld, Farbe farbe, int dx, int dy, Set<FigurenArt> figurenArten) {
+                                                        Feld feld, Farbe farbe, int dx, int dy, Set<FigurenArt> figurenArten) {
 
         int reihe = feld.getReihe();
         int linie = feld.getLinie();
@@ -156,7 +163,7 @@ final class Tools {
     }
 
     private static boolean istFeldAngegriffenVonFeld(Stellung stellung,
-                                                       Feld feld, Farbe farbe, int dx, int dy, FigurenArt figurenArt) {
+                                                     Feld feld, Farbe farbe, int dx, int dy, FigurenArt figurenArt) {
 
         int linie = feld.getLinie() + dx;
         int reihe = feld.getReihe() + dy;
