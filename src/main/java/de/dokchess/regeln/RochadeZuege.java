@@ -39,18 +39,18 @@ class RochadeZuege extends Gangart {
         switch (stellung.getAmZug()) {
             case WEISS:
                 if (stellung.getRochadeRechte().contains(RochadeRecht.WEISS_KURZ)) {
-                    if (alleFelderFrei(stellung, F1, G1)
-                            && keinesDerFelderAngegriffen(stellung, SCHWARZ, E1,
-                            F1, G1)) {
-                        Zug rochadeKurz = new Zug(WEISSER_KOENIG, E1, G1);
+                    if (alleFelderFrei(stellung, f1, g1)
+                            && keinesDerFelderAngegriffen(stellung, SCHWARZ, e1,
+                            f1, g1)) {
+                        Zug rochadeKurz = new Zug(WEISSER_KOENIG, e1, g1);
                         liste.add(rochadeKurz);
                     }
                 }
                 if (stellung.getRochadeRechte().contains(RochadeRecht.WEISS_LANG)) {
-                    if (alleFelderFrei(stellung, B1, C1, D1)
-                            && keinesDerFelderAngegriffen(stellung, SCHWARZ, E1,
-                            D1, C1)) {
-                        Zug rochadeLang = new Zug(WEISSER_KOENIG, E1, C1);
+                    if (alleFelderFrei(stellung, b1, c1, d1)
+                            && keinesDerFelderAngegriffen(stellung, SCHWARZ, e1,
+                            d1, c1)) {
+                        Zug rochadeLang = new Zug(WEISSER_KOENIG, e1, c1);
                         liste.add(rochadeLang);
                     }
                 }
@@ -58,18 +58,18 @@ class RochadeZuege extends Gangart {
 
             case SCHWARZ:
                 if (stellung.getRochadeRechte().contains(RochadeRecht.SCHWARZ_KURZ)) {
-                    if (alleFelderFrei(stellung, F8, G8)
-                            && keinesDerFelderAngegriffen(stellung, WEISS, E8, F8,
-                            G8)) {
-                        Zug rochadeKurz = new Zug(SCHWARZER_KOENIG, E8, G8);
+                    if (alleFelderFrei(stellung, f8, g8)
+                            && keinesDerFelderAngegriffen(stellung, WEISS, e8, f8,
+                            g8)) {
+                        Zug rochadeKurz = new Zug(SCHWARZER_KOENIG, e8, g8);
                         liste.add(rochadeKurz);
                     }
                 }
                 if (stellung.getRochadeRechte().contains(RochadeRecht.SCHWARZ_LANG)) {
-                    if (alleFelderFrei(stellung, B8, C8, D8)
-                            && keinesDerFelderAngegriffen(stellung, WEISS, E8, D8,
-                            C8)) {
-                        Zug rochadeLang = new Zug(SCHWARZER_KOENIG, E8, C8);
+                    if (alleFelderFrei(stellung, b8, c8, d8)
+                            && keinesDerFelderAngegriffen(stellung, WEISS, e8, d8,
+                            c8)) {
+                        Zug rochadeLang = new Zug(SCHWARZER_KOENIG, e8, c8);
                         liste.add(rochadeLang);
                     }
                 }
