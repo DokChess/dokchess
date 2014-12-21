@@ -44,7 +44,7 @@ sonarRunner {
     sonarProperties {
         property 'sonar.jdbc.url', 'jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true'
         property 'sonar.jdbc.driverClassName', 'com.mysql.jdbc.Driver'
-        property 'sonar.projectVersion', '${buildDir}/jacocoHtml'
+        property 'sonar.projectVersion', "${version}"
     }
 }
 
