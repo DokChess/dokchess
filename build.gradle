@@ -48,17 +48,17 @@ sonarRunner {
     }
 }
 
+// Siehe
+// http://selimober.com/blog/2014/01/24/separate-unit-and-integration-tests-using-gradle/
 sourceSets {
     integTest {
         java.srcDir file('src/integTest/java')
     }
 }
-
 task integTest(type: Test) {
     testClassesDir = sourceSets.integTest.output.classesDir
     classpath = sourceSets.integTest.runtimeClasspath
 }
-
 check.dependsOn integTest
 
 repositories {
