@@ -50,7 +50,7 @@ public class ForsythEdwardsNotationTest {
     public void enPassantToString() {
 
         Stellung s = new Stellung();
-        Zug z = new Zug(new Figur(BAUER, Farbe.WEISS), E2, E4);
+        Zug z = new Zug(new Figur(BAUER, Farbe.WEISS), e2, e4);
         s = s.fuehreZugAus(z);
 
         String fen = ForsythEdwardsNotation.toString(s);
@@ -68,7 +68,7 @@ public class ForsythEdwardsNotationTest {
         ForsythEdwardsNotation.fromString(pos, fen);
 
         Assert.assertEquals(Farbe.WEISS, pos.getAmZug());
-        Assert.assertEquals(new Figur(DAME, WEISS), pos.getFigur(H5));
-        Assert.assertEquals(new Figur(BAUER, SCHWARZ), pos.getFigur(E5));
+        Assert.assertEquals(new Figur(DAME, WEISS), pos.getFigur(h5));
+        Assert.assertEquals(new Figur(BAUER, SCHWARZ), pos.getFigur(e5));
     }
 }

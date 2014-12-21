@@ -47,13 +47,13 @@ public class StellungTest {
     public void bauerEinsVor() {
         Stellung stellung = new Stellung();
 
-        Zug zug = new Zug(WEISSER_BAUER, E2, E3);
+        Zug zug = new Zug(WEISSER_BAUER, e2, e3);
 
         Stellung neueStellung = stellung.fuehreZugAus(zug);
 
-        assertNull(neueStellung.getFigur(E2));
+        assertNull(neueStellung.getFigur(e2));
         assertNull(neueStellung.getEnPassantFeld());
-        assertEquals(WEISSER_BAUER, neueStellung.getFigur(E3));
+        assertEquals(WEISSER_BAUER, neueStellung.getFigur(e3));
 
         assertEquals(SCHWARZ, neueStellung.getAmZug());
     }
@@ -62,13 +62,13 @@ public class StellungTest {
     public void bauerZweiVor() {
         Stellung stellung = new Stellung();
 
-        Zug zug = new Zug(WEISSER_BAUER, E2, E4);
+        Zug zug = new Zug(WEISSER_BAUER, e2, e4);
 
         Stellung neueStellung = stellung.fuehreZugAus(zug);
 
-        assertNull(neueStellung.getFigur(E2));
-        assertEquals(E3, neueStellung.getEnPassantFeld());
-        assertEquals(WEISSER_BAUER, neueStellung.getFigur(E4));
+        assertNull(neueStellung.getFigur(e2));
+        assertEquals(e3, neueStellung.getEnPassantFeld());
+        assertEquals(WEISSER_BAUER, neueStellung.getFigur(e4));
 
         assertEquals(SCHWARZ, neueStellung.getAmZug());
     }
@@ -80,11 +80,11 @@ public class StellungTest {
     public void bauerUmwandlungInDame() {
         Stellung stellung = new Stellung("4k3/1P6/4K3/8/8/8/8/8 w - - 0 1");
 
-        Zug zug = new Zug(WEISSER_BAUER, B7, B8, FigurenArt.DAME);
+        Zug zug = new Zug(WEISSER_BAUER, b7, b8, FigurenArt.DAME);
         Stellung neueStellung = stellung.fuehreZugAus(zug);
 
-        assertNull(neueStellung.getFigur(B7));
-        assertEquals(WEISSE_DAME, neueStellung.getFigur(B8));
+        assertNull(neueStellung.getFigur(b7));
+        assertEquals(WEISSE_DAME, neueStellung.getFigur(b8));
     }
 
     /**
@@ -94,17 +94,17 @@ public class StellungTest {
     public void kurzeRochadeWeiss() {
         Stellung stellung = new Stellung("rnbqkbnr/ppp3pp/3ppp2/8/8/4PN2/PPPPBPPP/RNBQK2R w KQkq - 0 1");
 
-        Zug zug = new Zug(WEISSER_KOENIG, E1, G1);
+        Zug zug = new Zug(WEISSER_KOENIG, e1, g1);
         assertTrue(zug.istRochadeKurz());
 
         Stellung neueStellung = stellung.fuehreZugAus(zug);
 
         // Koenig und Turm haben sich bewegt
-        assertNull(neueStellung.getFigur(E1));
-        assertNull(neueStellung.getFigur(H1));
+        assertNull(neueStellung.getFigur(e1));
+        assertNull(neueStellung.getFigur(h1));
 
-        assertEquals(WEISSER_KOENIG, neueStellung.getFigur(G1));
-        assertEquals(WEISSER_TURM, neueStellung.getFigur(F1));
+        assertEquals(WEISSER_KOENIG, neueStellung.getFigur(g1));
+        assertEquals(WEISSER_TURM, neueStellung.getFigur(f1));
 
         assertTrue(neueStellung.rochadeErlaubt((SCHWARZ_LANG)));
         assertTrue(neueStellung.rochadeErlaubt((SCHWARZ_KURZ)));
@@ -120,19 +120,19 @@ public class StellungTest {
         Stellung stellung = new Stellung("4k3/8/1Q6/8/8/8/8/R3K2R w KQ - 0 1");
 
         // Turm wird bewegt. Auf der anderen Seite ist dann rochade noch erlaubt
-        Zug z1 = new Zug(WEISSER_TURM, A1, B1);
+        Zug z1 = new Zug(WEISSER_TURM, a1, b1);
         Stellung neueStellung1 = stellung.fuehreZugAus(z1);
         assertFalse(neueStellung1.rochadeErlaubt(WEISS_LANG));
         assertTrue(neueStellung1.rochadeErlaubt(WEISS_KURZ));
 
         // Gleicher Test, andere Seite
-        Zug z2 = new Zug(WEISSER_TURM, H1, G1);
+        Zug z2 = new Zug(WEISSER_TURM, h1, g1);
         Stellung neueStellung2 = stellung.fuehreZugAus(z2);
         assertTrue(neueStellung2.rochadeErlaubt(WEISS_LANG));
         assertFalse(neueStellung2.rochadeErlaubt(WEISS_KURZ));
 
         // Koenig wird bewegt. Keine Rochade fuer weiss merh moeglich.
-        Zug z3 = new Zug(WEISSER_KOENIG, E1, E2);
+        Zug z3 = new Zug(WEISSER_KOENIG, e1, e2);
         Stellung neueStellung3 = stellung.fuehreZugAus(z3);
         assertFalse(neueStellung3.rochadeErlaubt(WEISS_LANG));
         assertFalse(neueStellung3.rochadeErlaubt(WEISS_KURZ));
@@ -145,7 +145,7 @@ public class StellungTest {
 
         Set<Feld> felder = stellung.felderMitFarbe(WEISS);
         assertEquals(16, felder.size());
-        assertTrue("Weisse Figur a1", felder.contains(A1));
+        assertTrue("Weisse Figur a1", felder.contains(a1));
     }
 
     @Test
@@ -154,7 +154,7 @@ public class StellungTest {
 
         List<Feld> felder = stellung.findeFelderMit(WEISSER_BAUER);
         assertEquals(8, felder.size());
-        assertTrue("Weisser Bauer e2", felder.contains(E2));
+        assertTrue("Weisser Bauer e2", felder.contains(e2));
     }
 
     @Test
@@ -162,9 +162,9 @@ public class StellungTest {
         Stellung stellung = new Stellung();
 
         Feld feldSchwarz = stellung.findeFeldMitKoenig(SCHWARZ);
-        assertEquals(E8, feldSchwarz);
+        assertEquals(e8, feldSchwarz);
 
         Feld feldWeiss = stellung.findeFeldMitKoenig(WEISS);
-        assertEquals(E1, feldWeiss);
+        assertEquals(e1, feldWeiss);
     }
 }

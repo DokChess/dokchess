@@ -23,8 +23,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static de.dokchess.allgemein.Farbe.WEISS;
-import static de.dokchess.allgemein.Felder.E2;
-import static de.dokchess.allgemein.Felder.E4;
+import static de.dokchess.allgemein.Felder.e2;
+import static de.dokchess.allgemein.Felder.e4;
 import static de.dokchess.allgemein.FigurenArt.BAUER;
 
 public class ZugTest {
@@ -35,8 +35,8 @@ public class ZugTest {
     @Test
     public void testEqualsHashcode() {
 
-        Zug z1 = new Zug(WEISSER_BAUER, E2, E4);
-        Zug z2 = new Zug(WEISSER_BAUER, E2, E4);
+        Zug z1 = new Zug(WEISSER_BAUER, e2, e4);
+        Zug z2 = new Zug(WEISSER_BAUER, e2, e4);
 
         Assert.assertEquals(z1, z2);
         Assert.assertEquals(z1.hashCode(), z2.hashCode());
@@ -45,7 +45,7 @@ public class ZugTest {
     @Test
     public void testToString() {
 
-        Zug z1 = new Zug(WEISSER_BAUER, E2, E4);
+        Zug z1 = new Zug(WEISSER_BAUER, e2, e4);
         String s = z1.toString();
 
         Assert.assertEquals("e2-e4", s);

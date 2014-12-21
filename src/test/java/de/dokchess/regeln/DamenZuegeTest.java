@@ -41,16 +41,16 @@ public class DamenZuegeTest {
             DamenZuege damenZuege = new DamenZuege();
             List<Zug> zuege = new ArrayList<Zug>();
 
-            damenZuege.fuegeZugkandidatenHinzu(A1, weisseDameA1, zuege);
+            damenZuege.fuegeZugkandidatenHinzu(a1, weisseDameA1, zuege);
 
             Assert.assertEquals(21, zuege.size());
             for (Zug zug : zuege) {
-                Assert.assertEquals(A1, zug.getVon());
+                Assert.assertEquals(a1, zug.getVon());
             }
-            Feld[] ziele = {B1, C1, D1, E1, F1, G1, H1, A2, A3, A4, A5, A6,
-                    A7, A8, B2, C3, D4, E5, F6, G7, H8};
+            Feld[] ziele = {b1, c1, d1, e1, f1, g1, h1, a2, a3, a4, a5, a6,
+                    a7, a8, b2, c3, d4, e5, f6, g7, h8};
             for (Feld ziel : ziele) {
-                Zug zuTesten = new Zug(DAME_WEISS, A1, ziel);
+                Zug zuTesten = new Zug(DAME_WEISS, a1, ziel);
                 Assert.assertTrue(zuege.contains(zuTesten));
             }
         }
@@ -61,15 +61,15 @@ public class DamenZuegeTest {
             DamenZuege damenZuege = new DamenZuege();
             List<Zug> zuege = new ArrayList<Zug>();
 
-            damenZuege.fuegeZugkandidatenHinzu(H8, weisseDameH8, zuege);
+            damenZuege.fuegeZugkandidatenHinzu(h8, weisseDameH8, zuege);
             Assert.assertEquals(21, zuege.size());
             for (Zug zug : zuege) {
-                Assert.assertEquals(H8, zug.getVon());
+                Assert.assertEquals(h8, zug.getVon());
             }
-            Feld[] ziele = {H1, H2, H3, H4, H5, H6, H7, A8, B8, C8, D8, E8,
-                    F8, G8, A1, B2, C3, D4, E5, F6, G7};
+            Feld[] ziele = {h1, h2, h3, h4, h5, h6, h7, a8, b8, c8, d8, e8,
+                    f8, g8, a1, b2, c3, d4, e5, f6, g7};
             for (Feld ziel : ziele) {
-                Zug zuTesten = new Zug(DAME_WEISS, H8, ziel);
+                Zug zuTesten = new Zug(DAME_WEISS, h8, ziel);
                 Assert.assertTrue(zuege.contains(zuTesten));
             }
         }
@@ -83,16 +83,16 @@ public class DamenZuegeTest {
         DamenZuege damenZuege = new DamenZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        damenZuege.fuegeZugkandidatenHinzu(D5, weisseDameD5, zuege);
+        damenZuege.fuegeZugkandidatenHinzu(d5, weisseDameD5, zuege);
 
         Assert.assertEquals(27, zuege.size());
         for (Zug zug : zuege) {
-            Assert.assertEquals(D5, zug.getVon());
+            Assert.assertEquals(d5, zug.getVon());
         }
-        Feld[] ziele = {A5, B5, C5, E5, F5, G5, H5, D1, D2, D3, D4, D6, D7,
-                D8, A2, B3, C4, E5, F7, G8};
+        Feld[] ziele = {a5, b5, c5, e5, f5, g5, h5, d1, d2, d3, d4, d6, d7,
+                d8, a2, b3, c4, e5, f7, g8};
         for (Feld ziel : ziele) {
-            Zug zuTesten = new Zug(DAME_WEISS, D5, ziel);
+            Zug zuTesten = new Zug(DAME_WEISS, d5, ziel);
             Assert.assertTrue(zuTesten.toString(), zuege.contains(zuTesten));
         }
     }
@@ -106,16 +106,16 @@ public class DamenZuegeTest {
         DamenZuege damenZuege = new DamenZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        damenZuege.fuegeZugkandidatenHinzu(D3, weisseDameSchlaegtZweiFiguren,
+        damenZuege.fuegeZugkandidatenHinzu(d3, weisseDameSchlaegtZweiFiguren,
                 zuege);
 
         Assert.assertEquals(19, zuege.size());
         for (Zug zug : zuege) {
-            Assert.assertEquals(D3, zug.getVon());
+            Assert.assertEquals(d3, zug.getVon());
         }
 
-        Zug schlaegtSchwarzenSpringer = new Zug(DAME_WEISS, D3, A6, true);
-        Zug schlaegtSchwarzenBauern = new Zug(DAME_WEISS, D3, F3, true);
+        Zug schlaegtSchwarzenSpringer = new Zug(DAME_WEISS, d3, a6, true);
+        Zug schlaegtSchwarzenBauern = new Zug(DAME_WEISS, d3, f3, true);
 
         Assert.assertTrue(schlaegtSchwarzenSpringer.toString(),
                 zuege.contains(schlaegtSchwarzenSpringer));

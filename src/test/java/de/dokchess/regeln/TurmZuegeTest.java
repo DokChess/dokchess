@@ -47,16 +47,16 @@ public class TurmZuegeTest {
 			TurmZuege turmZuege = new TurmZuege();
 			List<Zug> zuege = new ArrayList<Zug>();
 
-			turmZuege.fuegeZugkandidatenHinzu(A1, weisserTurmA1, zuege);
+			turmZuege.fuegeZugkandidatenHinzu(a1, weisserTurmA1, zuege);
 
 			Assert.assertEquals(14, zuege.size());
 			for (Zug zug : zuege) {
-				Assert.assertEquals(A1, zug.getVon());
+				Assert.assertEquals(a1, zug.getVon());
 			}
-			Feld[] ziele = { B1, C1, D1, E1, F1, G1, H1, A2, A3, A4, A5, A6,
-					A7, A8 };
+			Feld[] ziele = {b1, c1, d1, e1, f1, g1, h1, a2, a3, a4, a5, a6,
+					a7, a8};
 			for (Feld ziel : ziele) {
-				Zug zuTesten = new Zug(TURM_WEISS, A1, ziel);
+				Zug zuTesten = new Zug(TURM_WEISS, a1, ziel);
 				Assert.assertTrue(zuege.contains(zuTesten));
 			}
 		}
@@ -67,16 +67,16 @@ public class TurmZuegeTest {
 			TurmZuege turmZuege = new TurmZuege();
 			List<Zug> zuege = new ArrayList<Zug>();
 
-			turmZuege.fuegeZugkandidatenHinzu(H8, weisserTurmH8, zuege);
+			turmZuege.fuegeZugkandidatenHinzu(h8, weisserTurmH8, zuege);
 			Assert.assertEquals(14, zuege.size());
 
 			for (Zug zug : zuege) {
-				Assert.assertEquals(H8, zug.getVon());
+				Assert.assertEquals(h8, zug.getVon());
 			}
-			Feld[] ziele = { H1, H2, H3, H4, H5, H6, H6, A8, B8, C8, D8, E8,
-					F8, G8 };
+			Feld[] ziele = {h1, h2, h3, h4, h5, h6, h6, a8, b8, c8, d8, e8,
+					f8, g8};
 			for (Feld ziel : ziele) {
-				Zug zuTesten = new Zug(TURM_WEISS, H8, ziel);
+				Zug zuTesten = new Zug(TURM_WEISS, h8, ziel);
 				Assert.assertTrue(zuege.contains(zuTesten));
 			}
 		}
@@ -92,17 +92,17 @@ public class TurmZuegeTest {
 			TurmZuege turmZuege = new TurmZuege();
 			List<Zug> zuege = new ArrayList<Zug>();
 
-			turmZuege.fuegeZugkandidatenHinzu(D5, weisserTurmAufD5, zuege);
+			turmZuege.fuegeZugkandidatenHinzu(d5, weisserTurmAufD5, zuege);
 
 			Assert.assertEquals(14, zuege.size());
 
 			for (Zug zug : zuege) {
-				Assert.assertEquals(D5, zug.getVon());
+				Assert.assertEquals(d5, zug.getVon());
 			}
-			Feld[] ziele = { A5, B5, C5, E5, F5, G5, H5, D1, D2, D3, D4, D6,
-					D7, D8 };
+			Feld[] ziele = {a5, b5, c5, e5, f5, g5, h5, d1, d2, d3, d4, d6,
+					d7, d8};
 			for (Feld ziel : ziele) {
-				Zug toTest = new Zug(TURM_WEISS, D5, ziel);
+				Zug toTest = new Zug(TURM_WEISS, d5, ziel);
 				Assert.assertTrue(toTest.toString(), zuege.contains(toTest));
 			}
 		}
@@ -117,16 +117,16 @@ public class TurmZuegeTest {
 		TurmZuege turmZuege = new TurmZuege();
 		List<Zug> zuege = new ArrayList<Zug>();
 
-		turmZuege.fuegeZugkandidatenHinzu(D3, weisserTurmSchlaegtZweiFiguren,
+		turmZuege.fuegeZugkandidatenHinzu(d3, weisserTurmSchlaegtZweiFiguren,
 				zuege);
 
 		Assert.assertEquals(10, zuege.size());
 		for (Zug zug : zuege) {
-			Assert.assertEquals(D3, zug.getVon());
+			Assert.assertEquals(d3, zug.getVon());
 		}
 
-		Zug schwarzeDameSchlagen = new Zug(TURM_WEISS, D3, D7, true);
-		Zug schwarzenLaeuferSchlagen = new Zug(TURM_WEISS, D3, G3, true);
+		Zug schwarzeDameSchlagen = new Zug(TURM_WEISS, d3, d7, true);
+		Zug schwarzenLaeuferSchlagen = new Zug(TURM_WEISS, d3, g3, true);
 
 		Assert.assertTrue(schwarzeDameSchlagen.toString(),
 				zuege.contains(schwarzeDameSchlagen));

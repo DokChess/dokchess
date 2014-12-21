@@ -49,17 +49,17 @@ public class BauernZuegeTest {
 		BauernZuege bauernzuege = new BauernZuege();
 		List<Zug> zuege = new ArrayList<Zug>();
 
-		bauernzuege.fuegeZugkandidatenHinzu(B2, einzelnerWeisserBauerAmStart,
+		bauernzuege.fuegeZugkandidatenHinzu(b2, einzelnerWeisserBauerAmStart,
 				zuege);
 
 		Assert.assertEquals(2, zuege.size());
 		for (Zug zug : zuege) {
-			Assert.assertEquals(B2, zug.getVon());
+			Assert.assertEquals(b2, zug.getVon());
 		}
 
 		Assert.assertEquals(2, zuege.size());
-		Zug einFeld = new Zug(BAUER_WEISS, B2, B3);
-		Zug zweiFelder = new Zug(BAUER_WEISS, B2, B4);
+		Zug einFeld = new Zug(BAUER_WEISS, b2, b3);
+		Zug zweiFelder = new Zug(BAUER_WEISS, b2, b4);
 
 		Assert.assertTrue(einFeld.toString(), zuege.contains(einFeld));
 		Assert.assertTrue(zweiFelder.toString(), zuege.contains(zweiFelder));
@@ -74,11 +74,11 @@ public class BauernZuegeTest {
 		BauernZuege bauernzuege = new BauernZuege();
 		List<Zug> zuege = new ArrayList<Zug>();
 
-		bauernzuege.fuegeZugkandidatenHinzu(E5,
+		bauernzuege.fuegeZugkandidatenHinzu(e5,
 				einzelnerWeisserBauerInDerMitte, zuege);
 
 		Assert.assertEquals(1, zuege.size());
-		Zug einFeld = new Zug(BAUER_WEISS, E5, E6);
+		Zug einFeld = new Zug(BAUER_WEISS, e5, e6);
 		Assert.assertTrue(einFeld.toString(), zuege.contains(einFeld));
 	}
 
@@ -91,15 +91,15 @@ public class BauernZuegeTest {
 		BauernZuege bauernzuege = new BauernZuege();
 		List<Zug> zuege = new ArrayList<Zug>();
 
-		bauernzuege.fuegeZugkandidatenHinzu(D4,
+		bauernzuege.fuegeZugkandidatenHinzu(d4,
 				einzelnerWeisserBauerKannSchlagen, zuege);
 
 		Assert.assertEquals(2, zuege.size());
 
-		Zug einFeld = new Zug(BAUER_WEISS, D4, D5);
+		Zug einFeld = new Zug(BAUER_WEISS, d4, d5);
 		Assert.assertTrue(einFeld.toString(), zuege.contains(einFeld));
 
-		Zug schlagen = new Zug(BAUER_WEISS, D4, E5, true);
+		Zug schlagen = new Zug(BAUER_WEISS, d4, e5, true);
 		Assert.assertTrue(einFeld.toString(), zuege.contains(schlagen));
 	}
 
@@ -112,12 +112,12 @@ public class BauernZuegeTest {
 		BauernZuege bauernzuege = new BauernZuege();
 		List<Zug> zuege = new ArrayList<Zug>();
 
-		bauernzuege.fuegeZugkandidatenHinzu(E7,
+		bauernzuege.fuegeZugkandidatenHinzu(e7,
 				einzelnerWeisserBauerUmwandlung, zuege);
 
 		Assert.assertEquals(8, zuege.size());
 		for (Zug zug : zuege) {
-			Assert.assertEquals(E7, zug.getVon());
+			Assert.assertEquals(e7, zug.getVon());
 			Assert.assertTrue(zug.istUmwandlung());
 		}
 	}
@@ -131,7 +131,7 @@ public class BauernZuegeTest {
 		BauernZuege bauernzuege = new BauernZuege();
 		List<Zug> zuege = new ArrayList<Zug>();
 
-		bauernzuege.fuegeZugkandidatenHinzu(E7,
+		bauernzuege.fuegeZugkandidatenHinzu(e7,
 				einzelnerWeisserBauerUmwandlung, zuege);
 		Assert.assertEquals(0, zuege.size());
 	}
@@ -145,7 +145,7 @@ public class BauernZuegeTest {
 		BauernZuege bauernzuege = new BauernZuege();
 		List<Zug> zuege = new ArrayList<Zug>();
 
-		bauernzuege.fuegeZugkandidatenHinzu(E2,
+		bauernzuege.fuegeZugkandidatenHinzu(e2,
 				einzelnerWeisserBauerUmwandlung, zuege);
 		Assert.assertEquals(0, zuege.size());
 	}
@@ -159,16 +159,16 @@ public class BauernZuegeTest {
 		BauernZuege bauernzuege = new BauernZuege();
 		List<Zug> zuege = new ArrayList<Zug>();
 
-		bauernzuege.fuegeZugkandidatenHinzu(E7, einzelnerSchwarzerBauerAmStart,
+		bauernzuege.fuegeZugkandidatenHinzu(e7, einzelnerSchwarzerBauerAmStart,
 				zuege);
 
 		Assert.assertEquals(2, zuege.size());
 		for (Zug zug : zuege) {
-			Assert.assertEquals(E7, zug.getVon());
+			Assert.assertEquals(e7, zug.getVon());
 		}
 
-		Zug einFeld = new Zug(BAUER_SCHWARZ, E7, E6);
-		Zug zweiFelder = new Zug(BAUER_SCHWARZ, E7, E5);
+		Zug einFeld = new Zug(BAUER_SCHWARZ, e7, e6);
+		Zug zweiFelder = new Zug(BAUER_SCHWARZ, e7, e5);
 
 		Assert.assertTrue(einFeld.toString(), zuege.contains(einFeld));
 		Assert.assertTrue(zweiFelder.toString(), zuege.contains(zweiFelder));
@@ -183,14 +183,14 @@ public class BauernZuegeTest {
 		BauernZuege bauernzuege = new BauernZuege();
 		List<Zug> zuege = new ArrayList<Zug>();
 
-		bauernzuege.fuegeZugkandidatenHinzu(E2, weisserBauerBlockiert, zuege);
+		bauernzuege.fuegeZugkandidatenHinzu(e2, weisserBauerBlockiert, zuege);
 
 		Assert.assertEquals(1, zuege.size());
 		for (Zug zug : zuege) {
-			Assert.assertEquals(E2, zug.getVon());
+			Assert.assertEquals(e2, zug.getVon());
 		}
 
-		Zug einFeld = new Zug(BAUER_WEISS, E2, E3);
+		Zug einFeld = new Zug(BAUER_WEISS, e2, e3);
 
 		Assert.assertTrue(einFeld.toString(), zuege.contains(einFeld));
 	}
@@ -204,13 +204,13 @@ public class BauernZuegeTest {
 		BauernZuege bauernzuege = new BauernZuege();
 		List<Zug> zuege = new ArrayList<Zug>();
 
-		bauernzuege.fuegeZugkandidatenHinzu(E4, schwarzerBauerEnPassant, zuege);
-		bauernzuege.fuegeZugkandidatenHinzu(G4, schwarzerBauerEnPassant, zuege);
+		bauernzuege.fuegeZugkandidatenHinzu(e4, schwarzerBauerEnPassant, zuege);
+		bauernzuege.fuegeZugkandidatenHinzu(g4, schwarzerBauerEnPassant, zuege);
 
 		Assert.assertEquals(4, zuege.size());
 
-		Zug schlag1 = new Zug(BAUER_SCHWARZ, E4, F3, true);
-		Zug schlag2 = new Zug(BAUER_SCHWARZ, G4, F3, true);
+		Zug schlag1 = new Zug(BAUER_SCHWARZ, e4, f3, true);
+		Zug schlag2 = new Zug(BAUER_SCHWARZ, g4, f3, true);
 
 		Assert.assertTrue(zuege.contains(schlag1));
 		Assert.assertTrue(zuege.contains(schlag2));
@@ -225,13 +225,13 @@ public class BauernZuegeTest {
 		BauernZuege bauernzuege = new BauernZuege();
 		List<Zug> zuege = new ArrayList<Zug>();
 
-		bauernzuege.fuegeZugkandidatenHinzu(D5, weisserBauerEnPassant, zuege);
-		bauernzuege.fuegeZugkandidatenHinzu(F5, weisserBauerEnPassant, zuege);
+		bauernzuege.fuegeZugkandidatenHinzu(d5, weisserBauerEnPassant, zuege);
+		bauernzuege.fuegeZugkandidatenHinzu(f5, weisserBauerEnPassant, zuege);
 
 		Assert.assertEquals(4, zuege.size());
 
-		Zug schlag1 = new Zug(BAUER_WEISS, D5, E6, true);
-		Zug schlag2 = new Zug(BAUER_WEISS, F5, E6, true);
+		Zug schlag1 = new Zug(BAUER_WEISS, d5, e6, true);
+		Zug schlag2 = new Zug(BAUER_WEISS, f5, e6, true);
 
 		Assert.assertTrue(zuege.contains(schlag1));
 		Assert.assertTrue(zuege.contains(schlag2));

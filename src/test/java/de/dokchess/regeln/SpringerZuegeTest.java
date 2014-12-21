@@ -39,15 +39,15 @@ public class SpringerZuegeTest {
         SpringerZuege springerZuege = new SpringerZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        springerZuege.fuegeZugkandidatenHinzu(D5, weisserSpringerD5, zuege);
+        springerZuege.fuegeZugkandidatenHinzu(d5, weisserSpringerD5, zuege);
 
         Assert.assertEquals(8, zuege.size());
         for (Zug zug : zuege) {
-            Assert.assertEquals(D5, zug.getVon());
+            Assert.assertEquals(d5, zug.getVon());
         }
-        Feld[] ziele = {C7, E7, B6, F6, B4, F4, C3, E3};
+        Feld[] ziele = {c7, e7, b6, f6, b4, f4, c3, e3};
         for (Feld ziel : ziele) {
-            Zug zuTesten = new Zug(SPRINGER_WEISS, D5, ziel);
+            Zug zuTesten = new Zug(SPRINGER_WEISS, d5, ziel);
             Assert.assertTrue(zuTesten.toString(), zuege.contains(zuTesten));
         }
     }
@@ -62,16 +62,16 @@ public class SpringerZuegeTest {
             SpringerZuege springerZuege = new SpringerZuege();
             List<Zug> zuege = new ArrayList<Zug>();
 
-            springerZuege.fuegeZugkandidatenHinzu(A1, weisserSpringerA1, zuege);
+            springerZuege.fuegeZugkandidatenHinzu(a1, weisserSpringerA1, zuege);
 
             Assert.assertEquals(2, zuege.size());
 
             for (Zug zug : zuege) {
-                Assert.assertEquals(A1, zug.getVon());
+                Assert.assertEquals(a1, zug.getVon());
             }
-            Feld[] ziele = {B3, C2};
+            Feld[] ziele = {b3, c2};
             for (Feld ziel : ziele) {
-                Zug zuTesten = new Zug(SPRINGER_WEISS, A1, ziel);
+                Zug zuTesten = new Zug(SPRINGER_WEISS, a1, ziel);
                 Assert.assertTrue(zuege.contains(zuTesten));
             }
         }
@@ -83,15 +83,15 @@ public class SpringerZuegeTest {
             SpringerZuege springerZuege = new SpringerZuege();
             List<Zug> zuege = new ArrayList<Zug>();
 
-            springerZuege.fuegeZugkandidatenHinzu(H8, weisserSpringerH8, zuege);
+            springerZuege.fuegeZugkandidatenHinzu(h8, weisserSpringerH8, zuege);
             Assert.assertEquals(2, zuege.size());
 
             for (Zug zug : zuege) {
-                Assert.assertEquals(H8, zug.getVon());
+                Assert.assertEquals(h8, zug.getVon());
             }
-            Feld[] ziele = {G6, F7};
+            Feld[] ziele = {g6, f7};
             for (Feld ziel : ziele) {
-                Zug zuTesten = new Zug(SPRINGER_WEISS, H8, ziel);
+                Zug zuTesten = new Zug(SPRINGER_WEISS, h8, ziel);
                 Assert.assertTrue(zuege.contains(zuTesten));
             }
         }
@@ -105,17 +105,17 @@ public class SpringerZuegeTest {
         SpringerZuege springerZuege = new SpringerZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        springerZuege.fuegeZugkandidatenHinzu(D5,
+        springerZuege.fuegeZugkandidatenHinzu(d5,
                 weisserSpringKannZweiSchlagen, zuege);
 
         Assert.assertEquals(7, zuege.size());
 
         for (Zug zug : zuege) {
-            Assert.assertEquals(D5, zug.getVon());
+            Assert.assertEquals(d5, zug.getVon());
         }
 
-        Zug schwarzenSpringerSchlagen = new Zug(SPRINGER_WEISS, D5, B4, true);
-        Zug schwarzenTurmSchlagen = new Zug(SPRINGER_WEISS, D5, E3, true);
+        Zug schwarzenSpringerSchlagen = new Zug(SPRINGER_WEISS, d5, b4, true);
+        Zug schwarzenTurmSchlagen = new Zug(SPRINGER_WEISS, d5, e3, true);
 
         Assert.assertTrue(schwarzenSpringerSchlagen.toString(),
                 zuege.contains(schwarzenSpringerSchlagen));

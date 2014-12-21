@@ -41,8 +41,8 @@ public class ZugParserTest {
             String eingabe = "e2e3";
             Zug zug = parser.vonXboard(eingabe, stellung);
             assertNotNull(zug);
-            assertEquals(Felder.E2, zug.getVon());
-            assertEquals(Felder.E3, zug.getNach());
+            assertEquals(Felder.e2, zug.getVon());
+            assertEquals(Felder.e3, zug.getNach());
             assertEquals(WEISSER_BAUER, zug.getFigur());
             assertTrue(zug.istBauernZug());
             assertFalse(zug.istBauernZugZweiVor());
@@ -53,8 +53,8 @@ public class ZugParserTest {
             String eingabe = "e2e4";
             Zug zug = parser.vonXboard(eingabe, stellung);
             assertNotNull(zug);
-            assertEquals(Felder.E2, zug.getVon());
-            assertEquals(Felder.E4, zug.getNach());
+            assertEquals(Felder.e2, zug.getVon());
+            assertEquals(Felder.e4, zug.getNach());
             assertEquals(WEISSER_BAUER, zug.getFigur());
             assertTrue(zug.istBauernZug());
             assertTrue(zug.istBauernZugZweiVor());
@@ -71,8 +71,8 @@ public class ZugParserTest {
         Zug zug = parser.vonXboard(eingabe, stellung);
 
         assertNotNull(zug);
-        assertEquals(Felder.G7, zug.getVon());
-        assertEquals(Felder.G8, zug.getNach());
+        assertEquals(Felder.g7, zug.getVon());
+        assertEquals(Felder.g8, zug.getNach());
         assertEquals(WEISSER_BAUER, zug.getFigur());
         assertTrue(zug.istBauernZug());
         assertTrue(zug.istUmwandlung());
@@ -82,7 +82,7 @@ public class ZugParserTest {
     @Test
     public void rochadeNachXBoard() {
         ZugParser parser = new ZugParser();
-        Zug rochadeKurz = new Zug(WEISSER_KOENIG, Felder.E1, Felder.G1);
+        Zug rochadeKurz = new Zug(WEISSER_KOENIG, Felder.e1, Felder.g1);
 
         String ausgabe = parser.nachXboard(rochadeKurz);
         assertEquals("move e1g1", ausgabe);
@@ -92,7 +92,7 @@ public class ZugParserTest {
     public void umwandlungInDameNachXBoard() {
 
         ZugParser parser = new ZugParser();
-        Zug umwandlung = new Zug(WEISSER_BAUER, Felder.H7, Felder.H8,
+        Zug umwandlung = new Zug(WEISSER_BAUER, Felder.h7, Felder.h8,
                 FigurenArt.DAME);
 
         String ausgabe = parser.nachXboard(umwandlung);

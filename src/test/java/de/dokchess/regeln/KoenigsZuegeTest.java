@@ -47,15 +47,15 @@ public class KoenigsZuegeTest {
 			KoenigsZuege koenigsZuege = new KoenigsZuege();
 			List<Zug> zuege = new ArrayList<Zug>();
 
-			koenigsZuege.fuegeZugkandidatenHinzu(A1, weisserKoenigA1, zuege);
+			koenigsZuege.fuegeZugkandidatenHinzu(a1, weisserKoenigA1, zuege);
 
 			Assert.assertEquals(3, zuege.size());
 			for (Zug zug : zuege) {
-				Assert.assertEquals(A1, zug.getVon());
+				Assert.assertEquals(a1, zug.getVon());
 			}
-			Feld[] ziele = { A2, B2, B1 };
+			Feld[] ziele = {a2, b2, b1};
 			for (Feld ziel : ziele) {
-				Zug zuTesten = new Zug(KOENIG_WEISS, A1, ziel);
+				Zug zuTesten = new Zug(KOENIG_WEISS, a1, ziel);
 				Assert.assertTrue(zuege.contains(zuTesten));
 			}
 		}
@@ -66,14 +66,14 @@ public class KoenigsZuegeTest {
 			KoenigsZuege koenigsZuege = new KoenigsZuege();
 			List<Zug> zuege = new ArrayList<Zug>();
 
-			koenigsZuege.fuegeZugkandidatenHinzu(H8, weisserKoenigH8, zuege);
+			koenigsZuege.fuegeZugkandidatenHinzu(h8, weisserKoenigH8, zuege);
 			Assert.assertEquals(3, zuege.size());
 			for (Zug zug : zuege) {
-				Assert.assertEquals(H8, zug.getVon());
+				Assert.assertEquals(h8, zug.getVon());
 			}
-			Feld[] ziele = { G8, G7, H7 };
+			Feld[] ziele = {g8, g7, h7};
 			for (Feld ziel : ziele) {
-				Zug zuTesten = new Zug(KOENIG_WEISS, H8, ziel);
+				Zug zuTesten = new Zug(KOENIG_WEISS, h8, ziel);
 				Assert.assertTrue(zuege.contains(zuTesten));
 			}
 		}
@@ -88,15 +88,15 @@ public class KoenigsZuegeTest {
 			KoenigsZuege koenigsZuege = new KoenigsZuege();
 			List<Zug> zuege = new ArrayList<Zug>();
 
-			koenigsZuege.fuegeZugkandidatenHinzu(D5, weisserKoenigD5, zuege);
+			koenigsZuege.fuegeZugkandidatenHinzu(d5, weisserKoenigD5, zuege);
 
 			Assert.assertEquals(8, zuege.size());
 			for (Zug zug : zuege) {
-				Assert.assertEquals(D5, zug.getVon());
+				Assert.assertEquals(d5, zug.getVon());
 			}
-			Feld[] ziele = { C6, C6, E6, C5, E5, C4, D4, E4 };
+			Feld[] ziele = {c6, c6, e6, c5, e5, c4, d4, e4};
 			for (Feld ziel : ziele) {
-				Zug zuTesten = new Zug(KOENIG_WEISS, D5, ziel);
+				Zug zuTesten = new Zug(KOENIG_WEISS, d5, ziel);
 				Assert.assertTrue(zuTesten.toString(), zuege.contains(zuTesten));
 			}
 		}
@@ -111,16 +111,16 @@ public class KoenigsZuegeTest {
 			KoenigsZuege koenigsZuege = new KoenigsZuege();
 			List<Zug> zuege = new ArrayList<Zug>();
 
-			koenigsZuege.fuegeZugkandidatenHinzu(D5,
+			koenigsZuege.fuegeZugkandidatenHinzu(d5,
 					weisserKoenigSchlaegtZweiFiguren, zuege);
 
 			Assert.assertEquals(6, zuege.size());
 			for (Zug zug : zuege) {
-				Assert.assertEquals(D5, zug.getVon());
+				Assert.assertEquals(d5, zug.getVon());
 			}
 
-			Zug schlaegtSchwarzenSpringer = new Zug(KOENIG_WEISS, D5, E6, true);
-			Zug schlaegtScvhwarzenTurm = new Zug(KOENIG_WEISS, D5, E5, true);
+			Zug schlaegtSchwarzenSpringer = new Zug(KOENIG_WEISS, d5, e6, true);
+			Zug schlaegtScvhwarzenTurm = new Zug(KOENIG_WEISS, d5, e5, true);
 
 			Assert.assertTrue(schlaegtSchwarzenSpringer.toString(),
 					zuege.contains(schlaegtSchwarzenSpringer));

@@ -43,7 +43,7 @@ public class MinimaxMattsucheTest {
                 "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 1");
         Zug z = algorithmus.ermittleZug(stellung);
 
-        Assert.assertEquals(Felder.H5, z.getVon());
-        Assert.assertEquals(Felder.F7, z.getNach());
+        Assert.assertEquals(Felder.h5, z.getVon());
+        Assert.assertEquals(Felder.f7, z.getNach());
     }
 }

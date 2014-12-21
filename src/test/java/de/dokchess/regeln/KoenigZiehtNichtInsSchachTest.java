@@ -41,15 +41,15 @@ public class KoenigZiehtNichtInsSchachTest {
         Spielregeln regeln = new SpielregelnImpl();
         Collection<Zug> zuege = regeln.ermittleGueltigeZuege(stellung);
 
-        Zug illegal1 = new Zug(KOENIG_WEISS, D4, C5);
-        Zug illegal2 = new Zug(KOENIG_WEISS, D4, D5);
-        Zug illegal3 = new Zug(KOENIG_WEISS, D4, E5);
+        Zug illegal1 = new Zug(KOENIG_WEISS, d4, c5);
+        Zug illegal2 = new Zug(KOENIG_WEISS, d4, d5);
+        Zug illegal3 = new Zug(KOENIG_WEISS, d4, e5);
 
         Assert.assertFalse(zuege.contains(illegal1));
         Assert.assertFalse(zuege.contains(illegal2));
         Assert.assertFalse(zuege.contains(illegal3));
 
-        Zug legal = new Zug(KOENIG_WEISS, D4, D3);
+        Zug legal = new Zug(KOENIG_WEISS, d4, d3);
         Assert.assertTrue(zuege.contains(legal));
 
         Assert.assertEquals(5, zuege.size());
@@ -67,15 +67,15 @@ public class KoenigZiehtNichtInsSchachTest {
         Collection<Zug> zuege = regeln.ermittleGueltigeZuege(stellung);
 
 
-        Zug illegal1 = new Zug(KOENIG_WEISS, D4, D5);
-        Zug illegal2 = new Zug(KOENIG_WEISS, D4, E3);
+        Zug illegal1 = new Zug(KOENIG_WEISS, d4, d5);
+        Zug illegal2 = new Zug(KOENIG_WEISS, d4, e3);
 
         Assert.assertFalse(zuege.contains(illegal1));
         Assert.assertFalse(zuege.contains(illegal2));
 
-        Zug legal1 = new Zug(KOENIG_WEISS, D4, C5);
-        Zug legal2 = new Zug(KOENIG_WEISS, D4, D3);
-        Zug legal3 = new Zug(KOENIG_WEISS, D4, E5);
+        Zug legal1 = new Zug(KOENIG_WEISS, d4, c5);
+        Zug legal2 = new Zug(KOENIG_WEISS, d4, d3);
+        Zug legal3 = new Zug(KOENIG_WEISS, d4, e5);
 
         Assert.assertTrue(zuege.contains(legal1));
         Assert.assertTrue(zuege.contains(legal2));

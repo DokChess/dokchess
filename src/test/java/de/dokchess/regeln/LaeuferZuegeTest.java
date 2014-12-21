@@ -47,15 +47,15 @@ public class LaeuferZuegeTest {
 			LaeuferZuege laeuferZuege = new LaeuferZuege();
 			List<Zug> zuege = new ArrayList<Zug>();
 
-			laeuferZuege.fuegeZugkandidatenHinzu(A1, weisserLaeuferA1, zuege);
+			laeuferZuege.fuegeZugkandidatenHinzu(a1, weisserLaeuferA1, zuege);
 
 			Assert.assertEquals(7, zuege.size());
 			for (Zug zug : zuege) {
-				Assert.assertEquals(A1, zug.getVon());
+				Assert.assertEquals(a1, zug.getVon());
 			}
-			Feld[] ziele = { B2, C3, D4, E5, F6, G7, H8 };
+			Feld[] ziele = {b2, c3, d4, e5, f6, g7, h8};
 			for (Feld ziel : ziele) {
-				Zug zuTesten = new Zug(LAEUFER_WEISS, A1, ziel);
+				Zug zuTesten = new Zug(LAEUFER_WEISS, a1, ziel);
 				Assert.assertTrue(zuTesten.toString(), zuege.contains(zuTesten));
 			}
 		}
@@ -66,13 +66,13 @@ public class LaeuferZuegeTest {
 			LaeuferZuege laeuferZuege = new LaeuferZuege();
 			List<Zug> zuege = new ArrayList<Zug>();
 
-			laeuferZuege.fuegeZugkandidatenHinzu(H1, weisserLaeuferH1, zuege);
+			laeuferZuege.fuegeZugkandidatenHinzu(h1, weisserLaeuferH1, zuege);
 			Assert.assertEquals(7, zuege.size());
 			Feld h1 = new Feld("h1");
 			for (Zug zug : zuege) {
 				Assert.assertEquals(h1, zug.getVon());
 			}
-			Feld[] ziele = { A8, B7, C6, D5, E4, F3, G2 };
+			Feld[] ziele = {a8, b7, c6, d5, e4, f3, g2};
 			for (Feld ziel : ziele) {
 				Zug zuTesten = new Zug(LAEUFER_WEISS, h1, ziel);
 				Assert.assertTrue(zuTesten.toString(), zuege.contains(zuTesten));
@@ -89,15 +89,15 @@ public class LaeuferZuegeTest {
 			LaeuferZuege laeuferZuege = new LaeuferZuege();
 			List<Zug> zuege = new ArrayList<Zug>();
 
-			laeuferZuege.fuegeZugkandidatenHinzu(D4, weisserLaeuferD4, zuege);
+			laeuferZuege.fuegeZugkandidatenHinzu(d4, weisserLaeuferD4, zuege);
 
 			Assert.assertEquals(13, zuege.size());
 			for (Zug zug : zuege) {
-				Assert.assertEquals(D4, zug.getVon());
+				Assert.assertEquals(d4, zug.getVon());
 			}
-			Feld[] ziele = { A1, B2, C3, E5, F6, G7, H8, A7, B6, C5, E3, F2, G1 };
+			Feld[] ziele = {a1, b2, c3, e5, f6, g7, h8, a7, b6, c5, e3, f2, g1};
 			for (Feld ziel : ziele) {
-				Zug zuTesten = new Zug(LAEUFER_WEISS, D4, ziel);
+				Zug zuTesten = new Zug(LAEUFER_WEISS, d4, ziel);
 				Assert.assertTrue(zuTesten.toString(), zuege.contains(zuTesten));
 			}
 		}
@@ -112,16 +112,16 @@ public class LaeuferZuegeTest {
 			LaeuferZuege laeuferZuege = new LaeuferZuege();
 			List<Zug> zuege = new ArrayList<Zug>();
 
-			laeuferZuege.fuegeZugkandidatenHinzu(D4,
+			laeuferZuege.fuegeZugkandidatenHinzu(d4,
 					weisserLaeuferSchlaegtZweiFiguren, zuege);
 
 			Assert.assertEquals(9, zuege.size());
 			for (Zug zug : zuege) {
-				Assert.assertEquals(D4, zug.getVon());
+				Assert.assertEquals(d4, zug.getVon());
 			}
 
-			Zug schwarzenTurmSchlagen = new Zug(LAEUFER_WEISS, D4, F2, true);
-			Zug schwarzenSpringerSchlagen = new Zug(LAEUFER_WEISS, D4, G7, true);
+			Zug schwarzenTurmSchlagen = new Zug(LAEUFER_WEISS, d4, f2, true);
+			Zug schwarzenSpringerSchlagen = new Zug(LAEUFER_WEISS, d4, g7, true);
 
 			Assert.assertTrue(schwarzenTurmSchlagen.toString(),
 					zuege.contains(schwarzenTurmSchlagen));

@@ -29,8 +29,8 @@ import java.util.List;
 
 import static de.dokchess.allgemein.Farbe.SCHWARZ;
 import static de.dokchess.allgemein.Farbe.WEISS;
-import static de.dokchess.allgemein.Felder.E1;
-import static de.dokchess.allgemein.Felder.E8;
+import static de.dokchess.allgemein.Felder.e1;
+import static de.dokchess.allgemein.Felder.e8;
 import static de.dokchess.allgemein.FigurenArt.KOENIG;
 
 public class RochadeZuegeTest {
@@ -45,11 +45,11 @@ public class RochadeZuegeTest {
         RochadeZuege rochadeZuege = new RochadeZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        rochadeZuege.fuegeZugkandidatenHinzu(E1, stellung, zuege);
+        rochadeZuege.fuegeZugkandidatenHinzu(e1, stellung, zuege);
         Assert.assertEquals(2, zuege.size());
         for (Zug zug : zuege) {
             Assert.assertTrue(zug.getFigur().equals(WEISSER_KOENIG));
-            Assert.assertEquals(E1, zug.getVon());
+            Assert.assertEquals(e1, zug.getVon());
         }
     }
 
@@ -60,7 +60,7 @@ public class RochadeZuegeTest {
         RochadeZuege rochadeZuege = new RochadeZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        rochadeZuege.fuegeZugkandidatenHinzu(E1, stellung, zuege);
+        rochadeZuege.fuegeZugkandidatenHinzu(e1, stellung, zuege);
         Assert.assertEquals(0, zuege.size());
     }
 
@@ -71,11 +71,11 @@ public class RochadeZuegeTest {
         RochadeZuege rochadeZuege = new RochadeZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        rochadeZuege.fuegeZugkandidatenHinzu(E8, stellung, zuege);
+        rochadeZuege.fuegeZugkandidatenHinzu(e8, stellung, zuege);
         Assert.assertEquals(2, zuege.size());
         for (Zug zug : zuege) {
             Assert.assertTrue(zug.getFigur().equals(SCHWARZER_KOENIG));
-            Assert.assertEquals(E8, zug.getVon());
+            Assert.assertEquals(e8, zug.getVon());
         }
     }
 
@@ -86,7 +86,7 @@ public class RochadeZuegeTest {
         RochadeZuege rochadeZuege = new RochadeZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        rochadeZuege.fuegeZugkandidatenHinzu(E8, stellung, zuege);
+        rochadeZuege.fuegeZugkandidatenHinzu(e8, stellung, zuege);
         Assert.assertEquals(0, zuege.size());
     }
 
@@ -96,7 +96,7 @@ public class RochadeZuegeTest {
         RochadeZuege rochadeZuege = new RochadeZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        rochadeZuege.fuegeZugkandidatenHinzu(E1, stellung, zuege);
+        rochadeZuege.fuegeZugkandidatenHinzu(e1, stellung, zuege);
         Assert.assertEquals(0, zuege.size());
     }
 
@@ -106,7 +106,7 @@ public class RochadeZuegeTest {
         RochadeZuege rochadeZuege = new RochadeZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        rochadeZuege.fuegeZugkandidatenHinzu(E8, stellung, zuege);
+        rochadeZuege.fuegeZugkandidatenHinzu(e8, stellung, zuege);
         Assert.assertEquals(0, zuege.size());
     }
 
@@ -116,7 +116,7 @@ public class RochadeZuegeTest {
         RochadeZuege rochadeZuege = new RochadeZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        rochadeZuege.fuegeZugkandidatenHinzu(E1, stellung, zuege);
+        rochadeZuege.fuegeZugkandidatenHinzu(e1, stellung, zuege);
         Assert.assertEquals(0, zuege.size());
     }
 
@@ -126,7 +126,7 @@ public class RochadeZuegeTest {
         RochadeZuege rochadeZuege = new RochadeZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        rochadeZuege.fuegeZugkandidatenHinzu(E8, stellung, zuege);
+        rochadeZuege.fuegeZugkandidatenHinzu(e8, stellung, zuege);
         Assert.assertEquals(0, zuege.size());
     }
 
@@ -136,7 +136,7 @@ public class RochadeZuegeTest {
         RochadeZuege rochadeZuege = new RochadeZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        rochadeZuege.fuegeZugkandidatenHinzu(E1, stellung, zuege);
+        rochadeZuege.fuegeZugkandidatenHinzu(e1, stellung, zuege);
         Assert.assertEquals(0, zuege.size());
     }
 
@@ -146,7 +146,7 @@ public class RochadeZuegeTest {
         RochadeZuege rochadeZuege = new RochadeZuege();
         List<Zug> zuege = new ArrayList<Zug>();
 
-        rochadeZuege.fuegeZugkandidatenHinzu(E8, stellung, zuege);
+        rochadeZuege.fuegeZugkandidatenHinzu(e8, stellung, zuege);
         Assert.assertEquals(0, zuege.size());
     }
 

@@ -26,8 +26,8 @@ import de.dokchess.regeln.SpielregelnImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static de.dokchess.allgemein.Felder.E7;
-import static de.dokchess.allgemein.Felder.F5;
+import static de.dokchess.allgemein.Felder.e7;
+import static de.dokchess.allgemein.Felder.f5;
 
 public class GabelTest {
 
@@ -46,8 +46,8 @@ public class GabelTest {
                 "2q3k1/5ppp/8/5N2/8/8/PPP5/1KR5 w - - 0 1");
         Zug z = algorithmus.ermittleZug(stellung);
 
-        Assert.assertEquals(z.getVon(), F5);
-        Assert.assertEquals(z.getNach(), E7);
+        Assert.assertEquals(z.getVon(), f5);
+        Assert.assertEquals(z.getNach(), e7);
 
     }
 }
