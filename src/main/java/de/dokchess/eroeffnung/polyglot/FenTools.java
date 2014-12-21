@@ -1,17 +1,18 @@
-/* Copyright 2010, 2011, 2012 Stefan Zoerner
- * 
+/*
+ * Copyright (c) 2010-2014 Stefan Zoerner
+ *
  * This file is part of DokChess.
- * 
+ *
  * DokChess is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * DokChess is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with DokChess.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -19,6 +20,7 @@ package de.dokchess.eroeffnung.polyglot;
 
 class FenTools {
 
+	//CHECKSTYLE:OFF
 	private static long[] random64 = { 0x9D39247E33776D41l,
 			0x2AF7398005AAA5C7l, 0x44DB015024623547l, 0x9C15F73E62A76AE2l,
 			0x75834465489C0C89l, 0x3290AC3A203001BFl, 0x0FBBAD1F61042279l,
@@ -280,6 +282,7 @@ class FenTools {
 			0x70CC73D90BC26E24l, 0xE21A6B35DF0C3AD7l, 0x003A93D8B2806962l,
 			0x1C99DED33CB890A1l, 0xCF3145DE0ADD4289l, 0xD0E4427A5514FB72l,
 			0x77C621CC9FB3A483l, 0x67A34DAC4356550Bl, 0xF8D626AAAF278509l };
+	//CHECKSTYLE:ON
 
 	private FenTools() {
 	}
