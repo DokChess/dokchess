@@ -18,7 +18,7 @@
  */
 package de.dokchess.eroeffnung.polyglot;
 
-class FenTools {
+final class FenTools {
 
 	//CHECKSTYLE:OFF
 	private static long[] random64 = { 0x9D39247E33776D41l,
