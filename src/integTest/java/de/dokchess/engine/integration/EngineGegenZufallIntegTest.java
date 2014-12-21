@@ -78,6 +78,8 @@ public class EngineGegenZufallIntegTest {
         Assert.assertTrue(regel.aufMattPruefen(brett));
     }
 
+    /** Bevorzugte Zuege des anderen, mehr oder weniger zufaelligen Computergegners.
+     */
     class Sortierung implements Comparator<Zug> {
 
         @Override
