@@ -59,7 +59,7 @@ task integTest(type: Test) {
     testClassesDir = sourceSets.integTest.output.classesDir
     classpath = sourceSets.integTest.runtimeClasspath
 }
-check.dependsOn integTest
+check.dependsOn -= integTest
 
 repositories {
     mavenCentral()
