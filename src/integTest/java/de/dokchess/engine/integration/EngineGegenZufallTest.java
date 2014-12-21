@@ -17,22 +17,19 @@
  * along with DokChess.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.dokchess.engine;
+package de.dokchess.engine.integration;
 
 import de.dokchess.allgemein.Farbe;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
-import de.dokchess.engine.bewertung.ReineMaterialBewertung;
-import de.dokchess.engine.zugauswahl.MinimaxAlgorithmus;
+import de.dokchess.engine.DefaultEngine;
+import de.dokchess.engine.Engine;
 import de.dokchess.regeln.Spielregeln;
 import de.dokchess.regeln.SpielregelnImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;
-
-import static de.dokchess.allgemein.Felder.E7;
-import static de.dokchess.allgemein.Felder.F5;
 
 public class EngineGegenZufallTest {
 
@@ -81,11 +78,11 @@ public class EngineGegenZufallTest {
             return zugWert(z2) - zugWert(z1);
         }
 
-        int zugWert (Zug z) {
+        int zugWert(Zug z) {
             int wert = 0;
 
             if (z.istSchlagen()) {
-                wert +=1000;
+                wert += 1000;
             }
 
             if (z.istRochade()) {
