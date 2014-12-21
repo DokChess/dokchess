@@ -31,7 +31,14 @@ import org.junit.Test;
 
 import java.util.*;
 
-public class EngineGegenZufallTest {
+/**
+ * Die Engine spielt in der Standardkonfiguration eine Partie als weiss
+ * gegen einen Computergegner, der mehr oder weniger zufaellig spielt.
+ *
+ * Konkret nimmt er den erst besten gueltigen Zug aus den Spielregeln, wobei er
+ * aber schlagende Zuege und Bauernzuege bevorzugt, um das Spiel voran zu bringen.
+ */
+public class EngineGegenZufallIntegTest {
 
     @Test
     public void partieSpielen() {
@@ -56,7 +63,7 @@ public class EngineGegenZufallTest {
 
             // Zufall zieht (schwarz)
             Collection<Zug> zuege = regel.ermittleGueltigeZuege(brett);
-            List<Zug> zugListe = new ArrayList<Zug>(zuege);
+            List<Zug> zugListe = new ArrayList<>(zuege);
             Collections.sort(zugListe, new Sortierung());
             Zug z2 = zugListe.get(0);
             dokChess.ziehen(z2);
