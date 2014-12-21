@@ -18,35 +18,32 @@
  */
 package de.dokchess.engine.zugauswahl;
 
-import junit.framework.Assert;
-
-import org.junit.Test;
-
 import de.dokchess.allgemein.Felder;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.bewertung.ReineMaterialBewertung;
-import de.dokchess.engine.zugauswahl.MinimaxAlgorithmus;
 import de.dokchess.regeln.SpielregelnImpl;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class MinimaxMattsucheTest {
 
-	/**
-	 * Matt in einem Zug (Schaefermatt). Siegzug fuer weiss: Dame h5xf7
-	 */
-	@Test
-	public void schaeferMatt() {
+    /**
+     * Matt in einem Zug (Schaefermatt). Siegzug fuer weiss: Dame h5xf7
+     */
+    @Test
+    public void schaeferMatt() {
 
-		MinimaxAlgorithmus algorithmus = new MinimaxAlgorithmus();
-		algorithmus.setBewertung(new ReineMaterialBewertung());
-		algorithmus.setSpielregeln(new SpielregelnImpl());
-		algorithmus.setTiefe(2);
+        MinimaxAlgorithmus algorithmus = new MinimaxAlgorithmus();
+        algorithmus.setBewertung(new ReineMaterialBewertung());
+        algorithmus.setSpielregeln(new SpielregelnImpl());
+        algorithmus.setTiefe(2);
 
-		Stellung stellung = new Stellung(
-				"r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 1");
-		Zug z = algorithmus.ermittleZug(stellung);
+        Stellung stellung = new Stellung(
+                "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 0 1");
+        Zug z = algorithmus.ermittleZug(stellung);
 
-		Assert.assertEquals(Felder.H5, z.getVon());
-		Assert.assertEquals(Felder.F7, z.getNach());
-	}
+        Assert.assertEquals(Felder.H5, z.getVon());
+        Assert.assertEquals(Felder.F7, z.getNach());
+    }
 }
