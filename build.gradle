@@ -22,7 +22,7 @@ apply plugin: 'sonar-runner'
 apply plugin: 'jacoco'
 
 sourceCompatibility = 1.7
-version = '1.0'
+version = '2.0'
 
 test {
     jacoco {
