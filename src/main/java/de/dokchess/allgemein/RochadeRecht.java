@@ -18,6 +18,9 @@
  */
 package de.dokchess.allgemein;
 
+/**
+ * Die verschiedenen Rochaderechte als Aufzaehlung.
+ */
 public enum RochadeRecht {
     WEISS_KURZ('K'), WEISS_LANG('Q'), SCHWARZ_KURZ('k'), SCHWARZ_LANG('q');
 
@@ -27,10 +30,12 @@ public enum RochadeRecht {
         this.buchstabe = buchstabe;
     }
 
-    public char alsBuchstabe() {
-        return this.buchstabe;
-    }
-
+    /**
+     * Liefert zur Kurznotion aus FEN das passende Rocahderecht.
+     *
+     * @param c Buchstabe, 'K', 'Q', 'k' oder 'q'
+     * @return das passende Rochaderecht, oder null
+     */
     public static RochadeRecht ausBuchstabe(char c) {
         switch (c) {
             case 'K':
@@ -43,5 +48,15 @@ public enum RochadeRecht {
                 return SCHWARZ_LANG;
         }
         return null;
+    }
+
+    /**
+     * Liefert das Rochaderecht in Kurznotation, also ein Buchstabe, f&uuml;r FEN.
+     * Beispiel: 'K' f&uuml;r weisse, kurze Rochade. 'q' f&uuml;r schwarze, lange Rochade.
+     *
+     * @return Rochaderecht als Buchstabe.
+     */
+    public char alsBuchstabe() {
+        return this.buchstabe;
     }
 }
