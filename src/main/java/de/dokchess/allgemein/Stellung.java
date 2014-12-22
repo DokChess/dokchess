@@ -119,7 +119,7 @@ public final class Stellung {
     }
 
     public List<Feld> findeFelderMit(final Figur figur) {
-        List<Feld> felder = new ArrayList<Feld>();
+        List<Feld> felder = new ArrayList<>();
 
         for (int reihe = 0; reihe < ANZAHL_REIHEN; ++reihe) {
             for (int linie = 0; linie < ANZAHL_LINIEN; ++linie) {
@@ -133,6 +133,12 @@ public final class Stellung {
         return felder;
     }
 
+    /**
+     * Findet das Feld mit dem K&ouml;nig in der betreffenden Farbe.
+     *
+     * @param farbe Farbe des gesuchten K&ouml;nigs.
+     * @return Feld mit dem K&ouml;nig, oder null, falls er fehlt
+     */
     public Feld findeFeldMitKoenig(final Farbe farbe) {
         for (int reihe = 0; reihe < ANZAHL_REIHEN; ++reihe) {
             for (int linie = 0; linie < ANZAHL_LINIEN; ++linie) {
