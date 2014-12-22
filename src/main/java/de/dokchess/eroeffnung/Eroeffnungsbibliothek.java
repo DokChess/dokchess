@@ -24,14 +24,12 @@ import de.dokchess.allgemein.Zug;
 
 public interface Eroeffnungsbibliothek {
 
-	/**
-	 * Liefert zur angegebenen Stellung ein aus der Bibliothek bekannten Zug,
-	 * oder null.
-	 * 
-	 * @param stellung
-	 *            zu betrachtende Stellung
-	 * @return passender Zug, oder null, falls keiner bekannt
-	 */
-	Zug liefereZug(Stellung stellung);
-
+    /**
+     * Liefert zur angegebenen Stellung ein aus der Bibliothek bekannten Zug,
+     * oder null.
+     *
+     * @param stellung zu betrachtende Stellung
+     * @return passender Zug, oder null, falls keiner bekannt
+     */
+    Zug liefereZug(Stellung stellung);
 }
