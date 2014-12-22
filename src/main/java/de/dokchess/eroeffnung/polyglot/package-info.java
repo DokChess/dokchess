@@ -18,6 +18,6 @@
  */
 
 /**
- * Implementierung der Polyglot Opening Book-Dateiformates fü Er&ouml;ffnungsbücher.
+ * Implementierung der Polyglot Opening Book-Dateiformates f&uuml; Er&ouml;ffnungsb&uuml;cher.
  */
 package de.dokchess.eroeffnung.polyglot;
