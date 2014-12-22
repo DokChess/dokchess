@@ -18,7 +18,7 @@
  */
 
 /**
- * Subsystem, beinhaltet die Spielregeln für Schach.
+ * Subsystem, beinhaltet die Spielregeln f&uuml;r Schach.
  * Kann zum Beispiel zu einer Stellung alle g&uuml;ltigen Z&uuml;ge ermitteln.
  */
 package de.dokchess.regeln;
