@@ -52,7 +52,7 @@ public class XBoard implements Observer<Zug> {
 
     private Stellung stellung = new Stellung();
 
-    ZugParser parser = new ZugParser();
+    private ZugParser parser = new ZugParser();
 
     /**
      * Setzt die Protokoll-Eingabe per Dependency Injection. Typischerweise ist
