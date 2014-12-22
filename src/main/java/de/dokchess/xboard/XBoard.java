@@ -22,6 +22,8 @@ import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.Engine;
 import de.dokchess.regeln.Spielregeln;
+import rx.Observable;
+import rx.Observer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,7 +36,7 @@ import java.util.Collection;
  *
  * @author StefanZ
  */
-public class XBoard {
+public class XBoard implements Observer<Zug> {
 
     private Reader eingabe;
 
@@ -45,6 +47,12 @@ public class XBoard {
     private Spielregeln spielregeln;
 
     private Engine engine;
+
+    private Zug besterZug;
+
+    private Stellung stellung = new Stellung();
+
+    ZugParser parser = new ZugParser();
 
     /**
      * Setzt die Protokoll-Eingabe per Dependency Injection. Typischerweise ist
@@ -94,8 +102,8 @@ public class XBoard {
      */
     public void spielen() {
 
-        ZugParser parser = new ZugParser();
-        Stellung stellung = new Stellung();
+
+
 
         boolean running = true;
         while (running) {
@@ -120,10 +128,8 @@ public class XBoard {
             }
 
             if (eingelesen.equals("go")) {
-                Zug engineZug = engine.ermittleDeinenZug();
-                stellung = stellung.fuehreZugAus(engineZug);
-                engine.ziehen(engineZug);
-                schreiben(parser.nachXboard(engineZug));
+                Observable<Zug> s = engine.ermittleDeinenZug();
+                s.subscribe(this);
             }
 
             Zug zug = parser.vonXboard(eingelesen, stellung);
@@ -141,10 +147,8 @@ public class XBoard {
                 engine.ziehen(zug);
                 stellung = stellung.fuehreZugAus(zug);
 
-                Zug engineZug = engine.ermittleDeinenZug();
-                stellung = stellung.fuehreZugAus(engineZug);
-                engine.ziehen(engineZug);
-                schreiben(parser.nachXboard(engineZug));
+                Observable<Zug> s = engine.ermittleDeinenZug();
+                s.subscribe(this);
             }
 
         }
@@ -167,5 +171,22 @@ public class XBoard {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void onCompleted() {
+        schreiben(parser.nachXboard(this.besterZug));
+        this.engine.ziehen(this.besterZug);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onNext(Zug zug) {
+        schreiben("# neuen besten Zug gefunden: "+ zug);
+        this.besterZug = zug;
     }
 }

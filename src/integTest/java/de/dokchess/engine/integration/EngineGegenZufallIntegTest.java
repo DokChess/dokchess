@@ -27,7 +27,10 @@ import de.dokchess.engine.Engine;
 import de.dokchess.regeln.Spielregeln;
 import de.dokchess.regeln.SpielregelnImpl;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import rx.*;
+import rx.Observable;
 
 import java.util.*;
 
@@ -38,44 +41,78 @@ import java.util.*;
  * Konkret nimmt er den erst besten gueltigen Zug aus den Spielregeln, wobei er
  * aber schlagende Zuege und Bauernzuege bevorzugt, um das Spiel voran zu bringen.
  */
-public class EngineGegenZufallIntegTest {
+public class EngineGegenZufallIntegTest implements rx.Observer<Zug> {
+
+    private Zug besterZug = null;
+
+    private Spielregeln spielregeln = null;
+
+    private Engine dokChess = null;
+
+    private Stellung brett;
+
+    @Before
+    public void setup() {
+        spielregeln = new SpielregelnImpl();
+        dokChess = new DefaultEngine(spielregeln);
+        brett = new Stellung();
+        dokChess.figurenAufbauen(brett);
+    }
+
 
     @Test
     public void partieSpielen() {
-
-        Stellung brett = new Stellung();
-
-        Spielregeln regel = new SpielregelnImpl();
-        Engine dokChess = new DefaultEngine(regel);
-
-        dokChess.figurenAufbauen(brett);
-
-        while (true) {
-
+        
+        while (! (spielregeln.aufMattPruefen(brett) || spielregeln.aufPattPruefen(brett))) {
             // Engine zieht (weiss)
-            Zug z1 = dokChess.ermittleDeinenZug();
-            dokChess.ziehen(z1);
-            brett = brett.fuehreZugAus(z1);
+            Observable<Zug> subjekt = dokChess.ermittleDeinenZug();
+            subjekt.subscribe(this);
 
-            if (regel.aufMattPruefen(brett) || regel.aufPattPruefen(brett)) {
-                break;
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+        }
 
-            // Zufall zieht (schwarz)
-            Collection<Zug> zuege = regel.ermittleGueltigeZuege(brett);
-            List<Zug> zugListe = new ArrayList<>(zuege);
+        Assert.assertTrue(brett.getAmZug() == Farbe.SCHWARZ);
+        Assert.assertTrue(spielregeln.aufMattPruefen(brett));
+    }
+
+    @Override
+    public void onCompleted() {
+        System.out.println("onCompleted. ");
+        
+        // Zug von weiss (mir selber) ausfuehren
+        //
+        dokChess.ziehen(besterZug);
+        brett = this.brett.fuehreZugAus(besterZug);
+
+        // Zufall (schwarz) zieht, falls moeglich
+        Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(brett);
+        List<Zug> zugListe = new ArrayList<>(zuege);
+
+        if(zugListe.size() > 0) {
             Collections.sort(zugListe, new Sortierung());
             Zug z2 = zugListe.get(0);
             dokChess.ziehen(z2);
             brett = brett.fuehreZugAus(z2);
 
-            if (regel.aufMattPruefen(brett) || regel.aufPattPruefen(brett)) {
-                Assert.fail("Zufall hat gewonnen");
-            }
+            Observable<Zug> subjekt = dokChess.ermittleDeinenZug();
+            subjekt.subscribe(this);
         }
+    }
 
-        Assert.assertTrue(brett.getAmZug() == Farbe.SCHWARZ);
-        Assert.assertTrue(regel.aufMattPruefen(brett));
+    @Override
+    public void onError(Throwable e) {
+        Assert.fail(e.getMessage());
+    }
+
+    @Override
+    public void onNext(Zug zug) {
+        System.out.println("onNext: " + zug);
+
+        besterZug = zug;
     }
 
     /** Bevorzugte Zuege des anderen, mehr oder weniger zufaelligen Computergegners.
