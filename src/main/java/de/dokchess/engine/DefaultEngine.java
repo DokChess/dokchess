@@ -73,7 +73,7 @@ public class DefaultEngine implements Engine {
     public Observable<Zug> ermittleDeinenZug() {
 
         ReplaySubject<Zug> subject = ReplaySubject.create();
-        Zug zug = this.zugAuswahl.waehleZug(stellung, subject);
+        this.zugAuswahl.waehleZug(stellung, subject);
 
         return subject;
     }
