@@ -46,4 +46,25 @@ public class MinimaxMattsucheTest {
         Assert.assertEquals(Felder.h5, z.getVon());
         Assert.assertEquals(Felder.f7, z.getNach());
     }
+
+    /**
+     * Matt in zwei Zuegen, Nur die K&ouml;nige, weiss hat 2 Tuerme, schwarz nichts.
+     * Siegzug fuer weiss: Turm h5xf7
+     */
+    @Test
+    public void zweiTuermeMatt() {
+
+        MinimaxAlgorithmus algorithmus = new MinimaxAlgorithmus();
+        algorithmus.setBewertung(new ReineMaterialBewertung());
+        algorithmus.setSpielregeln(new SpielregelnImpl());
+        algorithmus.setTiefe(4);
+
+        Stellung stellung = new Stellung(
+                "2k5/8/8/8/8/8/6R1/6KR w - - 0 1");
+        Zug z = algorithmus.ermittleZug(stellung);
+
+        System.out.println("Zug = " + z);
+
+        Assert.assertTrue(z.toString().equals("R g2-g7") || z.toString().equals("R h1-h7"));
+    }
 }
