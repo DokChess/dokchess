@@ -20,61 +20,58 @@ package de.dokchess.eroeffnung.polyglot;
 
 class PolyglotTools {
 
-	private static final String FILES = "abcdefgh";
-	private static final String ROWS = "12345678";
+    private static final String FILES = "abcdefgh";
+    private static final String ROWS = "12345678";
 
-	/**
-	 * Converts a chess board field given by file and row to a String
-	 * representation.
-	 * 
-	 * @param file
-	 *            the file number, 0..7, meaning a..h
-	 * @param row
-	 *            the row number, 0..7
-	 * 
-	 * @return field, e.g. "e5"
-	 */
-	static String fileAndRowToString(int file, int row) {
-		StringBuilder sb = new StringBuilder(2);
-		sb.append(FILES.charAt(file));
-		sb.append(ROWS.charAt(row));
-		return sb.toString();
-	}
+    /**
+     * Converts a chess board field given by file and row to a String
+     * representation.
+     *
+     * @param file the file number, 0..7, meaning a..h
+     * @param row  the row number, 0..7
+     * @return field, e.g. "e5"
+     */
+    static String fileAndRowToString(int file, int row) {
+        StringBuilder sb = new StringBuilder(2);
+        sb.append(FILES.charAt(file));
+        sb.append(ROWS.charAt(row));
+        return sb.toString();
+    }
 
-	static int twoBytesToInt(byte[] source) {
-		int result = 0;
+    static int twoBytesToInt(byte[] source) {
+        int result = 0;
 
-		byte byteA = source[1];
-		byte byteB = source[0];
+        byte byteA = source[1];
+        byte byteB = source[0];
 
-		for (int i = 0; i < 8; ++i) {
-			if ((byteA & (1 << i)) > 0) {
-				result = result | (1 << i);
-			}
-		}
-		for (int i = 0; i < 8; ++i) {
-			if ((byteB & (1 << i)) > 0) {
-				result = result | (1 << (8 + i));
-			}
-		}
+        for (int i = 0; i < 8; ++i) {
+            if ((byteA & (1 << i)) > 0) {
+                result = result | (1 << i);
+            }
+        }
+        for (int i = 0; i < 8; ++i) {
+            if ((byteB & (1 << i)) > 0) {
+                result = result | (1 << (8 + i));
+            }
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	static byte[] longToByteArray(long source) {
-		byte[] bytesKey = new byte[8];
-		String sBytes = Long.toBinaryString(source);
-		while (sBytes.length() < 64) {
-			sBytes = "0" + sBytes;
-		}
-		for (int i = 0; i < 8; i++) {
-			String s = sBytes.substring(i * 8, (i * 8) + 8);
-			for (int j = 0; j < 8; ++j) {
-				if (s.charAt(j) == '1') {
-					bytesKey[i] = (byte) (bytesKey[i] | (1 << (7 - j)));
-				}
-			}
-		}
-		return bytesKey;
-	}
+    static byte[] longToByteArray(long source) {
+        byte[] bytesKey = new byte[8];
+        String sBytes = Long.toBinaryString(source);
+        while (sBytes.length() < 64) {
+            sBytes = "0" + sBytes;
+        }
+        for (int i = 0; i < 8; i++) {
+            String s = sBytes.substring(i * 8, (i * 8) + 8);
+            for (int j = 0; j < 8; ++j) {
+                if (s.charAt(j) == '1') {
+                    bytesKey[i] = (byte) (bytesKey[i] | (1 << (7 - j)));
+                }
+            }
+        }
+        return bytesKey;
+    }
 }
