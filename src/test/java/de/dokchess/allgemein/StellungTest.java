@@ -167,4 +167,15 @@ public class StellungTest {
         Feld feldWeiss = stellung.findeFeldMitKoenig(WEISS);
         assertEquals(e1, feldWeiss);
     }
+
+    @Test
+    public void sucheFelderMitKoenigAufLeerenBrett() {
+        Stellung stellung = new Stellung("8/8/8/8/8/8/8/8 w - - 0 1");
+
+        Feld feldSchwarz = stellung.findeFeldMitKoenig(SCHWARZ);
+        assertNull(feldSchwarz);
+
+        Feld feldWeiss = stellung.findeFeldMitKoenig(WEISS);
+        assertNull(feldWeiss);
+    }
 }
