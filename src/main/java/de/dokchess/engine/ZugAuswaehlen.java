@@ -21,6 +21,7 @@ package de.dokchess.engine;
 
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
+import rx.subjects.Subject;
 
 /**
  * Uebernimmt die Rolle Handler im Chain of Responsibility Muster.
@@ -35,11 +36,12 @@ abstract class ZugAuswaehlen {
         this.nachfolger = nachfolger;
     }
 
-    public Zug waehleZug(Stellung stellung) {
+    public Zug waehleZug(Stellung stellung, Subject<Zug, Zug> subject) {
         if (nachfolger == null) {
+            subject.onCompleted();
             return null;
         } else {
-            return nachfolger.waehleZug(stellung);
+            return nachfolger.waehleZug(stellung, subject);
         }
     }
 }

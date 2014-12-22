@@ -25,6 +25,8 @@ import de.dokchess.engine.bewertung.ReineMaterialBewertung;
 import de.dokchess.engine.zugauswahl.MinimaxAlgorithmus;
 import de.dokchess.eroeffnung.Eroeffnungsbibliothek;
 import de.dokchess.regeln.Spielregeln;
+import rx.Observable;
+import rx.subjects.ReplaySubject;
 
 /**
  * Default-Implementierung einer Engine.
@@ -68,8 +70,12 @@ public class DefaultEngine implements Engine {
     }
 
     @Override
-    public Zug ermittleDeinenZug() {
-        return zugAuswahl.waehleZug(stellung);
+    public Observable<Zug> ermittleDeinenZug() {
+
+        ReplaySubject<Zug> subject = ReplaySubject.create();
+        Zug zug = this.zugAuswahl.waehleZug(stellung, subject);
+
+        return subject;
     }
 
     @Override

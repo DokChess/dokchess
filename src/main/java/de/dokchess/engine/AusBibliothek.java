@@ -21,6 +21,7 @@ package de.dokchess.engine;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.eroeffnung.Eroeffnungsbibliothek;
+import rx.subjects.Subject;
 
 class AusBibliothek extends ZugAuswaehlen {
 
@@ -33,8 +34,14 @@ class AusBibliothek extends ZugAuswaehlen {
     }
 
     @Override
-    public Zug waehleZug(Stellung stellung) {
+    public Zug waehleZug(Stellung stellung, Subject<Zug, Zug> subject) {
         Zug zug = bibliothek.liefereZug(stellung);
-        return (zug != null) ? zug : super.waehleZug(stellung);
+        if (zug != null) {
+            subject.onNext(zug);
+            subject.onCompleted();
+            return zug;
+        } else {
+            return super.waehleZug(stellung, subject);
+        }
     }
 }

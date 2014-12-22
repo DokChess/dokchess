@@ -20,6 +20,7 @@ package de.dokchess.engine;
 
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
+import rx.Observable;
 
 /**
  * Zentrale Schnittstelle des Engine-Subsystems. Ermittlung des n&auml;chsten
@@ -44,7 +45,7 @@ public interface Engine {
      *
      * @return der beste Zug aus Sicht der Engine
      */
-    Zug ermittleDeinenZug();
+    Observable<Zug> ermittleDeinenZug();
 
     /**
      * F&uuml;hrt den angegebenen Zug aus, d.h. &auml;ndert den Zustand der
