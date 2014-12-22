@@ -22,7 +22,7 @@
  *
  * Das Modul bewertet eine Stellung aus Sicht eines Spielers. Ergebnis ist eine Zahl,
  * wobei 0 eine ausgeglichene Situation beschreibt, eine positive Zahl einen Vorteil für den
- * Spieler, eine negative einen Nachteil. Je höher der Betrag, desto gr&uml;sser der Vor- bzw. Nachteil.
- * Das Modul ermöglicht es so, Stellungen miteinander zu vergleichen.
+ * Spieler, eine negative einen Nachteil. Je h&ouml;her der Betrag, desto gr&uml;sser der Vor- bzw. Nachteil.
+ * Das Modul erm&ouml;glicht es so, Stellungen miteinander zu vergleichen.
  */
 package de.dokchess.engine.bewertung;
