@@ -39,6 +39,31 @@ public final class Zug {
 
     private final FigurenArt neueFigurenart;
 
+    /**
+     * Erzeugt einen einfachen Zug. Eine Figur wird von einem Feld auf ein anderes Feld
+     * bewegt. Eine Rochade wird hierbei durch einen Koenigszug um zwei Felder in Richtung des
+     * Turmes angegeben.
+     * <p/>
+     * Fuer das Schlagen oder die Umwandlung eines Bauern in eine andere Figur sind
+     * andere Konstruktoren da.
+     *
+     * @param figur bewegte Figur
+     * @param von   Start-Feld
+     * @param nach  Ziel-Feld
+     */
+    public Zug(Figur figur, Feld von, Feld nach) {
+        this(figur, von, nach, false, null);
+    }
+
+    /**
+     * Erzeugt einen Zug.
+     *
+     * @param figur          bewegte Figur
+     * @param von            Start-Feld
+     * @param nach           Ziel-Feld
+     * @param schlagen       wird eine gegnerische Figur geschlagen?
+     * @param neueFigurenArt neue Figurenart im Falle einer Umwandlung
+     */
     public Zug(Figur figur, Feld von, Feld nach, boolean schlagen,
                FigurenArt neueFigurenArt) {
         this.figur = figur;
@@ -48,34 +73,75 @@ public final class Zug {
         this.neueFigurenart = neueFigurenArt;
     }
 
-    public Zug(Figur figur, Feld von, Feld nach) {
-        this(figur, von, nach, false, null);
-    }
-
+    /**
+     * Erzeugt einen Zug.
+     *
+     * @param figur          bewegte Figur
+     * @param von            Start-Feld
+     * @param nach           Ziel-Feld
+     * @param schlagen       wird eine gegnerische Figur geschlagen?
+     */
     public Zug(Figur figur, Feld von, Feld nach, boolean schlagen) {
         this(figur, von, nach, schlagen, null);
     }
 
+    /**
+     * Erzeugt einen Zug.
+     *
+     * @param figur          bewegte Figur
+     * @param von            Start-Feld
+     * @param nach           Ziel-Feld
+     * @param neueFigurenArt neue Figurenart im Falle einer Umwandlung
+     */
     public Zug(Figur figur, Feld von, Feld nach, FigurenArt neueFigurenArt) {
         this(figur, von, nach, false, neueFigurenArt);
     }
 
+    /**
+     * Liefert das Feld zu&uuml;ck, von dem die Figur durch den Zug bewegt wird.
+     *
+     * @return das Startfeld
+     */
     public Feld getVon() {
         return von;
     }
 
+    /**
+     * Liefert das Feld zu&uuml;ck, auf das die Figur durch den Zug bewegt wird.
+     *
+     * @return das Zielfeld
+     */
     public Feld getNach() {
         return nach;
     }
 
+    /**
+     * Liefert im Falle einer Umwandlung eines Bauern auf der Grundlinie
+     * die gew&uuml;nschte neue Figurenart zur&uuml;ck.
+     * <p/>
+     * M&ouml;gliche Werte: DAME, LAEUFER, TURM, SPRINGER.
+     *
+     * @return gew&uuml;nschte Figurenart, oder null, wenn es keine Umwandlung ist.
+     */
     public FigurenArt getNeueFigurenart() {
         return neueFigurenart;
     }
 
+    /**
+     * Liefert die Figur zu&uuml;ck, die bewegt wird.
+     * Im Fall einer Rochade ist das der K&ouml;nig, im Fall einer Umwandlung der Bauer.
+     *
+     * @return die bewegte Figur
+     */
     public Figur getFigur() {
         return figur;
     }
 
+    /**
+     * Liefert zur&uuml;ck, ob mit dem Zug eine gegnerische Figur geschlagen wird.
+     *
+     * @return true, falls eine Figur geschlagen wird.
+     */
     public boolean istSchlagen() {
         return schlagen;
     }
@@ -101,19 +167,41 @@ public final class Zug {
                 && Math.abs(von.getReihe() - nach.getReihe()) == 2;
     }
 
+    /**
+     * Liefert zur&uuml;ck, ob der Zug eine Umwandlung ist.
+     *
+     * @return true bei einer Umwandlung.
+     */
     public boolean istUmwandlung() {
         return neueFigurenart != null;
     }
 
+    /**
+     * Liefert zur&uuml;ck, ob der Zug eine Rochade ist.
+     *
+     * @return true bei einer Rochade.
+     */
     public boolean istRochade() {
         return figur.getArt() == FigurenArt.KOENIG
                 && Math.abs(von.getLinie() - nach.getLinie()) == 2;
     }
 
+    /**
+     * Liefert zur&uuml;ck, ob der Zug eine kurze Rochade ist.
+     * Kurze Rochaden: e1 - g1 (weiss), e8 - g8 (schwarz).
+     *
+     * @return true bei einer kurzen Rochade.
+     */
     public boolean istRochadeKurz() {
         return istRochade() && nach.getLinie() == 6;
     }
 
+    /**
+     * Liefert zur&uuml;ck, ob der Zug eine lange Rochade ist.
+     * Lange Rochaden: e1 - c1 (weiss), e8 - c8 (schwarz).
+     *
+     * @return true bei einer langen Rochade.
+     */
     public boolean istRochadeLang() {
         return istRochade() && nach.getLinie() == 2;
     }
