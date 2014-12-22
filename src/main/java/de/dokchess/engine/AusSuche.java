@@ -38,14 +38,13 @@ class AusSuche extends ZugAuswaehlen {
     }
 
     @Override
-    public Zug waehleZug(Stellung stellung, Subject<Zug, Zug> subject) {
+    public void waehleZug(Stellung stellung, Subject<Zug, Zug> subject) {
         Zug zug = suche.ermittleZug(stellung);
         if (zug != null) {
             subject.onNext(zug);
             subject.onCompleted();
-            return zug;
         } else {
-            return super.waehleZug(stellung, subject);
+            super.waehleZug(stellung, subject);
         }
     }
 }

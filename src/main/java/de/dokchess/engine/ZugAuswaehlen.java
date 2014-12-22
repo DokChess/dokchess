@@ -36,12 +36,11 @@ abstract class ZugAuswaehlen {
         this.nachfolger = nachfolger;
     }
 
-    public Zug waehleZug(Stellung stellung, Subject<Zug, Zug> subject) {
+    public void waehleZug(Stellung stellung, Subject<Zug, Zug> subject) {
         if (nachfolger == null) {
             subject.onCompleted();
-            return null;
         } else {
-            return nachfolger.waehleZug(stellung, subject);
+            nachfolger.waehleZug(stellung, subject);
         }
     }
 }
