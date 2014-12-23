@@ -29,6 +29,14 @@ import java.util.Collection;
 
 public class MinimaxAlgorithmus implements ZugAuswahl {
 
+    private static final int MAXIMALE_BEWERTUNG = Integer.MAX_VALUE;
+
+    private static final int MINIMALE_BEWERTUNG = Integer.MIN_VALUE;
+
+    private static final int MATT_BEWERTUNG = Integer.MAX_VALUE / 2;
+
+    private static final int PATT_BEWERTUNG = 0;
+
     private Spielregeln spielregeln;
 
     private Bewertung bewertung;
@@ -96,20 +104,21 @@ public class MinimaxAlgorithmus implements ZugAuswahl {
                 // PATT
                 if (!spielregeln
                         .aufSchachPruefen(stellung, stellung.getAmZug())) {
-                    return 0;
+                    return PATT_BEWERTUNG;
                 }
 
                 // MATT
+                // Tiefe mit einrechnen, um fruehes Matt zu bevorzugen
                 if (stellung.getAmZug() == spielerFarbe) {
-                    return -(100000 - aktuelleTiefe);
+                    return -(MATT_BEWERTUNG - aktuelleTiefe);
                 } else {
-                    return 100000 - aktuelleTiefe;
+                    return MATT_BEWERTUNG - aktuelleTiefe;
                 }
 
             } else {
                 if (aktuelleTiefe % 2 == 0) {
                     // Max
-                    int max = -Integer.MAX_VALUE;
+                    int max = MINIMALE_BEWERTUNG;
                     for (Zug zug : zuege) {
                         Stellung neueStellung = stellung.fuehreZugAus(zug);
                         int wert = ermittleZugRekursiv(neueStellung,
@@ -121,7 +130,7 @@ public class MinimaxAlgorithmus implements ZugAuswahl {
                     return max;
                 } else {
                     // Min
-                    int min = Integer.MAX_VALUE;
+                    int min = MAXIMALE_BEWERTUNG;
                     for (Zug zug : zuege) {
                         Stellung neueStellung = stellung.fuehreZugAus(zug);
                         int wert = ermittleZugRekursiv(neueStellung,
