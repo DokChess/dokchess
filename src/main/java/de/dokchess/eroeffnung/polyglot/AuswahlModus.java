@@ -18,6 +18,12 @@
  */
 package de.dokchess.eroeffnung.polyglot;
 
+/**
+ * Beschreibt moegliche Strategien, nach denen ein Zug in der Eroefffnungsbibliothek
+ * ausgewaehlt wird, wenn es mehrere zur Auswahl gibt.
+ *
+ * @author StefanZ
+ */
 public enum AuswahlModus {
 
     /**
