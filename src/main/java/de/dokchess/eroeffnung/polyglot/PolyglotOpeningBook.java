@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PolyglotOpeningBook implements Eroeffnungsbibliothek {
@@ -59,6 +60,13 @@ public class PolyglotOpeningBook implements Eroeffnungsbibliothek {
         List<BookEntry> treffer = findEntriesByFen(fen);
 
         if (treffer != null && treffer.size() > 0) {
+
+            if (auswahlModus == AuswahlModus.HAEUFIGSTER) {
+                Collections.sort(treffer);
+            } else if (auswahlModus == AuswahlModus.PER_ZUFALL) {
+                Collections.shuffle(treffer);
+            }
+
             BookEntry eintrag = treffer.get(0);
 
             Feld von = new Feld(eintrag.getMoveFrom());
