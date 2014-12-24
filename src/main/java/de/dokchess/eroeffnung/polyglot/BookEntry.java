@@ -20,10 +20,11 @@ package de.dokchess.eroeffnung.polyglot;
 
 /**
  * Ein einzelner Eintrag im Eroeffnungsbuch.
+ * Die natuerliche Ordnung (Comparable) erfolgt nach Gewicht absteigend.
  *
  * @author StefanZ
  */
-class BookEntry {
+class BookEntry implements Comparable<BookEntry> {
 
     private byte[] key;
     private byte[] move;
@@ -111,5 +112,10 @@ class BookEntry {
     @Override
     public String toString() {
         return getMove();
+    }
+
+    @Override
+    public int compareTo(BookEntry o) {
+        return o.getWeightAsInt() - this.getWeightAsInt();
     }
 }
