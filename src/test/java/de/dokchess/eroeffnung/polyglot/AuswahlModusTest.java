@@ -80,9 +80,8 @@ public class AuswahlModusTest {
     public void zufaellig() {
         buch.setAuswahlModus(AuswahlModus.PER_ZUFALL);
 
-        Stellung stellung = new Stellung();
-        List<BookEntry> eintraege = buch.findEntriesByFen(stellung.toString());
-        BookEntry zug = eintraege.get(0);
+        Stellung anfang = new Stellung();
+        Zug zug = buch.liefereZug(anfang);
 
         Assert.assertNotNull(zug);
     }
