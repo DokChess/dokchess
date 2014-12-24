@@ -69,5 +69,4 @@ public class PolyglotOpeningBookTest {
         Assert.assertEquals("f3", zug.getNach().toString());
 
     }
-
 }
