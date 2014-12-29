@@ -22,7 +22,7 @@ import de.dokchess.allgemein.Felder;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.bewertung.ReineMaterialBewertung;
-import de.dokchess.regeln.SpielregelnImpl;
+import de.dokchess.regeln.DefaultSpielregeln;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -36,7 +36,7 @@ public class MinimaxMattsucheTest {
 
         MinimaxAlgorithmus algorithmus = new MinimaxAlgorithmus();
         algorithmus.setBewertung(new ReineMaterialBewertung());
-        algorithmus.setSpielregeln(new SpielregelnImpl());
+        algorithmus.setSpielregeln(new DefaultSpielregeln());
         algorithmus.setTiefe(2);
 
         Stellung stellung = new Stellung(
@@ -56,7 +56,7 @@ public class MinimaxMattsucheTest {
 
         MinimaxAlgorithmus algorithmus = new MinimaxAlgorithmus();
         algorithmus.setBewertung(new ReineMaterialBewertung());
-        algorithmus.setSpielregeln(new SpielregelnImpl());
+        algorithmus.setSpielregeln(new DefaultSpielregeln());
         algorithmus.setTiefe(4);
 
         Stellung stellung = new Stellung(

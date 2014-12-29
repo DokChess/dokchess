@@ -24,12 +24,11 @@ import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.DefaultEngine;
 import de.dokchess.engine.Engine;
+import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
-import de.dokchess.regeln.SpielregelnImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import rx.*;
 import rx.Observable;
 
 import java.util.*;
@@ -53,7 +52,7 @@ public class EngineGegenZufallIntegTest implements rx.Observer<Zug> {
 
     @Before
     public void setup() {
-        spielregeln = new SpielregelnImpl();
+        spielregeln = new DefaultSpielregeln();
         dokChess = new DefaultEngine(spielregeln);
         brett = new Stellung();
         dokChess.figurenAufbauen(brett);

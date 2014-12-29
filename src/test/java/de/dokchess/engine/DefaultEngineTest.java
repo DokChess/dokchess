@@ -22,8 +22,8 @@ package de.dokchess.engine;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.eroeffnung.polyglot.PolyglotOpeningBook;
+import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
-import de.dokchess.regeln.SpielregelnImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import rx.Observable;
@@ -39,7 +39,7 @@ public class DefaultEngineTest {
     @Test
     public void ohneEroeffnungsbiblithek() {
 
-        Spielregeln regeln = new SpielregelnImpl();
+        Spielregeln regeln = new DefaultSpielregeln();
         DefaultEngine engine = new DefaultEngine(regeln);
 
         Stellung anfang = new Stellung();
@@ -57,7 +57,7 @@ public class DefaultEngineTest {
         PolyglotOpeningBook buch = new PolyglotOpeningBook(is);
         is.close();
 
-        Spielregeln regeln = new SpielregelnImpl();
+        Spielregeln regeln = new DefaultSpielregeln();
         DefaultEngine engine = new DefaultEngine(regeln, buch);
 
         Stellung anfang = new Stellung();

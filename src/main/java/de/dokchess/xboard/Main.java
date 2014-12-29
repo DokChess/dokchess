@@ -22,8 +22,8 @@ import de.dokchess.engine.DefaultEngine;
 import de.dokchess.engine.Engine;
 import de.dokchess.eroeffnung.Eroeffnungsbibliothek;
 import de.dokchess.eroeffnung.polyglot.PolyglotOpeningBook;
+import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
-import de.dokchess.regeln.SpielregelnImpl;
 
 import java.io.File;
 import java.io.InputStreamReader;
@@ -60,7 +60,7 @@ public class Main {
         OutputStreamWriter writer = new OutputStreamWriter(System.out);
         xBoard.setAusgabe(writer);
 
-        Spielregeln spielregeln = new SpielregelnImpl();
+        Spielregeln spielregeln = new DefaultSpielregeln();
         Engine engine = new DefaultEngine(spielregeln, bibliothek);
 
         xBoard.setEngine(engine);

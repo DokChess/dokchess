@@ -17,13 +17,10 @@
  */
 package de.dokchess.regeln.suite;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
+import de.dokchess.allgemein.Stellung;
+import de.dokchess.allgemein.Zug;
+import de.dokchess.regeln.DefaultSpielregeln;
+import de.dokchess.regeln.Spielregeln;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,10 +28,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import de.dokchess.allgemein.Stellung;
-import de.dokchess.allgemein.Zug;
-import de.dokchess.regeln.Spielregeln;
-import de.dokchess.regeln.SpielregelnImpl;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @RunWith(Parameterized.class)
 public class SpielregelnTestSuite {
@@ -51,7 +50,7 @@ public class SpielregelnTestSuite {
 
 	@Before
 	public void setup() {
-		this.regeln = new SpielregelnImpl();
+		this.regeln = new DefaultSpielregeln();
 
 		String fen = datenSatz.getFen();
 		Stellung stellung = new Stellung(fen);

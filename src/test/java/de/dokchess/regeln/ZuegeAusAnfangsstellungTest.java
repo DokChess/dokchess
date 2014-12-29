@@ -32,7 +32,7 @@ public class ZuegeAusAnfangsstellungTest {
 
     @Before
     public void setup() {
-        spielregeln = new SpielregelnImpl();
+        spielregeln = new DefaultSpielregeln();
     }
 
     @Test

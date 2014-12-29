@@ -18,12 +18,11 @@
  */
 package de.dokchess.regeln;
 
+import de.dokchess.allgemein.Farbe;
+import de.dokchess.allgemein.Stellung;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import de.dokchess.allgemein.Farbe;
-import de.dokchess.allgemein.Stellung;
 
 public class AufSchachPruefenTest {
 
@@ -31,7 +30,7 @@ public class AufSchachPruefenTest {
 
 	@Before
 	public void setup() {
-		spielregeln = new SpielregelnImpl();
+		spielregeln = new DefaultSpielregeln();
 	}
 
 	@Test

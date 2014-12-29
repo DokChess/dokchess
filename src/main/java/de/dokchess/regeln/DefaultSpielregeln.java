@@ -22,7 +22,7 @@ import de.dokchess.allgemein.*;
 
 import java.util.*;
 
-public class SpielregelnImpl implements Spielregeln {
+public class DefaultSpielregeln implements Spielregeln {
 
     private SpringerZuege springerZuege = new SpringerZuege();
 

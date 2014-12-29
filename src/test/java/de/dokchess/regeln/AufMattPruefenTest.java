@@ -18,11 +18,10 @@
  */
 package de.dokchess.regeln;
 
+import de.dokchess.allgemein.Stellung;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import de.dokchess.allgemein.Stellung;
 
 public class AufMattPruefenTest {
 
@@ -30,7 +29,7 @@ public class AufMattPruefenTest {
 
 	@Before
 	public void setup() {
-		spielregeln = new SpielregelnImpl();
+		spielregeln = new DefaultSpielregeln();
 	}
 	
 	/**

@@ -22,7 +22,7 @@ package de.dokchess.engine.zugauswahl;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.bewertung.ReineMaterialBewertung;
-import de.dokchess.regeln.SpielregelnImpl;
+import de.dokchess.regeln.DefaultSpielregeln;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,7 +39,7 @@ public class GabelTest {
 
         MinimaxAlgorithmus algorithmus = new MinimaxAlgorithmus();
         algorithmus.setBewertung(new ReineMaterialBewertung());
-        algorithmus.setSpielregeln(new SpielregelnImpl());
+        algorithmus.setSpielregeln(new DefaultSpielregeln());
         algorithmus.setTiefe(2);
 
         Stellung stellung = new Stellung(
