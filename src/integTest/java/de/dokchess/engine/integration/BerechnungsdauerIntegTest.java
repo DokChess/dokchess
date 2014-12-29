@@ -53,7 +53,7 @@ public class BerechnungsdauerIntegTest implements Observer<Zug> {
         dokChess.figurenAufbauen(brett);
     }
 
-    @Test(timeout = 5000)
+    @Test(timeout = 10000)
     public void zugBerechnen() {
 
         Observable<Zug> subject = dokChess.ermittleDeinenZug();
