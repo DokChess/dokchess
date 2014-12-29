@@ -30,7 +30,8 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 /**
- * Minimaler Test fuer XBoard. Die Engine wird sofort verlassen.
+ * Minimaler Test fuer XBoard. Die Engine wird sofort verlassen,
+ * nachdem das xboard-Protocol steht.
  */
 public class XBoardTest {
 
@@ -39,7 +40,7 @@ public class XBoardTest {
 
         XBoard xBoard = new XBoard();
 
-        Reader eingabe = new StringReader("xboard\nquit\n");
+        Reader eingabe = new StringReader("xboard\nprotover 2\nnew\nquit\n");
         Writer ausgabe = new StringWriter();
 
         xBoard.setEingabe(eingabe);
