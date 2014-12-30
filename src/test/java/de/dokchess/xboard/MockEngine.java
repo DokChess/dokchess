@@ -26,7 +26,7 @@ import rx.Observable;
 import rx.subjects.ReplaySubject;
 
 /**
- * Created by stefanz on 30.12.14.
+ * Einfache Implementierung des Engine-Interfaces fuer Testzwecke.
  */
 public class MockEngine implements Engine {
 
@@ -35,6 +35,11 @@ public class MockEngine implements Engine {
     public MockEngine() {
     }
 
+    /**
+     * Erzeugt eine Engine, die beim Ermitteln genau diesen Zug liefert.
+     *
+     * @param zug der zu spielende Zug.
+     */
     public MockEngine(Zug zug) {
         this.zug = zug;
     }
