@@ -63,8 +63,6 @@ public class MinimaxMattsucheTest {
                 "2k5/8/8/8/8/8/6R1/6KR w - - 0 1");
         Zug z = algorithmus.ermittleZug(stellung);
 
-        System.out.println("Zug = " + z);
-
         Assert.assertTrue(z.toString().equals("R g2-g7") || z.toString().equals("R h1-h7"));
     }
 }
