@@ -19,9 +19,11 @@
 
 package de.dokchess.xboard;
 
-import de.dokchess.engine.DefaultEngine;
+import de.dokchess.allgemein.*;
+import de.dokchess.engine.Engine;
 import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.Reader;
@@ -29,14 +31,14 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 
-/**
- * Minimaler Test fuer XBoard. Die Engine wird sofort verlassen,
- * nachdem das xboard-Protocol steht.
- */
 public class XBoardTest {
 
+    /**
+     * Minimaler Test fuer XBoard. Die Engine wird sofort verlassen,
+     * nachdem das xboard-Protocol steht.
+     */
     @Test
-    public void einfachsteVerwendung() {
+    public void sofortVerlassen() {
 
         XBoard xBoard = new XBoard();
 
@@ -47,9 +49,62 @@ public class XBoardTest {
         xBoard.setAusgabe(ausgabe);
 
         Spielregeln spielregeln = new DefaultSpielregeln();
-        xBoard.setEngine(new DefaultEngine(spielregeln));
         xBoard.setSpielregeln(spielregeln);
+        xBoard.setEngine(new MockEngine());
 
         xBoard.spielen();
+    }
+
+    /**
+     * Weiss versucht den Turm auf a1 nach vorn zu ziehen.
+     */
+    @Test
+    public void ungueltigerZug() {
+
+        XBoard xBoard = new XBoard();
+
+        Reader eingabe = new StringReader("xboard\nprotover 2\nnew\na1a2\nquit\n");
+        Writer ausgabe = new StringWriter();
+
+        xBoard.setEingabe(eingabe);
+        xBoard.setAusgabe(ausgabe);
+
+        Spielregeln spielregeln = new DefaultSpielregeln();
+        xBoard.setSpielregeln(spielregeln);
+        xBoard.setEngine(new MockEngine());
+
+        xBoard.spielen();
+        Assert.assertTrue(ausgabe.toString().contains("Ungueltiger Zug"));
+    }
+
+    /**
+     * Weiss zieht e2-e4, Engine antwortrt mit e7-e5.
+     */
+    @Test
+    public void gueltigerZug() {
+
+        Figur weisserBauer = new Figur(FigurenArt.BAUER, Farbe.WEISS);
+        Zug e2e4 = new Zug(weisserBauer, Felder.e2, Felder.e4);
+        Zug e7e5 = new Zug(weisserBauer, Felder.e7, Felder.e5);
+
+        XBoard xBoard = new XBoard();
+
+        Reader eingabe = new StringReader("xboard\nprotover 2\nnew\ne2e4\nquit\n");
+        Writer ausgabe = new StringWriter();
+
+        xBoard.setEingabe(eingabe);
+        xBoard.setAusgabe(ausgabe);
+
+        Spielregeln spielregeln = new DefaultSpielregeln();
+        xBoard.setSpielregeln(spielregeln);
+
+        Engine engine = new MockEngine(e7e5);
+        engine.figurenAufbauen(new Stellung());
+        engine.ziehen(e2e4);
+
+        xBoard.setEngine(engine);
+
+        xBoard.spielen();
+        Assert.assertTrue(ausgabe.toString().contains("move e7e5"));
     }
 }
