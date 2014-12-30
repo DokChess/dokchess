@@ -112,24 +112,29 @@ public class XBoard implements Observer<Zug> {
 
             if (eingelesen.equals("quit")) {
                 running = false;
+                continue;
             }
 
             if (eingelesen.equals("xboard")) {
                 schreiben("");
+                continue;
             }
 
             if (eingelesen.equals("protover 2")) {
                 schreiben("feature done=1");
+                continue;
             }
 
             if (eingelesen.equals("new")) {
                 stellung = new Stellung();
                 engine.figurenAufbauen(stellung);
+                continue;
             }
 
             if (eingelesen.equals("go")) {
                 Observable<Zug> s = engine.ermittleDeinenZug();
                 s.subscribe(this);
+                continue;
             }
 
             Zug zug = parser.vonXboard(eingelesen, stellung);
@@ -139,7 +144,7 @@ public class XBoard implements Observer<Zug> {
                     Collection<Zug> gueltigeZuege = spielregeln
                             .ermittleGueltigeZuege(stellung);
                     if (!gueltigeZuege.contains(zug)) {
-                        schreiben("tellall Ungueltiger Zug: " + zug);
+                        schreiben("tellusererror Ungueltiger Zug: " + zug);
                         continue;
                     }
                 }
@@ -149,8 +154,10 @@ public class XBoard implements Observer<Zug> {
 
                 Observable<Zug> s = engine.ermittleDeinenZug();
                 s.subscribe(this);
+                continue;
             }
 
+            schreiben("telluser xboard-Befehl unbekannt oder nicht implementiert: " + eingelesen);
         }
     }
 
@@ -181,7 +188,7 @@ public class XBoard implements Observer<Zug> {
 
     @Override
     public void onError(Throwable e) {
-
+        schreiben("tellusererror " + e.getMessage());
     }
 
     @Override
