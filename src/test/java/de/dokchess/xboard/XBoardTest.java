@@ -34,25 +34,45 @@ import java.io.Writer;
 public class XBoardTest {
 
     /**
-     * Minimaler Test fuer XBoard. Die Engine wird sofort verlassen,
+     * Smoke-Test fuer XBoard. Die Engine wird sofort verlassen,
      * nachdem das xboard-Protocol steht.
      */
     @Test
     public void sofortVerlassen() {
 
+        String eingegeben = "xboard\nprotover 2\nquit\n";
+
         XBoard xBoard = new XBoard();
-
-        Reader eingabe = new StringReader("xboard\nprotover 2\nnew\nquit\n");
-        Writer ausgabe = new StringWriter();
-
-        xBoard.setEingabe(eingabe);
-        xBoard.setAusgabe(ausgabe);
-
-        Spielregeln spielregeln = new DefaultSpielregeln();
-        xBoard.setSpielregeln(spielregeln);
+        xBoard.setAusgabe(new StringWriter());
         xBoard.setEngine(new MockEngine());
+        xBoard.setSpielregeln(null);
+
+        Reader eingabe = new StringReader(eingegeben);
+        xBoard.setEingabe(eingabe);
 
         xBoard.spielen();
+    }
+
+    /**
+     * Eingabe eines unbekannten Befehls.
+     */
+    @Test
+    public void unsinnEingeben() {
+        XBoard xBoard = new XBoard();
+
+        xBoard.setEngine(new MockEngine());
+        xBoard.setSpielregeln(null);
+
+        String s = "Quak\nquit\n";
+        Reader eingabe = new StringReader(s);
+        xBoard.setEingabe(eingabe);
+
+        Writer ausgabe = new StringWriter();
+        xBoard.setAusgabe(ausgabe);
+
+        xBoard.spielen();
+
+        Assert.assertTrue(ausgabe.toString().contains("Quak"));
     }
 
     /**
@@ -78,7 +98,7 @@ public class XBoardTest {
     }
 
     /**
-     * Weiss zieht e2-e4, Engine antwortrt mit e7-e5.
+     * Weiss zieht e2-e4, Engine antwortet mit e7-e5.
      */
     @Test
     public void gueltigerZug() {
