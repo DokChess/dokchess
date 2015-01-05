@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2014 Stefan Zoerner
+ * Copyright (c) 2010-2015 Stefan Zoerner
  *
  * This file is part of DokChess.
  *
@@ -21,23 +21,17 @@ package de.dokchess.engine;
 
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
-import de.dokchess.eroeffnung.polyglot.PolyglotOpeningBook;
 import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
-import org.junit.Assert;
 import org.junit.Test;
-import rx.Observable;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
- * Einfache Tests, eher Richtung Smoke-Test ...
+ * Test startet eine Berechnung. Zieht dann aber nach 500ms.
  */
-public class DefaultEngineTest {
+public class DefaultEngineAbbrechenTest {
 
     @Test
-    public void ohneEroeffnungsbiblithek() {
+    public void ziehenNach500ms() throws InterruptedException {
 
         Spielregeln regeln = new DefaultSpielregeln();
         DefaultEngine engine = new DefaultEngine(regeln);
@@ -45,27 +39,12 @@ public class DefaultEngineTest {
         Stellung anfang = new Stellung();
         engine.figurenAufbauen(anfang);
 
-        Observable<Zug> observable = engine.ermittleDeinenZug();
-        Assert.assertNotNull(observable);
+        engine.ermittleDeinenZug();
+        Thread.sleep(500);
+
+        Zug z = regeln.ermittleGueltigeZuege(anfang).iterator().next();
+        engine.ziehen(z);
+
+        Thread.sleep(1000);
     }
-
-    @Test
-    public void mitEroeffnungsbiblithek() throws IOException {
-
-        InputStream is = getClass().getClassLoader().getResourceAsStream(
-                "de/dokchess/eroeffnung/polyglot/italienischePartie.bin");
-        PolyglotOpeningBook buch = new PolyglotOpeningBook(is);
-        is.close();
-
-        Spielregeln regeln = new DefaultSpielregeln();
-        DefaultEngine engine = new DefaultEngine(regeln, buch);
-
-        Stellung anfang = new Stellung();
-        engine.figurenAufbauen(anfang);
-
-        Observable<Zug> observable = engine.ermittleDeinenZug();
-        Assert.assertNotNull(observable);
-    }
-
-
 }
