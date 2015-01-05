@@ -52,6 +52,17 @@ public class Main {
             }
         }
 
+        Spielregeln spielregeln = new DefaultSpielregeln();
+        Engine engine = new DefaultEngine(spielregeln, bibliothek);
+
+        XBoard xBoard = xBoardBauen();
+        xBoard.setEngine(engine);
+        xBoard.setSpielregeln(spielregeln);
+
+        xBoard.spielen();
+    }
+
+    static XBoard xBoardBauen() {
         XBoard xBoard = new XBoard();
 
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -59,14 +70,7 @@ public class Main {
 
         OutputStreamWriter writer = new OutputStreamWriter(System.out);
         xBoard.setAusgabe(writer);
-
-        Spielregeln spielregeln = new DefaultSpielregeln();
-        Engine engine = new DefaultEngine(spielregeln, bibliothek);
-
-        xBoard.setEngine(engine);
-        xBoard.setSpielregeln(spielregeln);
-
-        xBoard.spielen();
+        return xBoard;
     }
 
 }
