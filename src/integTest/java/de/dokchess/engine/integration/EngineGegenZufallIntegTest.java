@@ -30,7 +30,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import rx.Observable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -49,7 +52,7 @@ public class EngineGegenZufallIntegTest {
     Spielregeln spielregeln = null;
 
     @Test
-    public void partieSpielen() throws InterruptedException {
+    public void spieleEinePartie() throws InterruptedException {
 
         spielregeln = new DefaultSpielregeln();
         dokChess = new DefaultEngine(spielregeln);
@@ -71,10 +74,9 @@ public class EngineGegenZufallIntegTest {
 
         executor.awaitTermination(5, TimeUnit.MINUTES);
 
-        System.out.println(brett);
-
-        Assert.assertTrue(spielregeln.aufMattPruefen(brett));
+        // Schwarz sollte am Zug und Matt sein
         Assert.assertTrue(brett.getAmZug() == Farbe.SCHWARZ);
+        Assert.assertTrue(spielregeln.aufMattPruefen(brett));
     }
 
     synchronized boolean spielZuEnde() {
@@ -91,21 +93,19 @@ public class EngineGegenZufallIntegTest {
         Zug besterZug = null;
 
         @Override
+        public void onNext(Zug zug) {
+            besterZug = zug;
+        }
+
+        @Override
         public void onCompleted() {
 
             ziehen(besterZug);
 
             if (!spielZuEnde()) {
 
-                // Zufall (schwarz) zieht, falls moeglich
-                Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(brett);
-                List<Zug> zugListe = new ArrayList<>(zuege);
-
-                if (zugListe.size() > 0) {
-                    Collections.sort(zugListe, new Sortierung());
-                    Zug z2 = zugListe.get(0);
-                    ziehen(z2);
-                }
+                Zug zug = ermittleSchwarzenZug();
+                ziehen(zug);
 
                 if (!spielZuEnde()) {
                     besterZug = null;
@@ -117,13 +117,20 @@ public class EngineGegenZufallIntegTest {
 
         @Override
         public void onError(Throwable e) {
-
+            Assert.fail(e.getMessage());
         }
 
-        @Override
-        public void onNext(Zug zug) {
-            besterZug = zug;
+        Zug ermittleSchwarzenZug() {
+            Assert.assertTrue(brett.getAmZug() == Farbe.SCHWARZ);
+            Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(brett);
+            Assert.assertFalse(zuege.isEmpty());
+
+            SortedSet<Zug> besteZuege = new TreeSet<>(new Sortierung());
+            besteZuege.addAll(zuege);
+
+            return besteZuege.first();
         }
+
 
         /**
          * Bevorzugte Zuege des anderen, mehr oder weniger zufaelligen Computergegners.
