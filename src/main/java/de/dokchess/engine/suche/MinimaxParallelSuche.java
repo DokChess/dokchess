@@ -35,7 +35,7 @@ import java.util.concurrent.Executors;
  */
 public class MinimaxParallelSuche extends BasisMinimaxAlgorithmus implements Suche {
 
-    ExecutorService executorService;
+    private ExecutorService executorService;
 
     public MinimaxParallelSuche() {
         int cores = Runtime.getRuntime().availableProcessors();
@@ -83,9 +83,6 @@ public class MinimaxParallelSuche extends BasisMinimaxAlgorithmus implements Suc
 
         @Override
         public void run() {
-
-            System.out.println("Zug untersuchen ... " + zug);
-
             Farbe spielerFarbe = stellung.getAmZug();
             Stellung nachZug = stellung.fuehreZugAus(zug);
             int wert = bewerteStellungRekursiv(nachZug, spielerFarbe);
