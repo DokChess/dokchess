@@ -66,11 +66,11 @@ public class MinimaxParallelSuche extends BasisMinimaxAlgorithmus implements Suc
 
     class EinzelnenZugUntersuchen implements Runnable {
 
-        Stellung stellung;
+        private Stellung stellung;
 
-        Zug zug;
+        private Zug zug;
 
-        ReplaySubject<BewerteterZug> suchErgebnisse;
+        private ReplaySubject<BewerteterZug> suchErgebnisse;
 
         EinzelnenZugUntersuchen(Stellung stellung, Zug zug, ReplaySubject<BewerteterZug> suchErgebnisse) {
             this.stellung = stellung;
