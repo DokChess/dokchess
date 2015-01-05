@@ -21,11 +21,11 @@ package de.dokchess.engine.suche;
 
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
-import rx.subjects.Subject;
+import rx.Observer;
 
 public interface Suche {
 
-    void suchen(Stellung stellung, Subject<Zug, Zug> subject);
+    void suchen(Stellung stellung, Observer<Zug> subject);
 
     void abbrechen();
 }

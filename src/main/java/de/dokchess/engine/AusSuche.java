@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2014 Stefan Zoerner
+ * Copyright (c) 2010-2015 Stefan Zoerner
  *
  * This file is part of DokChess.
  *
@@ -16,35 +16,32 @@
  * You should have received a copy of the GNU General Public License
  * along with DokChess.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.dokchess.engine;
 
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
-import de.dokchess.engine.zugauswahl.ZugAuswahl;
-import rx.subjects.Subject;
+import de.dokchess.engine.suche.Suche;
+import rx.Observer;
 
-class AusSuche extends ZugAuswaehlen {
+class AusSuche extends ZugErmitteln {
 
-    private ZugAuswahl suche;
+    private Suche suche;
 
-    public AusSuche(ZugAuswahl suche) {
+    public AusSuche(final Suche suche) {
         this(suche, null);
     }
 
-    public AusSuche(ZugAuswahl suche, ZugAuswaehlen nachfolger) {
+    public AusSuche(final Suche suche,
+                    final ZugErmitteln nachfolger) {
         super(nachfolger);
         this.suche = suche;
     }
 
     @Override
-    public void waehleZug(Stellung stellung, Subject<Zug, Zug> subject) {
-        Zug zug = suche.ermittleZug(stellung);
-        if (zug != null) {
-            subject.onNext(zug);
-            subject.onCompleted();
-        } else {
-            super.waehleZug(stellung, subject);
-        }
+    public void ermittelZug(Stellung stellung, Observer<Zug> subject) {
+        suche.suchen(stellung, subject);
+        super.ermittelZug(stellung, subject);
     }
+
+
 }

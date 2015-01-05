@@ -24,7 +24,6 @@ import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import rx.Observer;
 import rx.subjects.ReplaySubject;
-import rx.subjects.Subject;
 
 import java.util.Collection;
 import java.util.concurrent.ExecutorService;
@@ -37,22 +36,26 @@ public class MinimaxParallelSuche extends MinimaxAlgorithmus implements Suche {
 
     private ExecutorService executorService;
 
+    private ReplaySubject<BewerteterZug> aktuelleSuchErgebnisse;
+
     public MinimaxParallelSuche() {
         int cores = Runtime.getRuntime().availableProcessors();
         executorService = Executors.newFixedThreadPool(cores);
     }
 
     @Override
-    public void suchen(Stellung stellung, Subject<Zug, Zug> subject) {
+    public void suchen(Stellung stellung, Observer<Zug> subject) {
         Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(stellung);
         if (zuege.size() > 0) {
             ReplaySubject<BewerteterZug> suchErgebnisse = ReplaySubject.create();
+            aktuelleSuchErgebnisse = suchErgebnisse;
 
             ErgebnisMelden melder = new ErgebnisMelden(subject, zuege.size());
             suchErgebnisse.subscribe(melder);
 
             for (Zug zug : zuege) {
-                Runnable zugUntersuchen = new EinzelnenZugUntersuchen(stellung, zug, suchErgebnisse);
+                EinzelnenZugUntersuchen zugUntersuchen = new EinzelnenZugUntersuchen(stellung, zug, suchErgebnisse);
+                suchErgebnisse.subscribe(zugUntersuchen);
                 executorService.execute(zugUntersuchen);
             }
         } else {
@@ -61,16 +64,21 @@ public class MinimaxParallelSuche extends MinimaxAlgorithmus implements Suche {
     }
 
     public void abbrechen() {
-        executorService.shutdownNow();
+        if (aktuelleSuchErgebnisse != null) {
+            aktuelleSuchErgebnisse.onCompleted();
+            aktuelleSuchErgebnisse = null;
+        }
     }
 
-    class EinzelnenZugUntersuchen implements Runnable {
+    class EinzelnenZugUntersuchen implements Runnable, Observer<BewerteterZug> {
 
         private Stellung stellung;
 
         private Zug zug;
 
         private ReplaySubject<BewerteterZug> suchErgebnisse;
+
+        private boolean berechnungBeendet = false;
 
         EinzelnenZugUntersuchen(Stellung stellung, Zug zug, ReplaySubject<BewerteterZug> suchErgebnisse) {
             this.stellung = stellung;
@@ -80,16 +88,32 @@ public class MinimaxParallelSuche extends MinimaxAlgorithmus implements Suche {
 
         @Override
         public void run() {
-            Farbe spielerFarbe = stellung.getAmZug();
-            Stellung nachZug = stellung.fuehreZugAus(zug);
-            int wert = bewerteStellungRekursiv(nachZug, spielerFarbe);
-            suchErgebnisse.onNext(new BewerteterZug(zug, wert));
+            if (!berechnungBeendet) {
+                Farbe spielerFarbe = stellung.getAmZug();
+                Stellung nachZug = stellung.fuehreZugAus(zug);
+                int wert = bewerteStellungRekursiv(nachZug, spielerFarbe);
+                suchErgebnisse.onNext(new BewerteterZug(zug, wert));
+            }
+        }
+
+        @Override
+        public void onCompleted() {
+            this.berechnungBeendet = true;
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            this.berechnungBeendet = true;
+        }
+
+        @Override
+        public void onNext(BewerteterZug bewerteterZug) {
         }
     }
 
     class ErgebnisMelden implements Observer<BewerteterZug> {
 
-        Subject<Zug, Zug> subject;
+        Observer<Zug> subject;
 
         int anzahlKandidaten;
 
@@ -97,7 +121,7 @@ public class MinimaxParallelSuche extends MinimaxAlgorithmus implements Suche {
 
         BewerteterZug bester = null;
 
-        public ErgebnisMelden(Subject<Zug, Zug> subject, int anzahlKandidaten) {
+        public ErgebnisMelden(Observer<Zug> subject, int anzahlKandidaten) {
             this.subject = subject;
             this.anzahlKandidaten = anzahlKandidaten;
         }

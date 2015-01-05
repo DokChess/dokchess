@@ -23,7 +23,6 @@ import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.bewertung.ReineMaterialBewertung;
 import de.dokchess.engine.suche.MinimaxParallelSuche;
-import de.dokchess.engine.suche.Suche;
 import de.dokchess.eroeffnung.Eroeffnungsbibliothek;
 import de.dokchess.regeln.Spielregeln;
 import rx.Observable;
@@ -41,9 +40,7 @@ public class DefaultEngine implements Engine {
 
     private Stellung stellung;
 
-    // private ZugAuswaehlen zugAuswahl;
-
-    private Suche suche = null;
+    private ZugErmitteln zugErmitteln;
 
     public DefaultEngine(Spielregeln spielregeln) {
         this(spielregeln, null);
@@ -59,32 +56,32 @@ public class DefaultEngine implements Engine {
         minimax.setSpielregeln(spielregeln);
         minimax.setBewertung(new ReineMaterialBewertung());
 
-        this.suche = minimax;
-
-        /*
         AusSuche ausSuche = new AusSuche(minimax);
+
         if (eroeffnungsbibliothek != null) {
-            this.zugAuswahl = new AusBibliothek(eroeffnungsbibliothek, ausSuche);
+            this.zugErmitteln = new AusBibliothek(eroeffnungsbibliothek, ausSuche);
         } else {
-            this.zugAuswahl = ausSuche;
+            this.zugErmitteln = ausSuche;
         }
-        */
+
     }
 
     @Override
     public void figurenAufbauen(Stellung stellung) {
         this.stellung = stellung;
+        zugErmitteln.ermittlungBeenden();
     }
 
     @Override
     public Observable<Zug> ermittleDeinenZug() {
         ReplaySubject<Zug> subject = ReplaySubject.create();
-        this.suche.suchen(stellung, subject);
+        zugErmitteln.ermittelZug(stellung, subject);
         return subject;
     }
 
     @Override
     public void ziehen(Zug zug) {
         stellung = stellung.fuehreZugAus(zug);
+        zugErmitteln.ermittlungBeenden();
     }
 }

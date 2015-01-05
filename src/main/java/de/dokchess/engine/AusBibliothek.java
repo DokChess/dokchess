@@ -21,26 +21,26 @@ package de.dokchess.engine;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.eroeffnung.Eroeffnungsbibliothek;
-import rx.subjects.Subject;
+import rx.Observer;
 
-class AusBibliothek extends ZugAuswaehlen {
+class AusBibliothek extends ZugErmitteln {
 
     private Eroeffnungsbibliothek bibliothek;
 
     public AusBibliothek(Eroeffnungsbibliothek bibliothek,
-                         ZugAuswaehlen nachfolger) {
+                         ZugErmitteln nachfolger) {
         super(nachfolger);
         this.bibliothek = bibliothek;
     }
 
     @Override
-    public void waehleZug(Stellung stellung, Subject<Zug, Zug> subject) {
+    public void ermittelZug(Stellung stellung, Observer<Zug> subject) {
         Zug zug = bibliothek.liefereZug(stellung);
         if (zug != null) {
             subject.onNext(zug);
             subject.onCompleted();
         } else {
-            super.waehleZug(stellung, subject);
+            super.ermittelZug(stellung, subject);
         }
     }
 }
