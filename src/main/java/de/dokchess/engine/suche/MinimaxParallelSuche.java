@@ -33,7 +33,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by stefanz on 02.01.15.
  */
-public class MinimaxParallelSuche extends BasisMinimaxAlgorithmus implements Suche {
+public class MinimaxParallelSuche extends MinimaxAlgorithmus implements Suche {
 
     private ExecutorService executorService;
 
