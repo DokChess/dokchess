@@ -27,43 +27,13 @@ import de.dokchess.regeln.Spielregeln;
 
 import java.util.Collection;
 
-public class BasisMinimaxAlgorithmus {
-
-    protected static final int MAXIMALE_BEWERTUNG = Integer.MAX_VALUE;
-
-    protected static final int MINIMALE_BEWERTUNG = Integer.MIN_VALUE;
-
-    protected static final int MATT_BEWERTUNG = Integer.MAX_VALUE / 2;
-
-    protected static final int PATT_BEWERTUNG = 0;
+public class MinimaxAlgorithmus {
 
     protected Spielregeln spielregeln;
 
     protected Bewertung bewertung;
 
     private int tiefe;
-
-    public Zug ermittleBestenZug(Stellung stellung) {
-
-        Farbe spielerFarbe = stellung.getAmZug();
-        Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(stellung);
-
-        int besterWert = MINIMALE_BEWERTUNG;
-        Zug besterZug = null;
-
-        for (Zug zug : zuege) {
-            Stellung neueStellung = stellung.fuehreZugAus(zug);
-
-            int wert = bewerteStellungRekursiv(neueStellung, spielerFarbe);
-
-            if (wert > besterWert) {
-                besterWert = wert;
-                besterZug = zug;
-            }
-        }
-
-        return besterZug;
-    }
 
     /**
      * Setzt die Bewertungsfunktion, anhand derer die Stellungen bei Erreichen
@@ -91,6 +61,29 @@ public class BasisMinimaxAlgorithmus {
         this.tiefe = tiefe;
     }
 
+    public Zug ermittleBestenZug(Stellung stellung) {
+
+        Farbe spielerFarbe = stellung.getAmZug();
+        Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(stellung);
+
+        int besterWert = Bewertung.MINIMALE_BEWERTUNG;
+        Zug besterZug = null;
+
+        for (Zug zug : zuege) {
+            Stellung neueStellung = stellung.fuehreZugAus(zug);
+
+            int wert = bewerteStellungRekursiv(neueStellung, spielerFarbe);
+
+            if (wert > besterWert) {
+                besterWert = wert;
+                besterZug = zug;
+            }
+        }
+
+        return besterZug;
+    }
+
+
     protected int bewerteStellungRekursiv(Stellung stellung, Farbe spielerFarbe) {
         return bewerteStellungRekursiv(stellung, 1, spielerFarbe);
     }
@@ -108,21 +101,21 @@ public class BasisMinimaxAlgorithmus {
                 // PATT
                 if (!spielregeln
                         .aufSchachPruefen(stellung, stellung.getAmZug())) {
-                    return PATT_BEWERTUNG;
+                    return Bewertung.PATT_BEWERTUNG;
                 }
 
                 // MATT
                 // Tiefe mit einrechnen, um fruehes Matt zu bevorzugen
                 if (stellung.getAmZug() == spielerFarbe) {
-                    return -(MATT_BEWERTUNG - aktuelleTiefe);
+                    return -(Bewertung.MATT_BEWERTUNG - aktuelleTiefe);
                 } else {
-                    return MATT_BEWERTUNG - aktuelleTiefe;
+                    return Bewertung.MATT_BEWERTUNG - aktuelleTiefe;
                 }
 
             } else {
                 if (aktuelleTiefe % 2 == 0) {
                     // Max
-                    int max = MINIMALE_BEWERTUNG;
+                    int max = Bewertung.MINIMALE_BEWERTUNG;
                     for (Zug zug : zuege) {
                         Stellung neueStellung = stellung.fuehreZugAus(zug);
                         int wert = bewerteStellungRekursiv(neueStellung,
@@ -134,7 +127,7 @@ public class BasisMinimaxAlgorithmus {
                     return max;
                 } else {
                     // Min
-                    int min = MAXIMALE_BEWERTUNG;
+                    int min = Bewertung.MAXIMALE_BEWERTUNG;
                     for (Zug zug : zuege) {
                         Stellung neueStellung = stellung.fuehreZugAus(zug);
                         int wert = bewerteStellungRekursiv(neueStellung,
