@@ -110,7 +110,7 @@ public class XBoard implements Observer<Zug> {
 
             String eingelesen = lesen();
 
-            if (eingelesen.equals("quit")) {
+            if (eingelesen == null || eingelesen.equals("quit")) {
                 running = false;
                 continue;
             }
@@ -173,8 +173,10 @@ public class XBoard implements Observer<Zug> {
 
     void schreiben(String zeile) {
         try {
-            ausgabe.write(zeile + "\n");
-            ausgabe.flush();
+            synchronized (ausgabe) {
+                ausgabe.write(zeile + "\n");
+                ausgabe.flush();
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
