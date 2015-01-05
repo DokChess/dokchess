@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2014 Stefan Zoerner
+ * Copyright (c) 2010-2015 Stefan Zoerner
  *
  * This file is part of DokChess.
  *
@@ -35,8 +35,19 @@ import java.io.OutputStreamWriter;
  *
  * @author StefanZ
  */
-public class Main {
+public final class Main {
 
+    /**
+     * Konstruktor private, um keine Exemplare von dieser (Main-)Klasse bauen koennen.
+     */
+    private Main() {
+    }
+
+    /**
+     * Einstiegspunkt. Startet das XBoard-Protokoll und die Engine.
+     *
+     * @param args Kommendozeilenparameter. Dateiname eines (optionalen) Eroeffnungsbuches.
+     */
     public static void main(String[] args) {
 
         Eroeffnungsbibliothek bibliothek = null;
