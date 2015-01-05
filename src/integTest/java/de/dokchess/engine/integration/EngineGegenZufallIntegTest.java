@@ -27,11 +27,13 @@ import de.dokchess.engine.Engine;
 import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import rx.Observable;
 
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Die Engine spielt in der Standardkonfiguration eine Partie als weiss
@@ -40,105 +42,116 @@ import java.util.*;
  * Konkret nimmt er den erst besten gueltigen Zug aus den Spielregeln, wobei er
  * aber schlagende Zuege und Bauernzuege bevorzugt, um das Spiel voran zu bringen.
  */
-public class EngineGegenZufallIntegTest implements rx.Observer<Zug> {
+public class EngineGegenZufallIntegTest {
 
-    private Zug besterZug = null;
+    Stellung brett = null;
+    Engine dokChess = null;
+    Spielregeln spielregeln = null;
 
-    private Spielregeln spielregeln = null;
+    @Test
+    public void partieSpielen() throws InterruptedException {
 
-    private Engine dokChess = null;
-
-    private Stellung brett;
-
-    @Before
-    public void setup() {
         spielregeln = new DefaultSpielregeln();
         dokChess = new DefaultEngine(spielregeln);
         brett = new Stellung();
         dokChess.figurenAufbauen(brett);
-    }
 
+        Observable<Zug> weissZieht = dokChess.ermittleDeinenZug();
+        weissZieht.subscribe(new ZugHinRueck());
 
-    @Test
-    public void partieSpielen() {
-        
-        while (! (spielregeln.aufMattPruefen(brett) || spielregeln.aufPattPruefen(brett))) {
-            // Engine zieht (weiss)
-            Observable<Zug> subjekt = dokChess.ermittleDeinenZug();
-            subjekt.subscribe(this);
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                if (spielZuEnde()) {
+                    executor.shutdown();
+                }
             }
-        }
+        }, 10, 5, TimeUnit.SECONDS);
 
-        Assert.assertTrue(brett.getAmZug() == Farbe.SCHWARZ);
+        executor.awaitTermination(5, TimeUnit.MINUTES);
+
+        System.out.println(brett);
+
         Assert.assertTrue(spielregeln.aufMattPruefen(brett));
+        Assert.assertTrue(brett.getAmZug() == Farbe.SCHWARZ);
     }
 
-    @Override
-    public void onCompleted() {
-        System.out.println("onCompleted. ");
-        
-        // Zug von weiss (mir selber) ausfuehren
-        //
-        dokChess.ziehen(besterZug);
-        brett = this.brett.fuehreZugAus(besterZug);
-
-        // Zufall (schwarz) zieht, falls moeglich
-        Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(brett);
-        List<Zug> zugListe = new ArrayList<>(zuege);
-
-        if(zugListe.size() > 0) {
-            Collections.sort(zugListe, new Sortierung());
-            Zug z2 = zugListe.get(0);
-            dokChess.ziehen(z2);
-            brett = brett.fuehreZugAus(z2);
-
-            Observable<Zug> subjekt = dokChess.ermittleDeinenZug();
-            subjekt.subscribe(this);
-        }
+    synchronized boolean spielZuEnde() {
+        return spielregeln.aufMattPruefen(brett) || spielregeln.aufPattPruefen(brett);
     }
 
-    @Override
-    public void onError(Throwable e) {
-        Assert.fail(e.getMessage());
+    synchronized void ziehen(Zug zug) {
+        brett = brett.fuehreZugAus(zug);
+        dokChess.ziehen(zug);
     }
 
-    @Override
-    public void onNext(Zug zug) {
-        System.out.println("onNext: " + zug);
+    class ZugHinRueck implements rx.Observer<Zug> {
 
-        besterZug = zug;
-    }
-
-    /** Bevorzugte Zuege des anderen, mehr oder weniger zufaelligen Computergegners.
-     */
-    class Sortierung implements Comparator<Zug> {
+        Zug besterZug = null;
 
         @Override
-        public int compare(Zug z1, Zug z2) {
-            return zugWert(z2) - zugWert(z1);
+        public void onCompleted() {
+
+            ziehen(besterZug);
+
+            if (!spielZuEnde()) {
+
+                // Zufall (schwarz) zieht, falls moeglich
+                Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(brett);
+                List<Zug> zugListe = new ArrayList<>(zuege);
+
+                if (zugListe.size() > 0) {
+                    Collections.sort(zugListe, new Sortierung());
+                    Zug z2 = zugListe.get(0);
+                    ziehen(z2);
+                }
+
+                if (!spielZuEnde()) {
+                    besterZug = null;
+                    Observable<Zug> subjekt = dokChess.ermittleDeinenZug();
+                    subjekt.subscribe(this);
+                }
+            }
         }
 
-        int zugWert(Zug z) {
-            int wert = 0;
+        @Override
+        public void onError(Throwable e) {
 
-            if (z.istSchlagen()) {
-                wert += 1000;
+        }
+
+        @Override
+        public void onNext(Zug zug) {
+            besterZug = zug;
+        }
+
+        /**
+         * Bevorzugte Zuege des anderen, mehr oder weniger zufaelligen Computergegners.
+         */
+        class Sortierung implements Comparator<Zug> {
+
+            @Override
+            public int compare(Zug z1, Zug z2) {
+                return zugWert(z2) - zugWert(z1);
             }
 
-            if (z.istRochade()) {
-                wert += 100;
-            }
+            int zugWert(Zug z) {
+                int wert = 0;
 
-            if (z.istBauernZug()) {
-                wert += 10;
-            }
+                if (z.istSchlagen()) {
+                    wert += 1000;
+                }
 
-            return wert;
+                if (z.istRochade()) {
+                    wert += 100;
+                }
+
+                if (z.istBauernZug()) {
+                    wert += 10;
+                }
+
+                return wert;
+            }
         }
     }
 }
