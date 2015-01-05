@@ -25,7 +25,7 @@ import de.dokchess.allgemein.Zug;
 public interface Eroeffnungsbibliothek {
 
     /**
-     * Liefert zur angegebenen Stellung ein aus der Bibliothek bekannten Zug,
+     * Liefert zur angegebenen Stellung einen aus der Bibliothek bekannten Zug,
      * oder null.
      *
      * @param stellung zu betrachtende Stellung
