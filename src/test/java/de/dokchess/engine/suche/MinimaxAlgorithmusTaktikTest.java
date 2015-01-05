@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2014 Stefan Zoerner
+ * Copyright (c) 2010-2015 Stefan Zoerner
  *
  * This file is part of DokChess.
  *
@@ -17,19 +17,33 @@
  * along with DokChess.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.dokchess.engine.zugauswahl;
+package de.dokchess.engine.suche;
 
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.bewertung.ReineMaterialBewertung;
 import de.dokchess.regeln.DefaultSpielregeln;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-import static de.dokchess.allgemein.Felder.d5;
-import static de.dokchess.allgemein.Felder.f7;
+import static de.dokchess.allgemein.Felder.*;
 
-public class SpiessTest {
+/**
+ * Tests fuer verschiedene taktische Elemente im Schach.
+ *
+ * @author StefanZ
+ */
+public class MinimaxAlgorithmusTaktikTest {
+
+    private MinimaxAlgorithmus algorithmus;
+
+    @Before
+    public void setup() {
+        algorithmus = new MinimaxAlgorithmus();
+        algorithmus.setBewertung(new ReineMaterialBewertung());
+        algorithmus.setSpielregeln(new DefaultSpielregeln());
+    }
 
     @Test
     /**
@@ -40,17 +54,32 @@ public class SpiessTest {
      * http://de.wikipedia.org/wiki/Spieß_(Schach)
      */
     public void laeuferSpiess() {
-
-        MinimaxAlgorithmus algorithmus = new MinimaxAlgorithmus();
-        algorithmus.setBewertung(new ReineMaterialBewertung());
-        algorithmus.setSpielregeln(new DefaultSpielregeln());
         algorithmus.setTiefe(4);
 
         Stellung stellung = new Stellung(
                 "8/3qkb2/8/8/4KB2/5Q2/8/8 b - - 0 1");
-        Zug z = algorithmus.ermittleZug(stellung);
+        Zug z = algorithmus.ermittleBestenZug(stellung);
 
         Assert.assertEquals(f7, z.getVon());
         Assert.assertEquals(d5, z.getNach());
+    }
+
+    @Test
+    /**
+     * Weiss gewinnt durch eine Gabel mit einem Bauern einen Turm.
+     *
+     * Quelle des Beispiels: Wikipedia.
+     * http://de.wikipedia.org/wiki/Gabel_(Schach)
+     */
+    public void bauernGabel() {
+        algorithmus.setTiefe(4);
+
+        Stellung stellung = new Stellung(
+                "8/5k2/2r1r3/8/3P4/6P1/5PK1/8 w - - 0 1");
+        Zug z = algorithmus.ermittleBestenZug(stellung);
+
+        Assert.assertEquals(d4, z.getVon());
+        Assert.assertEquals(d5, z.getNach());
+
     }
 }
