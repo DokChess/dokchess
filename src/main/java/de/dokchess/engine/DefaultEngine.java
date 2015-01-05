@@ -22,7 +22,8 @@ package de.dokchess.engine;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.bewertung.ReineMaterialBewertung;
-import de.dokchess.engine.zugauswahl.MinimaxAlgorithmus;
+import de.dokchess.engine.suche.MinimaxParallelSuche;
+import de.dokchess.engine.suche.Suche;
 import de.dokchess.eroeffnung.Eroeffnungsbibliothek;
 import de.dokchess.regeln.Spielregeln;
 import rx.Observable;
@@ -40,7 +41,9 @@ public class DefaultEngine implements Engine {
 
     private Stellung stellung;
 
-    private ZugAuswaehlen zugAuswahl;
+    // private ZugAuswaehlen zugAuswahl;
+
+    private Suche suche = null;
 
     public DefaultEngine(Spielregeln spielregeln) {
         this(spielregeln, null);
@@ -51,17 +54,21 @@ public class DefaultEngine implements Engine {
 
         this.stellung = new Stellung();
 
-        MinimaxAlgorithmus minimax = new MinimaxAlgorithmus();
+        MinimaxParallelSuche minimax = new MinimaxParallelSuche();
         minimax.setTiefe(4);
         minimax.setSpielregeln(spielregeln);
         minimax.setBewertung(new ReineMaterialBewertung());
 
+        this.suche = minimax;
+
+        /*
         AusSuche ausSuche = new AusSuche(minimax);
         if (eroeffnungsbibliothek != null) {
             this.zugAuswahl = new AusBibliothek(eroeffnungsbibliothek, ausSuche);
         } else {
             this.zugAuswahl = ausSuche;
         }
+        */
     }
 
     @Override
@@ -71,10 +78,8 @@ public class DefaultEngine implements Engine {
 
     @Override
     public Observable<Zug> ermittleDeinenZug() {
-
         ReplaySubject<Zug> subject = ReplaySubject.create();
-        this.zugAuswahl.waehleZug(stellung, subject);
-
+        this.suche.suchen(stellung, subject);
         return subject;
     }
 
