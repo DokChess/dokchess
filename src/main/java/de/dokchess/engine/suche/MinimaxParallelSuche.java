@@ -44,10 +44,7 @@ public class MinimaxParallelSuche extends BasisMinimaxAlgorithmus implements Suc
 
     @Override
     public void suchen(Stellung stellung, Subject<Zug, Zug> subject) {
-
-        Farbe spielerFarbe = stellung.getAmZug();
         Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(stellung);
-
         if (zuege.size() > 0) {
             ReplaySubject<BewerteterZug> suchErgebnisse = ReplaySubject.create();
 
