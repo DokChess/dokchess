@@ -184,6 +184,7 @@ public class XBoard implements Observer<Zug> {
     public void onCompleted() {
         schreiben(parser.nachXboard(this.besterZug));
         this.engine.ziehen(this.besterZug);
+        this.stellung = this.stellung.fuehreZugAus(this.besterZug);
     }
 
     @Override
