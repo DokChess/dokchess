@@ -74,7 +74,7 @@ public class EngineGegenZufallIntegTest {
 
         executor.awaitTermination(5, TimeUnit.MINUTES);
 
-        // Schwarz sollte am Zug und Matt sein
+        // Schwarz sollte am Ende am Zug und Matt sein
         Assert.assertTrue(brett.getAmZug() == Farbe.SCHWARZ);
         Assert.assertTrue(spielregeln.aufMattPruefen(brett));
     }
