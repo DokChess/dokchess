@@ -38,4 +38,12 @@ public interface Bewertung {
      * den Spieler
      */
     int bewerteStellung(Stellung stellung, Farbe ausSicht);
+
+    int MAXIMALE_BEWERTUNG = Integer.MAX_VALUE;
+
+    int MINIMALE_BEWERTUNG = Integer.MIN_VALUE;
+
+    int MATT_BEWERTUNG = Integer.MAX_VALUE / 2;
+
+    int PATT_BEWERTUNG = 0;
 }
