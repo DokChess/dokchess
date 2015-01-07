@@ -64,4 +64,8 @@ public class MockEngine implements Engine {
     @Override
     public void ziehen(Zug zug) {
     }
+
+    @Override
+    public void schliessen() {
+    }
 }
