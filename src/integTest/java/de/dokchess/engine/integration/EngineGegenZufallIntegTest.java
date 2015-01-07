@@ -122,7 +122,7 @@ public class EngineGegenZufallIntegTest {
 
         Zug ermittleSchwarzenZug() {
             Assert.assertTrue(brett.getAmZug() == Farbe.SCHWARZ);
-            Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(brett);
+            Collection<Zug> zuege = spielregeln.liefereGueltigeZuege(brett);
             Assert.assertFalse(zuege.isEmpty());
 
             SortedSet<Zug> besteZuege = new TreeSet<>(new Sortierung());

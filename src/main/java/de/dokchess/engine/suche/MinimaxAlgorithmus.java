@@ -64,7 +64,7 @@ public class MinimaxAlgorithmus {
     public Zug ermittleBestenZug(Stellung stellung) {
 
         Farbe spielerFarbe = stellung.getAmZug();
-        Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(stellung);
+        Collection<Zug> zuege = spielregeln.liefereGueltigeZuege(stellung);
 
         int besterWert = Bewertung.MINIMALE_BEWERTUNG;
         Zug besterZug = null;
@@ -95,7 +95,7 @@ public class MinimaxAlgorithmus {
         if (aktuelleTiefe == tiefe) {
             return bewertung.bewerteStellung(stellung, spielerFarbe);
         } else {
-            Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(stellung);
+            Collection<Zug> zuege = spielregeln.liefereGueltigeZuege(stellung);
             if (zuege.isEmpty()) {
 
                 // PATT

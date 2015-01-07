@@ -142,7 +142,7 @@ public class XBoard implements Observer<Zug> {
 
                 if (spielregeln != null) {
                     Collection<Zug> gueltigeZuege = spielregeln
-                            .ermittleGueltigeZuege(stellung);
+                            .liefereGueltigeZuege(stellung);
                     if (!gueltigeZuege.contains(zug)) {
                         schreiben("tellusererror Ungueltiger Zug: " + zug);
                         continue;

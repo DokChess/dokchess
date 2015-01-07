@@ -39,7 +39,7 @@ public class DefaultSpielregeln implements Spielregeln {
     private RochadeZuege rochadeZuege = new RochadeZuege();
 
     @Override
-    public Collection<Zug> ermittleGueltigeZuege(Stellung stellung) {
+    public Collection<Zug> liefereGueltigeZuege(Stellung stellung) {
 
         List<Zug> zugKandidaten = new ArrayList<Zug>();
         Farbe amZug = stellung.getAmZug();
@@ -95,13 +95,11 @@ public class DefaultSpielregeln implements Spielregeln {
         return zugKandidaten;
     }
 
-    /**
-     * Prueft, ob der Koenig der angegebenen Farbe im Schach steht.
-     *
-     * @param stellung
-     * @param farbe
-     * @return true, falls der Koenig im Schach steht
-     */
+    @Override
+    public Stellung liefereGrundaufstellung() {
+        return new Stellung();
+    }
+
     @Override
     public boolean aufSchachPruefen(Stellung stellung, Farbe farbe) {
         Feld feld = stellung.findeFeldMitKoenig(farbe);
@@ -112,7 +110,7 @@ public class DefaultSpielregeln implements Spielregeln {
     public boolean aufMattPruefen(Stellung stellung) {
         Farbe amZug = stellung.getAmZug();
         if (aufSchachPruefen(stellung, amZug)) {
-            Collection<Zug> zuege = ermittleGueltigeZuege(stellung);
+            Collection<Zug> zuege = liefereGueltigeZuege(stellung);
             if (zuege.size() == 0) {
                 return true;
             }
@@ -122,7 +120,7 @@ public class DefaultSpielregeln implements Spielregeln {
 
     @Override
     public boolean aufPattPruefen(Stellung stellung) {
-        Collection<Zug> zuege = ermittleGueltigeZuege(stellung);
+        Collection<Zug> zuege = liefereGueltigeZuege(stellung);
         if (zuege.isEmpty()) {
             Farbe amZug = stellung.getAmZug();
             return !aufSchachPruefen(stellung, amZug);

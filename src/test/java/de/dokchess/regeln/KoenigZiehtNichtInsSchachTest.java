@@ -39,7 +39,7 @@ public class KoenigZiehtNichtInsSchachTest {
 
         Stellung stellung = new Stellung(fen);
         Spielregeln regeln = new DefaultSpielregeln();
-        Collection<Zug> zuege = regeln.ermittleGueltigeZuege(stellung);
+        Collection<Zug> zuege = regeln.liefereGueltigeZuege(stellung);
 
         Zug illegal1 = new Zug(KOENIG_WEISS, d4, c5);
         Zug illegal2 = new Zug(KOENIG_WEISS, d4, d5);
@@ -64,7 +64,7 @@ public class KoenigZiehtNichtInsSchachTest {
 
         Stellung stellung = new Stellung(fen);
         Spielregeln regeln = new DefaultSpielregeln();
-        Collection<Zug> zuege = regeln.ermittleGueltigeZuege(stellung);
+        Collection<Zug> zuege = regeln.liefereGueltigeZuege(stellung);
 
 
         Zug illegal1 = new Zug(KOENIG_WEISS, d4, d5);

@@ -41,7 +41,7 @@ public class ZuegeAusAnfangsstellungTest {
      */
     public void anfangsstellung() {
         Stellung anfangsstellung = new Stellung();
-        Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(anfangsstellung);
+        Collection<Zug> zuege = spielregeln.liefereGueltigeZuege(anfangsstellung);
         System.out.println(zuege);
         Assert.assertEquals(20, zuege.size());
     }

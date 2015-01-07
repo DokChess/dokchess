@@ -42,9 +42,9 @@ public abstract class ZugErmitteln {
         }
     }
 
-    public void ermittlungBeenden() {
+    public void aktuelleErmittlungBeenden() {
         if (nachfolger != null) {
-            nachfolger.ermittlungBeenden();
+            nachfolger.aktuelleErmittlungBeenden();
         }
     }
 }

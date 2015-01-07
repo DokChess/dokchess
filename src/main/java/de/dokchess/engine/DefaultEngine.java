@@ -69,7 +69,7 @@ public class DefaultEngine implements Engine {
     @Override
     public void figurenAufbauen(Stellung stellung) {
         this.stellung = stellung;
-        zugErmitteln.ermittlungBeenden();
+        zugErmitteln.aktuelleErmittlungBeenden();
     }
 
     @Override
@@ -82,6 +82,11 @@ public class DefaultEngine implements Engine {
     @Override
     public void ziehen(Zug zug) {
         stellung = stellung.fuehreZugAus(zug);
-        zugErmitteln.ermittlungBeenden();
+        zugErmitteln.aktuelleErmittlungBeenden();
+    }
+
+    @Override
+    public void schliessen() {
+        zugErmitteln.aktuelleErmittlungBeenden();
     }
 }

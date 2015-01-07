@@ -26,7 +26,7 @@ import rx.Observable;
  * Zentrale Schnittstelle des Engine-Subsystems. Ermittlung des n&auml;chsten
  * Zuges, ausgehend von einer Spielsituation. Diese Situation kann von aussen
  * vorgegeben werden. Die Engine ist zustandsbehaftet und spielt stets eine
- * Partie zur gleichen Zeit
+ * Partie zur gleichen Zeit.
  *
  * @author StefanZ
  */
@@ -34,6 +34,7 @@ public interface Engine {
 
     /**
      * Setzt den Zustand der Engine auf die angegebene Spielsituation.
+     * Falls aktuell eine Zugermittlung l&auml;uft, wird diese abgebrochen.
      *
      * @param stellung die neue Stellung
      */
@@ -42,16 +43,25 @@ public interface Engine {
     /**
      * Liefert den aus Sicht der Engine optimalen Zug f&uuml;r den aktuellen Spieler,
      * ohne ihn auszuf&uuml;hren.
+     * Als Ergebnis wird ein Observable zur&uuml;ckgeliefert,
+     * d.h. die Methode blockiert nicht, die Engine rechnet ggf. im Hintergrund.
+     * Neue beste Z&uuml;ge werden &uuml;ber onNext() gemeldet, das Ende der Berechnung mit onComplete.
      *
-     * @return der beste Zug aus Sicht der Engine
+     * @return Observable, ueber das der beste Zug aus Sicht der Engine &uuml;bermittelt wird, sowie Zwischenergebnisse.
      */
     Observable<Zug> ermittleDeinenZug();
 
     /**
      * F&uuml;hrt den angegebenen Zug aus, d.h. &auml;ndert den Zustand der
-     * Engine.
+     * Engine. Falls aktuell eine Zugermittlung l&auml;uft, wird diese abgebrochen.
      *
-     * @param zug
+     * @param zug der auszuf&uuml;rende Zug.
      */
     void ziehen(Zug zug);
+
+    /**
+     * Schliesst die Engine. Die Methode erlaubt es der Engine, Ressourcen frei zu geben.
+     * Im Anschluss sind keine Zugermittlungen mehr m&ouml;glich.
+     */
+    void schliessen();
 }

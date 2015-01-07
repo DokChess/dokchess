@@ -45,7 +45,7 @@ public class MinimaxParallelSuche extends MinimaxAlgorithmus implements Suche {
 
     @Override
     public void suchen(Stellung stellung, Observer<Zug> subject) {
-        Collection<Zug> zuege = spielregeln.ermittleGueltigeZuege(stellung);
+        Collection<Zug> zuege = spielregeln.liefereGueltigeZuege(stellung);
         if (zuege.size() > 0) {
             ReplaySubject<BewerteterZug> suchErgebnisse = ReplaySubject.create();
             aktuelleSuchErgebnisse = suchErgebnisse;

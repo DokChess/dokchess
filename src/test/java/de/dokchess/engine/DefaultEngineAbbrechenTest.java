@@ -42,7 +42,7 @@ public class DefaultEngineAbbrechenTest {
         engine.ermittleDeinenZug();
         Thread.sleep(500);
 
-        Zug z = regeln.ermittleGueltigeZuege(anfang).iterator().next();
+        Zug z = regeln.liefereGueltigeZuege(anfang).iterator().next();
         engine.ziehen(z);
 
         Thread.sleep(1000);

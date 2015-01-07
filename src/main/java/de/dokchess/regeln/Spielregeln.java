@@ -38,10 +38,17 @@ public interface Spielregeln {
      * @param stellung zu betrachtende Spielsituation
      * @return Menge, der Z&uuml;ge, gegebenenfalls leer
      */
-    Collection<Zug> ermittleGueltigeZuege(Stellung stellung);
+    Collection<Zug> liefereGueltigeZuege(Stellung stellung);
 
     /**
-     * Liefert zur&uuml;ck, ob der K&ouml;nig der angegebenen Farbe angegriffen ist,
+     * Liefert die Grundaufstellung zu Beginn einer Partie zur&uuml;ck.
+     *
+     * @return Grundaufstellung
+     */
+    Stellung liefereGrundaufstellung();
+
+    /**
+     * Pr&uumlf, ob der K&ouml;nig der angegebenen Farbe angegriffen ist,
      * also im Schach steht.
      *
      * @param stellung zu betrachtende Spielsituation
@@ -51,7 +58,7 @@ public interface Spielregeln {
     boolean aufSchachPruefen(Stellung stellung, Farbe farbe);
 
     /**
-     * Liefert zur&uuml;ck, ob die &uuml;bergebene Stellung ein Matt ist, also
+     * Pr&uuml;ft, ob die &uuml;bergebene Stellung ein Matt ist, also
      * der aktuellen Spieler am Zug im Schach steht und kein Zug ihn aus diesem
      * Angriff f&uuml;hrt. Eine solche Spielsituation ist f&uuml;r den Spiel am
      * Zug verloren ("Schach Matt").
@@ -62,7 +69,7 @@ public interface Spielregeln {
     boolean aufMattPruefen(Stellung stellung);
 
     /**
-     * Liefert zur&uuml;ck, ob die &uuml;bergebene Stellung ein Patt ist, also
+     * Pr&uuml;ft, ob die &uuml;bergebene Stellung ein Patt ist, also
      * der aktuelle Spieler keinen g&uuml;ltigen Zug hat, aber nicht im Schach
      * steht. Eine solche Spielsituation wird Remis gewertet.
      *

@@ -55,7 +55,7 @@ public class SpielregelnTestSuite {
 		String fen = datenSatz.getFen();
 		Stellung stellung = new Stellung(fen);
 
-		this.ermittelteZuege = regeln.ermittleGueltigeZuege(stellung);
+		this.ermittelteZuege = regeln.liefereGueltigeZuege(stellung);
 	}
 
 	/**

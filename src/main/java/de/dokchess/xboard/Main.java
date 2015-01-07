@@ -21,6 +21,7 @@ package de.dokchess.xboard;
 import de.dokchess.engine.DefaultEngine;
 import de.dokchess.engine.Engine;
 import de.dokchess.eroeffnung.Eroeffnungsbibliothek;
+import de.dokchess.eroeffnung.polyglot.AuswahlModus;
 import de.dokchess.eroeffnung.polyglot.PolyglotOpeningBook;
 import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
@@ -59,7 +60,9 @@ public final class Main {
                 System.err.printf("Kann Eroeffnungsbibliothek aus [%s] nicht lesen.%n", args[0]);
                 System.exit(1);
             } else {
-                bibliothek = new PolyglotOpeningBook(eroeffnungen);
+                PolyglotOpeningBook pob = new PolyglotOpeningBook(eroeffnungen);
+                pob.setAuswahlModus(AuswahlModus.HAEUFIGSTER);
+                bibliothek = pob;
             }
         }
 
