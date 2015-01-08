@@ -39,7 +39,7 @@ class AusSuche extends ZugErmitteln {
 
     @Override
     public void ermittelZug(Stellung stellung, Observer<Zug> subject) {
-        suche.suchen(stellung, subject);
+        suche.zugSuchen(stellung, subject);
         super.ermittelZug(stellung, subject);
     }
 

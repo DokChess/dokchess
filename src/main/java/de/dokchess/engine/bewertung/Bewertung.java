@@ -28,6 +28,15 @@ import de.dokchess.allgemein.Stellung;
  * @author StefanZ
  */
 public interface Bewertung {
+
+    int MAXIMALE_BEWERTUNG = Integer.MAX_VALUE;
+
+    int MINIMALE_BEWERTUNG = Integer.MIN_VALUE;
+
+    int MATT_BEWERTUNG = Integer.MAX_VALUE / 2;
+
+    int PATT_BEWERTUNG = 0;
+
     /**
      * Liefert zur gegebenen Stellung eine Bewertung aus Sicht der angegebenen
      * Spielerfarbe. Je h&ouml;her, desto besser.
@@ -39,11 +48,5 @@ public interface Bewertung {
      */
     int bewerteStellung(Stellung stellung, Farbe ausSicht);
 
-    int MAXIMALE_BEWERTUNG = Integer.MAX_VALUE;
 
-    int MINIMALE_BEWERTUNG = Integer.MIN_VALUE;
-
-    int MATT_BEWERTUNG = Integer.MAX_VALUE / 2;
-
-    int PATT_BEWERTUNG = 0;
 }

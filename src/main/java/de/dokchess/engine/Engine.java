@@ -60,8 +60,8 @@ public interface Engine {
     void ziehen(Zug zug);
 
     /**
-     * Schliesst die Engine. Die Methode erlaubt es der Engine, Ressourcen frei zu geben.
+     * Schliesst die Engine. Die Methode erlaubt es Ressourcen frei zu geben.
      * Im Anschluss sind keine Zugermittlungen mehr m&ouml;glich.
      */
-    void schliessen();
+    void beenden();
 }

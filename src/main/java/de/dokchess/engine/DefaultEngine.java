@@ -22,7 +22,7 @@ package de.dokchess.engine;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.bewertung.ReineMaterialBewertung;
-import de.dokchess.engine.suche.MinimaxParallelSuche;
+import de.dokchess.engine.suche.MinimaxParalleleSuche;
 import de.dokchess.eroeffnung.Eroeffnungsbibliothek;
 import de.dokchess.regeln.Spielregeln;
 import rx.Observable;
@@ -51,7 +51,7 @@ public class DefaultEngine implements Engine {
 
         this.stellung = new Stellung();
 
-        MinimaxParallelSuche minimax = new MinimaxParallelSuche();
+        MinimaxParalleleSuche minimax = new MinimaxParalleleSuche();
         minimax.setTiefe(4);
         minimax.setSpielregeln(spielregeln);
         minimax.setBewertung(new ReineMaterialBewertung());
@@ -86,7 +86,7 @@ public class DefaultEngine implements Engine {
     }
 
     @Override
-    public void schliessen() {
+    public void beenden() {
         zugErmitteln.aktuelleErmittlungBeenden();
     }
 }
