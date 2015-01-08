@@ -23,9 +23,34 @@ import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import rx.Observer;
 
+/**
+ * Beischreibt eine (asynchrone) Suche nach Z&uuml;gen.
+ *
+ * @author StefanZ
+ */
 public interface Suche {
 
-    void suchen(Stellung stellung, Observer<Zug> subject);
+    /**
+     * Startet eine Suche nach einem Zug f&uuml;r die angegebene Stellung.
+     * Liefert nach und nach bessere Z&uuml;ge als Ereignisse an den &uuml;bergebenen
+     * Observer.
+     * Das Ende der Suche (keinen besseren Zug mehr gefunden) wird ebenfalls
+     * an den Observer signalisiert.
+     *
+     * @param stellung Stellung, auf der die Suche aufsetzt.
+     * @param observer Observer, an den Suchergebnisse zu melden sind.
+     */
+    void zugSuchen(Stellung stellung, Observer<Zug> observer);
 
-    void abbrechen();
+    /**
+     * Bricht die aktuelle Suche ab.
+     */
+    void sucheAbbrechen();
+
+    /**
+     * Schlie&szlig;t die Suche vollst&auml;ndig.
+     * Anschlie&szlig;end d&uuml;rfen keine Z&uuml;ge mehr damit
+     * ermittelt werden.
+     */
+    void schliessen();
 }
