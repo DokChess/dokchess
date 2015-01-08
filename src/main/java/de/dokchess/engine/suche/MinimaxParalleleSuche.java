@@ -32,19 +32,19 @@ import java.util.concurrent.Executors;
 /**
  * Created by stefanz on 02.01.15.
  */
-public class MinimaxParallelSuche extends MinimaxAlgorithmus implements Suche {
+public class MinimaxParalleleSuche extends MinimaxAlgorithmus implements Suche {
 
     private ExecutorService executorService;
 
     private ReplaySubject<BewerteterZug> aktuelleSuchErgebnisse;
 
-    public MinimaxParallelSuche() {
+    public MinimaxParalleleSuche() {
         int cores = Runtime.getRuntime().availableProcessors();
         executorService = Executors.newFixedThreadPool(cores);
     }
 
     @Override
-    public void suchen(Stellung stellung, Observer<Zug> subject) {
+    public final void zugSuchen(Stellung stellung, Observer<Zug> subject) {
         Collection<Zug> zuege = spielregeln.liefereGueltigeZuege(stellung);
         if (zuege.size() > 0) {
             ReplaySubject<BewerteterZug> suchErgebnisse = ReplaySubject.create();
@@ -63,11 +63,18 @@ public class MinimaxParallelSuche extends MinimaxAlgorithmus implements Suche {
         }
     }
 
-    public void abbrechen() {
+    @Override
+    public final void sucheAbbrechen() {
         if (aktuelleSuchErgebnisse != null) {
             aktuelleSuchErgebnisse.onCompleted();
             aktuelleSuchErgebnisse = null;
         }
+    }
+
+    @Override
+    public void schliessen() {
+        this.sucheAbbrechen();
+        this.executorService.shutdown();
     }
 
     class EinzelnenZugUntersuchen implements Runnable, Observer<BewerteterZug> {
@@ -113,13 +120,13 @@ public class MinimaxParallelSuche extends MinimaxAlgorithmus implements Suche {
 
     class ErgebnisMelden implements Observer<BewerteterZug> {
 
-        Observer<Zug> subject;
+        private Observer<Zug> subject;
 
-        int anzahlKandidaten;
+        private int anzahlKandidaten;
 
-        int anzahlBisher;
+        private int anzahlBisher;
 
-        BewerteterZug bester = null;
+        private BewerteterZug bester = null;
 
         public ErgebnisMelden(Observer<Zug> subject, int anzahlKandidaten) {
             this.subject = subject;
@@ -128,12 +135,10 @@ public class MinimaxParallelSuche extends MinimaxAlgorithmus implements Suche {
 
         @Override
         public void onCompleted() {
-
         }
 
         @Override
         public void onError(Throwable e) {
-
         }
 
         @Override
