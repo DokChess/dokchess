@@ -66,6 +66,6 @@ public class MockEngine implements Engine {
     }
 
     @Override
-    public void schliessen() {
+    public void beenden() {
     }
 }
