@@ -159,6 +159,8 @@ public class XBoard implements Observer<Zug> {
 
             schreiben("telluser xboard-Befehl unbekannt oder nicht implementiert: " + eingelesen);
         }
+
+        engine.schliessen();
     }
 
     String lesen() {

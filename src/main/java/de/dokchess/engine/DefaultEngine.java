@@ -86,7 +86,7 @@ public class DefaultEngine implements Engine {
     }
 
     @Override
-    public void beenden() {
+    public void schliessen() {
         zugErmitteln.aktuelleErmittlungBeenden();
     }
 }

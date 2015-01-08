@@ -63,5 +63,5 @@ public interface Engine {
      * Schliesst die Engine. Die Methode erlaubt es Ressourcen frei zu geben.
      * Im Anschluss sind keine Zugermittlungen mehr m&ouml;glich.
      */
-    void beenden();
+    void schliessen();
 }
