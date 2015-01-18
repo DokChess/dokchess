@@ -35,7 +35,10 @@ public interface Bewertung {
 
     int MATT_BEWERTUNG = Integer.MAX_VALUE / 2;
 
-    int PATT_BEWERTUNG = 0;
+    /**
+     * Wert fuer eine ausgeglichene Stellung.
+     */
+    int AUSGEGLICHEN = 0;
 
     /**
      * Liefert zur gegebenen Stellung eine Bewertung aus Sicht der angegebenen

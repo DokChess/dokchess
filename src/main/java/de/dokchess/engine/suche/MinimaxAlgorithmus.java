@@ -101,7 +101,7 @@ public class MinimaxAlgorithmus {
                 // PATT
                 if (!spielregeln
                         .aufSchachPruefen(stellung, stellung.getAmZug())) {
-                    return Bewertung.PATT_BEWERTUNG;
+                    return Bewertung.AUSGEGLICHEN;
                 }
 
                 // MATT
