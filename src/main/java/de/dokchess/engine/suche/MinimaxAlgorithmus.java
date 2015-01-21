@@ -33,7 +33,7 @@ public class MinimaxAlgorithmus {
 
     protected Bewertung bewertung;
 
-    private static int MATT_BEWERTUNG = Bewertung.AM_BESTEN / 2;
+    private static final int MATT_BEWERTUNG = Bewertung.AM_BESTEN / 2;
 
     private int tiefe;
 
