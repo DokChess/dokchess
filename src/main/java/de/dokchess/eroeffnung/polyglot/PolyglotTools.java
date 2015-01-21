@@ -24,6 +24,12 @@ class PolyglotTools {
     private static final String ROWS = "12345678";
 
     /**
+     * Toolklasse, Konstruktor private
+     */
+    private PolyglotTools() {
+    }
+
+    /**
      * Converts a chess board field given by file and row to a String
      * representation.
      *
