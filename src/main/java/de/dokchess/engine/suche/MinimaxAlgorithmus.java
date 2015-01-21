@@ -33,6 +33,8 @@ public class MinimaxAlgorithmus {
 
     protected Bewertung bewertung;
 
+    private static int MATT_BEWERTUNG = Bewertung.AM_BESTEN / 2;
+
     private int tiefe;
 
     /**
@@ -66,7 +68,7 @@ public class MinimaxAlgorithmus {
         Farbe spielerFarbe = stellung.getAmZug();
         Collection<Zug> zuege = spielregeln.liefereGueltigeZuege(stellung);
 
-        int besterWert = Bewertung.MINIMALE_BEWERTUNG;
+        int besterWert = Bewertung.AM_SCHLECHTESTEN;
         Zug besterZug = null;
 
         for (Zug zug : zuege) {
@@ -107,15 +109,15 @@ public class MinimaxAlgorithmus {
                 // MATT
                 // Tiefe mit einrechnen, um fruehes Matt zu bevorzugen
                 if (stellung.getAmZug() == spielerFarbe) {
-                    return -(Bewertung.MATT_BEWERTUNG - aktuelleTiefe);
+                    return -(MATT_BEWERTUNG - aktuelleTiefe);
                 } else {
-                    return Bewertung.MATT_BEWERTUNG - aktuelleTiefe;
+                    return MATT_BEWERTUNG - aktuelleTiefe;
                 }
 
             } else {
                 if (aktuelleTiefe % 2 == 0) {
                     // Max
-                    int max = Bewertung.MINIMALE_BEWERTUNG;
+                    int max = Bewertung.AM_SCHLECHTESTEN;
                     for (Zug zug : zuege) {
                         Stellung neueStellung = stellung.fuehreZugAus(zug);
                         int wert = bewerteStellungRekursiv(neueStellung,
@@ -127,7 +129,7 @@ public class MinimaxAlgorithmus {
                     return max;
                 } else {
                     // Min
-                    int min = Bewertung.MAXIMALE_BEWERTUNG;
+                    int min = Bewertung.AM_BESTEN;
                     for (Zug zug : zuege) {
                         Stellung neueStellung = stellung.fuehreZugAus(zug);
                         int wert = bewerteStellungRekursiv(neueStellung,

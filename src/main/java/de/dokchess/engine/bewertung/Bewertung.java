@@ -29,11 +29,15 @@ import de.dokchess.allgemein.Stellung;
  */
 public interface Bewertung {
 
-    int MAXIMALE_BEWERTUNG = Integer.MAX_VALUE;
+    /**
+     * Bestm&ouml;glicher Wert.
+     */
+    int AM_BESTEN = Integer.MAX_VALUE;
 
-    int MINIMALE_BEWERTUNG = Integer.MIN_VALUE;
-
-    int MATT_BEWERTUNG = Integer.MAX_VALUE / 2;
+    /**
+     * Schlechtestm&ouml;glicher Wert.
+     */
+    int AM_SCHLECHTESTEN = Integer.MIN_VALUE;
 
     /**
      * Wert fuer eine ausgeglichene Stellung.
@@ -50,6 +54,4 @@ public interface Bewertung {
      * den Spieler
      */
     int bewerteStellung(Stellung stellung, Farbe ausSicht);
-
-
 }
