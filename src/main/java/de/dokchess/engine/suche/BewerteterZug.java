@@ -26,9 +26,9 @@ import de.dokchess.allgemein.Zug;
  */
 public class BewerteterZug implements Comparable<BewerteterZug> {
 
-    Zug zug;
+    private Zug zug;
 
-    int wert;
+    private int wert;
 
     public BewerteterZug(Zug zug, int wert) {
         this.zug = zug;
