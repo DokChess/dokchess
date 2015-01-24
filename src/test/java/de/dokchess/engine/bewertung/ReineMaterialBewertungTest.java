@@ -19,12 +19,10 @@
 
 package de.dokchess.engine.bewertung;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import de.dokchess.allgemein.Farbe;
 import de.dokchess.allgemein.Stellung;
-import de.dokchess.engine.bewertung.Bewertung;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Sehr einfache Tests fuer die Materialbewertung.
@@ -40,7 +38,7 @@ public class ReineMaterialBewertungTest {
 		Bewertung bewertung = new ReineMaterialBewertung();
 		
 		int wert = bewertung.bewerteStellung(stellung, stellung.getAmZug());
-		Assert.assertEquals(0, wert);
+		Assert.assertEquals(Bewertung.AUSGEGLICHEN, wert);
 	}
 	
 	@Test
