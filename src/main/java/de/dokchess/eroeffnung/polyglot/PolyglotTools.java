@@ -18,7 +18,7 @@
  */
 package de.dokchess.eroeffnung.polyglot;
 
-class PolyglotTools {
+final class PolyglotTools {
 
     private static final String FILES = "abcdefgh";
     private static final String ROWS = "12345678";
