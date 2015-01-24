@@ -82,7 +82,7 @@ public class PolyglotOpeningBook implements Eroeffnungsbibliothek {
         }
     }
 
-    void readData(File datei) {
+    final void readData(File datei) {
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(datei);
@@ -100,7 +100,7 @@ public class PolyglotOpeningBook implements Eroeffnungsbibliothek {
         }
     }
 
-    void readData(InputStream is) {
+    final void readData(InputStream is) {
         try {
             BufferedInputStream bis = new BufferedInputStream(is);
 
