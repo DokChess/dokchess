@@ -94,7 +94,7 @@ public class XBoardTest {
         xBoard.setEngine(new MockEngine());
 
         xBoard.spielen();
-        Assert.assertTrue(ausgabe.toString().contains("Ungueltiger Zug"));
+        Assert.assertTrue(ausgabe.toString().contains("Illegal move"));
     }
 
     /**
