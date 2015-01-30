@@ -144,7 +144,7 @@ public class XBoard implements Observer<Zug> {
                     Collection<Zug> gueltigeZuege = spielregeln
                             .liefereGueltigeZuege(stellung);
                     if (!gueltigeZuege.contains(zug)) {
-                        schreiben("tellusererror Ungueltiger Zug: " + zug);
+                        schreiben("Illegal move: " + eingelesen);
                         continue;
                     }
                 }
