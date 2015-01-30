@@ -86,6 +86,14 @@ public final class Stellung {
         this.amZug = amZug;
     }
 
+    /**
+     * Liefert die Figur auf dem Feld mit den gegebenen Koordinaten zur&uuml;ck,
+     * oder null, falls es frei ist.
+     *
+     * @param reihe Reihe des Feldes
+     * @param linie Linie des Feldes
+     * @return die Figur, oder null falls das Feld frei ist.
+     */
     public Figur getFigur(int reihe, int linie) {
         return brett[reihe][linie];
     }
@@ -94,6 +102,12 @@ public final class Stellung {
         brett[reihe][linie] = figur;
     }
 
+    /**
+     * Liefert die Figur auf dem Feld zur&uuml;ck, oder null, falls es frei ist.
+     *
+     * @param feld das Feld
+     * @return die Figur, oder null falls das Feld frei ist.
+     */
     public Figur getFigur(Feld feld) {
         return brett[feld.getReihe()][feld.getLinie()];
     }
