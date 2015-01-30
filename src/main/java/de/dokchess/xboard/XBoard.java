@@ -157,7 +157,7 @@ public class XBoard implements Observer<Zug> {
                 continue;
             }
 
-            schreiben("telluser xboard-Befehl unbekannt oder nicht implementiert: " + eingelesen);
+            schreiben("Error (unknown command): " + eingelesen);
         }
 
         engine.schliessen();
