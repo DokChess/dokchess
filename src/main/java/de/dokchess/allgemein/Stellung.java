@@ -132,6 +132,14 @@ public final class Stellung {
         this.rochadeRechte = rochadeRechte;
     }
 
+    /**
+     * Liefert eine Liste mit allen Felder zur&uuml;ck, auf denen die
+     * gesuchte Figur steht. Falls die Figur gar nicht auf dem Brett steht,
+     * wird eine leere Liste zur&uuml;ckgeliefert.
+     *
+     * @param figur gesuchte Figur
+     * @return Liste mit Feldern, auf denen eine solche Figur steht.
+     */
     public List<Feld> findeFelderMit(final Figur figur) {
         List<Feld> felder = new ArrayList<>();
 
