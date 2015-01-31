@@ -53,7 +53,7 @@ public class ZugParser {
                 schlagen = true;
             }
 
-            if (figur.getArt() == FigurenArt.BAUER
+            if (figur != null && figur.getArt() == FigurenArt.BAUER
                     && (to.getReihe() == 0 || to.getReihe() == 7)) {
                 char neueFigur = eingabe.charAt(4);
                 neueFigurenArt = FigurenArt.ausBuchstabe(neueFigur);
