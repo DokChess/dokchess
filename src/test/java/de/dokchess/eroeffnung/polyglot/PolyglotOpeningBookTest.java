@@ -25,6 +25,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 public class PolyglotOpeningBookTest {
@@ -32,8 +33,8 @@ public class PolyglotOpeningBookTest {
     /**
      * Fehlende Datei erzeugt Exception.
      */
-    @Test(expected = RuntimeException.class)
-    public void dateiNichtGefunden() {
+    @Test(expected = IOException.class)
+    public void dateiNichtGefunden() throws IOException {
         File eingabe = new File("dateiGibtEsNicht.bin");
         new PolyglotOpeningBook(eingabe);
     }
@@ -43,7 +44,7 @@ public class PolyglotOpeningBookTest {
      * italienische Partie. 1. e2-e4 e7-e5 2. S g1-f3 S b8-c6 3. L f1-c4 L f8-c5
      */
     @Test
-    public void italienischePartie() {
+    public void italienischePartie() throws IOException {
 
         InputStream is = getClass().getClassLoader().getResourceAsStream(
                 "de/dokchess/eroeffnung/polyglot/italienischePartie.bin");

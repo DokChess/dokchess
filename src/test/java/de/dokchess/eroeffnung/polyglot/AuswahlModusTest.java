@@ -25,6 +25,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class AuswahlModusTest {
     PolyglotOpeningBook buch = null;
 
     @Before
-    public void buchLaden() {
+    public void buchLaden() throws IOException {
         InputStream is = getClass().getClassLoader().getResourceAsStream(
                 "de/dokchess/eroeffnung/polyglot/demoBook.bin");
         buch = new PolyglotOpeningBook(is);

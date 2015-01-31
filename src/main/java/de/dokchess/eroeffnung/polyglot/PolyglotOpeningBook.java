@@ -24,10 +24,7 @@ import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.eroeffnung.Eroeffnungsbibliothek;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,12 +35,12 @@ public class PolyglotOpeningBook implements Eroeffnungsbibliothek {
 
     private List<BookEntry> eintraege = new ArrayList<BookEntry>();
 
-    public PolyglotOpeningBook(File datei) {
+    public PolyglotOpeningBook(File datei) throws FileNotFoundException, IOException {
         this.auswahlModus = AuswahlModus.ERSTER;
         readData(datei);
     }
 
-    public PolyglotOpeningBook(InputStream is) {
+    public PolyglotOpeningBook(InputStream is) throws FileNotFoundException, IOException {
         this.auswahlModus = AuswahlModus.ERSTER;
         readData(is);
     }
@@ -82,36 +79,20 @@ public class PolyglotOpeningBook implements Eroeffnungsbibliothek {
         }
     }
 
-    final void readData(File datei) {
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(datei);
-            readData(fis);
-        } catch (RuntimeException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                fis.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
+    final void readData(File datei) throws IOException {
+        FileInputStream fis = new FileInputStream(datei);
+        readData(fis);
+        fis.close();
     }
 
-    final void readData(InputStream is) {
-        try {
-            BufferedInputStream bis = new BufferedInputStream(is);
+    final void readData(InputStream is) throws IOException {
+        BufferedInputStream bis = new BufferedInputStream(is);
 
-            while (bis.available() > 0) {
-                byte[] entry = new byte[16];
-                bis.read(entry);
-                BookEntry bookEntry = new BookEntry(entry);
-                eintraege.add(bookEntry);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        while (bis.available() > 0) {
+            byte[] entry = new byte[16];
+            bis.read(entry);
+            BookEntry bookEntry = new BookEntry(entry);
+            eintraege.add(bookEntry);
         }
     }
 

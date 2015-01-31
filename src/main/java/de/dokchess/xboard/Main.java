@@ -27,6 +27,7 @@ import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
@@ -60,9 +61,15 @@ public final class Main {
                 System.err.printf("Kann Eroeffnungsbibliothek aus [%s] nicht lesen.%n", args[0]);
                 System.exit(1);
             } else {
-                PolyglotOpeningBook pob = new PolyglotOpeningBook(eroeffnungen);
-                pob.setAuswahlModus(AuswahlModus.HAEUFIGSTER);
-                bibliothek = pob;
+                try {
+                    PolyglotOpeningBook pob = new PolyglotOpeningBook(eroeffnungen);
+                    pob.setAuswahlModus(AuswahlModus.HAEUFIGSTER);
+                    bibliothek = pob;
+                } catch (IOException e) {
+                    System.err.printf(e.getMessage());
+                    System.exit(1);
+                }
+
             }
         }
 
