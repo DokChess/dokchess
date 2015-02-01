@@ -28,7 +28,7 @@ import rx.Observer;
  *
  * @author StefanZ
  */
-public abstract class ZugErmitteln {
+abstract class ZugErmitteln {
 
     private ZugErmitteln nachfolger;
 
