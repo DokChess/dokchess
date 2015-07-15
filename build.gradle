@@ -20,6 +20,7 @@
 apply plugin: 'java'
 apply plugin: 'sonar-runner'
 apply plugin: 'jacoco'
+apply plugin: 'eclipse'
 
 sourceCompatibility = 1.7
 version = '2.0'
