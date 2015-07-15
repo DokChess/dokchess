@@ -18,32 +18,13 @@
  */
 package de.dokchess.regeln;
 
-import de.dokchess.allgemein.Feld;
-import de.dokchess.allgemein.Figur;
-import de.dokchess.allgemein.Stellung;
-import de.dokchess.allgemein.Zug;
-
 import java.util.ArrayList;
 import java.util.List;
 
-class LaeuferZuege extends Gangart {
+import de.dokchess.allgemein.Feld;
+import de.dokchess.allgemein.Stellung;
 
-    public void fuegeZugkandidatenHinzu(Feld von, Stellung stellung,
-                                        List<Zug> liste) {
-
-        Figur eigenerLaeufer = stellung.getFigur(von);
-
-        List<Feld> erreichbareFelder = ermittleErreichbareFelder(stellung, von);
-        for (Feld nachFeld : erreichbareFelder) {
-            if (stellung.getFigur(nachFeld) == null) {
-                Zug z = new Zug(eigenerLaeufer, von, nachFeld);
-                liste.add(z);
-            } else {
-                Zug z = new Zug(eigenerLaeufer, von, nachFeld, true);
-                liste.add(z);
-            }
-        }
-    }
+class LaeuferZuege extends KomplexeGangart {
 
     protected List<Feld> ermittleErreichbareFelder(Stellung stellung, Feld feld) {
 
