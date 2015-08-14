@@ -45,7 +45,7 @@ public class MinimaxAlgorithmusPattTest {
      * Weiss rettet sich in ein Patt.
      * <p/>
      * Quelle des Beispiels: Wikipedia.
-     * http://de.wikipedia.org/wiki/Spieß_(Schach)
+     * http://de.wikipedia.org/wiki/Spie%c3%9f_(Schach)
      */
     @Test
     public void abwicklungZumPatt() {

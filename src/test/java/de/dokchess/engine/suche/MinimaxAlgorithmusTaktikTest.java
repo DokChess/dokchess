@@ -51,7 +51,7 @@ public class MinimaxAlgorithmusTaktikTest {
      * Er gewinnt so die Dame.
      *
      * Quelle des Beispiels: Wikipedia.
-     * http://de.wikipedia.org/wiki/Spieß_(Schach)
+     * http://de.wikipedia.org/wiki/Spie%c3%9f_(Schach)
      */
     public void laeuferSpiess() {
         algorithmus.setTiefe(4);
