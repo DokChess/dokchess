@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conqat-architecture xmlns="http://conqat.cs.tum.edu/ns/architecture" policy="deny" file-based="true" scope-include="" scope-exclude="">
+  <component name="DokChess" dim="610,290" pos="91,121">
+    <component name="DokChess/eroeffnung" dim="120,40" pos="30,80">
+      <code-mapping type="include" regex="src/main/java/de/dokchess/eroeffnung.*" />
+    </component>
+    <component name="DokChess/engine" dim="120,40" pos="200,90">
+      <code-mapping type="include" regex="src/main/java/de/dokchess/engine.*" />
+      <code-mapping type="exclude" regex="src/main/java/de/dokchess/engine/bewertung.*" />
+      <code-mapping type="exclude" regex="src/main/java/de/dokchess/engine/suche.*" />
+    </component>
+    <component name="DokChess/regeln" dim="120,40" pos="200,220">
+      <code-mapping type="include" regex="src/main/java/de/dokchess/regeln.*" />
+    </component>
+    <component name="DokChess/suche" dim="120,40" pos="450,90">
+      <code-mapping type="include" regex="src/main/java/de/dokchess/engine/suche.*" />
+    </component>
+    <component name="DokChess/bewertung" dim="120,40" pos="450,220">
+      <code-mapping type="include" regex="src/main/java/de/dokchess/engine/bewertung.*" />
+    </component>
+  </component>
+  <component name="allgemein" dim="120,40" pos="371,421" stereotype="public">
+    <code-mapping type="include" regex="src/main/java/de/dokchess/allgemein.*" />
+  </component>
+  <component name="integTest" dim="120,40" pos="981,181">
+    <code-mapping type="include" regex="src/integTest.*" />
+  </component>
+  <component name="test" dim="120,40" pos="961,421">
+    <code-mapping type="include" regex="src/test.*" />
+  </component>
+  <component name="xboard" dim="120,40" pos="751,431">
+    <code-mapping type="include" regex="src/main/java/de/dokchess/xboard.*" />
+  </component>
+  <allow source="DokChess/engine" target="DokChess/bewertung" />
+  <allow source="DokChess/engine" target="DokChess/eroeffnung" />
+  <allow source="DokChess/engine" target="DokChess/regeln" />
+  <allow source="DokChess/engine" target="DokChess/suche" />
+  <allow source="DokChess/suche" target="DokChess/bewertung" />
+  <allow source="DokChess/suche" target="DokChess/regeln" />
+  <allow source="DokChess" target="allgemein" />
+  <allow source="integTest" target="DokChess" />
+  <allow source="integTest" target="xboard" />
+  <allow source="test" target="DokChess" />
+  <allow source="test" target="xboard" />
+  <allow source="xboard" target="allgemein" />
+  <allow source="xboard" target="DokChess" />
+</conqat-architecture>
