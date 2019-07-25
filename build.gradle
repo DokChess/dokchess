@@ -23,6 +23,7 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.7
 version = '2.0'
 
+
 // Siehe
 // http://selimober.com/blog/2014/01/24/separate-unit-and-integration-tests-using-gradle/
 sourceSets {
@@ -31,7 +32,7 @@ sourceSets {
     }
 }
 task integTest(type: Test) {
-    testClassesDir = sourceSets.integTest.output.classesDir
+    testClassesDirs = files(sourceSets.integTest.output.classesDirs)
     classpath = sourceSets.integTest.runtimeClasspath
 }
 check.dependsOn -= integTest
@@ -51,7 +52,7 @@ dependencies {
 }
 
 task uberjar(type: Jar,dependsOn: ':compileJava') {
-    from files(sourceSets.main.output.classesDir)
+    from files(sourceSets.main.output.classesDirs)
     from configurations.runtime.asFileTree.files.collect { zipTree(it) }
 
     manifest {
