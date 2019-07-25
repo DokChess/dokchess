@@ -18,36 +18,10 @@
  */
 
 apply plugin: 'java'
-apply plugin: 'sonar-runner'
-apply plugin: 'jacoco'
 apply plugin: 'eclipse'
 
 sourceCompatibility = 1.7
 version = '2.0'
-
-test {
-    jacoco {
-        append = false
-        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
-        classDumpFile = file("$buildDir/jacoco/classpathdumps")
-    }
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled false
-        csv.enabled false
-        html.destination "${buildDir}/jacocoHtml"
-    }
-}
-
-sonarRunner {
-    sonarProperties {
-        property 'sonar.jdbc.url', 'jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true'
-        property 'sonar.jdbc.driverClassName', 'com.mysql.jdbc.Driver'
-        property 'sonar.projectVersion', "${version}"
-    }
-}
 
 // Siehe
 // http://selimober.com/blog/2014/01/24/separate-unit-and-integration-tests-using-gradle/
