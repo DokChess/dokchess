@@ -47,9 +47,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class EngineGegenZufallIntegTest {
 
-    Stellung brett = null;
-    Engine dokChess = null;
-    Spielregeln spielregeln = null;
+    private Stellung brett = null;
+    private Engine dokChess = null;
+    private Spielregeln spielregeln = null;
 
     @Test
     public void spieleEinePartie() throws InterruptedException {
@@ -75,7 +75,7 @@ public class EngineGegenZufallIntegTest {
         executor.awaitTermination(5, TimeUnit.MINUTES);
 
         // Schwarz sollte am Ende am Zug und Matt sein
-        Assert.assertTrue(brett.getAmZug() == Farbe.SCHWARZ);
+        Assert.assertSame(brett.getAmZug(), Farbe.SCHWARZ);
         Assert.assertTrue(spielregeln.aufMattPruefen(brett));
     }
 
@@ -121,7 +121,7 @@ public class EngineGegenZufallIntegTest {
         }
 
         Zug ermittleSchwarzenZug() {
-            Assert.assertTrue(brett.getAmZug() == Farbe.SCHWARZ);
+            Assert.assertSame(brett.getAmZug(), Farbe.SCHWARZ);
             Collection<Zug> zuege = spielregeln.liefereGueltigeZuege(brett);
             Assert.assertFalse(zuege.isEmpty());
 
