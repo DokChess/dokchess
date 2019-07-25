@@ -75,7 +75,7 @@ public class EngineGegenZufallIntegTest {
         executor.awaitTermination(5, TimeUnit.MINUTES);
 
         // Schwarz sollte am Ende am Zug und Matt sein
-        Assert.assertSame(brett.getAmZug(), Farbe.SCHWARZ);
+        Assert.assertEquals(Farbe.SCHWARZ, brett.getAmZug());
         Assert.assertTrue(spielregeln.aufMattPruefen(brett));
     }
 
@@ -121,7 +121,7 @@ public class EngineGegenZufallIntegTest {
         }
 
         Zug ermittleSchwarzenZug() {
-            Assert.assertSame(brett.getAmZug(), Farbe.SCHWARZ);
+            Assert.assertEquals(Farbe.SCHWARZ, brett.getAmZug());
             Collection<Zug> zuege = spielregeln.liefereGueltigeZuege(brett);
             Assert.assertFalse(zuege.isEmpty());
 
