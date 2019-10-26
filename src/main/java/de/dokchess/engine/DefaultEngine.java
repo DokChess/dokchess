@@ -30,7 +30,7 @@ import rx.subjects.ReplaySubject;
 
 /**
  * Default-Implementierung einer Engine.
- * <p/>
+ *
  * Ben&ouml;tigt zum Arbeiten eine Implementierung der Spielregeln, die
  * Er&ouml;ffnungsbibliothek ist optional.
  *

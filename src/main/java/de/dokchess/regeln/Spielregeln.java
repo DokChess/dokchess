@@ -48,7 +48,7 @@ public interface Spielregeln {
     Stellung liefereGrundaufstellung();
 
     /**
-     * Pr&uumlf, ob der K&ouml;nig der angegebenen Farbe angegriffen ist,
+     * Pr&uuml;ft, ob der K&ouml;nig der angegebenen Farbe angegriffen ist,
      * also im Schach steht.
      *
      * @param stellung zu betrachtende Spielsituation

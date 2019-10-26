@@ -24,7 +24,7 @@ import de.dokchess.allgemein.Stellung;
 
 /**
  * Bewertung ausschliesslich anhand des Figurenwertes.
- * <p/>
+ *
  * Jede Figurenart enth&auml;lt einen Wert (Bauer 1, Springer 3, ..., Dame 9),
  * die Figuren auf dem Brett werden entsprechend aufsummiert. Eigene Figuren
  * z&auml;hlen positiv, gegnerische negativ. Entsprechend ist bei ausgeglichenem

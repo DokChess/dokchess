@@ -43,7 +43,7 @@ public final class Zug {
      * Erzeugt einen einfachen Zug. Eine Figur wird von einem Feld auf ein anderes Feld
      * bewegt. Eine Rochade wird hierbei durch einen Koenigszug um zwei Felder in Richtung des
      * Turmes angegeben.
-     * <p/>
+     *
      * Fuer das Schlagen oder die Umwandlung eines Bauern in eine andere Figur sind
      * andere Konstruktoren da.
      *
@@ -118,7 +118,7 @@ public final class Zug {
     /**
      * Liefert im Falle einer Umwandlung eines Bauern auf der Grundlinie
      * die gew&uuml;nschte neue Figurenart zur&uuml;ck.
-     * <p/>
+     *
      * M&ouml;gliche Werte: DAME, LAEUFER, TURM, SPRINGER.
      *
      * @return gew&uuml;nschte Figurenart, oder null, wenn es keine Umwandlung ist.
