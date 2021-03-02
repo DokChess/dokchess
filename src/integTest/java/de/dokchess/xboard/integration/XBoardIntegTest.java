@@ -25,20 +25,22 @@ import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
 import de.dokchess.xboard.XBoard;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.Timeout;
 
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Starte das XBoard-Protokoll inkl. echter Engine. Mache einen Zug und warte
  * die Antwort ab.
  */
 public class XBoardIntegTest {
+
+    @Rule
+    public Timeout timeout = Timeout.seconds(60);
 
     @Test
     public void anspielen() throws InterruptedException {
@@ -59,23 +61,18 @@ public class XBoardIntegTest {
 
         xBoard.spielen();
 
-        final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-
-                String text;
-                synchronized (ausgabe) {
-                    text = ausgabe.toString();
-                }
-                if (text.contains("move ")) {
-                    executor.shutdown();
-                }
-            }
-        }, 3, 1, TimeUnit.SECONDS);
-        executor.awaitTermination(1, TimeUnit.MINUTES);
-
         String text;
+        boolean running = true;
+        while (running) {
+            synchronized (ausgabe) {
+                text = ausgabe.toString();
+            }
+            if (text.contains("move ")) {
+                running = false;
+            }
+
+            Thread.sleep(100);
+        }
         synchronized (ausgabe) {
             text = ausgabe.toString();
         }

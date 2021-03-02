@@ -27,16 +27,15 @@ import de.dokchess.engine.Engine;
 import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.Timeout;
 import rx.Observable;
 
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Die Engine spielt in der Standardkonfiguration eine Partie als weiss
@@ -51,6 +50,9 @@ public class EngineGegenZufallIntegTest {
     private Engine dokChess = null;
     private Spielregeln spielregeln = null;
 
+    @Rule
+    public Timeout timeout = Timeout.seconds(5 * 60);
+
     @Test
     public void spieleEinePartie() throws InterruptedException {
 
@@ -62,17 +64,10 @@ public class EngineGegenZufallIntegTest {
         Observable<Zug> weissZieht = dokChess.ermittleDeinenZug();
         weissZieht.subscribe(new ZugHinRueck());
 
-        final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                if (spielZuEnde()) {
-                    executor.shutdown();
-                }
-            }
-        }, 10, 5, TimeUnit.SECONDS);
-
-        executor.awaitTermination(5, TimeUnit.MINUTES);
+        // Warten bis Spiel zu Ende.
+        while (! spielZuEnde()) {
+            Thread.sleep(1000);
+        }
 
         // Schwarz sollte am Ende am Zug und Matt sein
         Assert.assertEquals(Farbe.SCHWARZ, brett.getAmZug());
