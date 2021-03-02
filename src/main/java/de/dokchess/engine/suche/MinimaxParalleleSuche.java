@@ -66,7 +66,9 @@ public class MinimaxParalleleSuche extends MinimaxAlgorithmus implements Suche {
     @Override
     public final void sucheAbbrechen() {
         if (aktuelleSuchErgebnisse != null) {
-            aktuelleSuchErgebnisse.onCompleted();
+            synchronized (aktuelleSuchErgebnisse) {
+                aktuelleSuchErgebnisse.onCompleted();
+            }
             aktuelleSuchErgebnisse = null;
         }
     }
@@ -99,7 +101,10 @@ public class MinimaxParalleleSuche extends MinimaxAlgorithmus implements Suche {
                 Farbe spielerFarbe = stellung.getAmZug();
                 Stellung nachZug = stellung.fuehreZugAus(zug);
                 int wert = bewerteStellungRekursiv(nachZug, spielerFarbe);
-                suchErgebnisse.onNext(new BewerteterZug(zug, wert));
+
+                synchronized (suchErgebnisse) {
+                    suchErgebnisse.onNext(new BewerteterZug(zug, wert));
+                }
             }
         }
 
