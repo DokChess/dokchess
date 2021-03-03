@@ -118,7 +118,7 @@ final class ForsythEdwardsNotation {
      */
     public static String toString(final Stellung position) {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         for (int reihe = 0; reihe < 8; ++reihe) {
             int leer = 0;
