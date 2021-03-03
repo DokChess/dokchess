@@ -71,9 +71,7 @@ public class PolyglotOpeningBook implements Eroeffnungsbibliothek {
             Figur figur = stellung.getFigur(von);
             boolean schlagen = stellung.getFigur(nach) != null;
 
-            Zug zug = new Zug(figur, von, nach, schlagen);
-
-            return zug;
+            return new Zug(figur, von, nach, schlagen);
         } else {
             return null;
         }
