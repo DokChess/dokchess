@@ -22,8 +22,10 @@ package de.dokchess.engine.suche;
 import de.dokchess.allgemein.Farbe;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
-import rx.Observer;
-import rx.subjects.ReplaySubject;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.subjects.ReplaySubject;
 
 import java.util.Collection;
 import java.util.concurrent.ExecutorService;
@@ -59,7 +61,7 @@ public class MinimaxParalleleSuche extends MinimaxAlgorithmus implements Suche {
                 executorService.execute(zugUntersuchen);
             }
         } else {
-            subject.onCompleted();
+            subject.onComplete();
         }
     }
 
@@ -67,7 +69,7 @@ public class MinimaxParalleleSuche extends MinimaxAlgorithmus implements Suche {
     public final void sucheAbbrechen() {
         if (aktuelleSuchErgebnisse != null) {
             synchronized (aktuelleSuchErgebnisse) {
-                aktuelleSuchErgebnisse.onCompleted();
+                aktuelleSuchErgebnisse.onComplete();
             }
             aktuelleSuchErgebnisse = null;
         }
@@ -109,13 +111,17 @@ public class MinimaxParalleleSuche extends MinimaxAlgorithmus implements Suche {
         }
 
         @Override
-        public void onCompleted() {
+        public void onComplete() {
             this.berechnungBeendet = true;
         }
 
         @Override
         public void onError(Throwable e) {
             this.berechnungBeendet = true;
+        }
+
+        @Override
+        public void onSubscribe(@NonNull Disposable d) {
         }
 
         @Override
@@ -139,11 +145,15 @@ public class MinimaxParalleleSuche extends MinimaxAlgorithmus implements Suche {
         }
 
         @Override
-        public void onCompleted() {
+        public void onComplete() {
         }
 
         @Override
         public void onError(Throwable e) {
+        }
+
+        @Override
+        public void onSubscribe(@NonNull Disposable d) {
         }
 
         @Override
@@ -156,7 +166,7 @@ public class MinimaxParalleleSuche extends MinimaxAlgorithmus implements Suche {
 
             anzahlBisher += 1;
             if (anzahlBisher == anzahlKandidaten) {
-                subject.onCompleted();
+                subject.onComplete();
             }
         }
     }

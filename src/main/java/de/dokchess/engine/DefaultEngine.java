@@ -25,8 +25,8 @@ import de.dokchess.engine.bewertung.ReineMaterialBewertung;
 import de.dokchess.engine.suche.MinimaxParalleleSuche;
 import de.dokchess.eroeffnung.Eroeffnungsbibliothek;
 import de.dokchess.regeln.Spielregeln;
-import rx.Observable;
-import rx.subjects.ReplaySubject;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.subjects.ReplaySubject;
 
 /**
  * Default-Implementierung einer Engine.

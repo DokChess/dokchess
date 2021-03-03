@@ -21,7 +21,7 @@ package de.dokchess.engine;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.suche.Suche;
-import rx.Observer;
+import io.reactivex.rxjava3.core.Observer;
 
 class AusSuche extends ZugErmitteln {
 

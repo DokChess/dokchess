@@ -22,8 +22,10 @@ import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.Engine;
 import de.dokchess.regeln.Spielregeln;
-import rx.Observable;
-import rx.Observer;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -185,7 +187,7 @@ public class XBoard implements Observer<Zug> {
     }
 
     @Override
-    public void onCompleted() {
+    public void onComplete() {
         schreiben(parser.nachXboard(this.besterZug));
         this.engine.ziehen(this.besterZug);
         this.stellung = this.stellung.fuehreZugAus(this.besterZug);
@@ -194,6 +196,10 @@ public class XBoard implements Observer<Zug> {
     @Override
     public void onError(Throwable e) {
         schreiben("tellusererror " + e.getMessage());
+    }
+
+    @Override
+    public void onSubscribe(@NonNull Disposable d) {
     }
 
     @Override

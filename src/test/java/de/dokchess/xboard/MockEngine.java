@@ -22,8 +22,8 @@ package de.dokchess.xboard;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.engine.Engine;
-import rx.Observable;
-import rx.subjects.ReplaySubject;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.subjects.ReplaySubject;
 
 /**
  * Einfache Implementierung des Engine-Interfaces fuer Testzwecke.
@@ -56,7 +56,7 @@ public class MockEngine implements Engine {
         if (zug != null) {
             subject.onNext(zug);
         }
-        subject.onCompleted();
+        subject.onComplete();
 
         return subject;
     }

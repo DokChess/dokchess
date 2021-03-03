@@ -26,7 +26,7 @@ import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
 import org.junit.Assert;
 import org.junit.Test;
-import rx.Observable;
+import io.reactivex.rxjava3.core.Observable;
 
 import java.io.IOException;
 import java.io.InputStream;

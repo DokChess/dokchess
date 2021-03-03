@@ -21,7 +21,7 @@ package de.dokchess.engine;
 
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
-import rx.Observer;
+import io.reactivex.rxjava3.core.Observer;
 
 /**
  * Uebernimmt die Rolle Handler im Chain of Responsibility Muster.

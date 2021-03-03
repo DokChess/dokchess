@@ -21,7 +21,7 @@ package de.dokchess.engine.suche;
 
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
-import rx.Observer;
+import io.reactivex.rxjava3.core.Observer;
 
 /**
  * Beischreibt eine (asynchrone) Suche nach Z&uuml;gen.

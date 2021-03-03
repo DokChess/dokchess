@@ -21,7 +21,7 @@ package de.dokchess.engine;
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
 import de.dokchess.eroeffnung.Eroeffnungsbibliothek;
-import rx.Observer;
+import io.reactivex.rxjava3.core.Observer;
 
 class AusBibliothek extends ZugErmitteln {
 
@@ -38,7 +38,7 @@ class AusBibliothek extends ZugErmitteln {
         Zug zug = bibliothek.liefereZug(stellung);
         if (zug != null) {
             subject.onNext(zug);
-            subject.onCompleted();
+            subject.onComplete();
         } else {
             super.ermittelZug(stellung, subject);
         }

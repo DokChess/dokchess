@@ -26,11 +26,13 @@ import de.dokchess.engine.DefaultEngine;
 import de.dokchess.engine.Engine;
 import de.dokchess.regeln.DefaultSpielregeln;
 import de.dokchess.regeln.Spielregeln;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.disposables.Disposable;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
-import rx.Observable;
+import io.reactivex.rxjava3.core.Observable;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -83,9 +85,13 @@ public class EngineGegenZufallIntegTest {
         dokChess.ziehen(zug);
     }
 
-    class ZugHinRueck implements rx.Observer<Zug> {
+    class ZugHinRueck implements io.reactivex.rxjava3.core.Observer<Zug> {
 
         Zug besterZug = null;
+
+        @Override
+        public void onSubscribe(@NonNull Disposable d) {
+        }
 
         @Override
         public void onNext(Zug zug) {
@@ -93,7 +99,7 @@ public class EngineGegenZufallIntegTest {
         }
 
         @Override
-        public void onCompleted() {
+        public void onComplete() {
 
             ziehen(besterZug);
 

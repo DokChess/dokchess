@@ -20,7 +20,7 @@ package de.dokchess.engine;
 
 import de.dokchess.allgemein.Stellung;
 import de.dokchess.allgemein.Zug;
-import rx.Observable;
+import io.reactivex.rxjava3.core.Observable;
 
 /**
  * Zentrale Schnittstelle des Engine-Subsystems. Ermittlung des n&auml;chsten
