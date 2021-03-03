@@ -268,7 +268,7 @@ public final class Zug {
      */
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (this.figur.getArt() != FigurenArt.BAUER) {
             sb.append(figur.getArt().getBuchstabe());
             sb.append(' ');
